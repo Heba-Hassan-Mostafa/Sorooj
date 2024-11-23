@@ -1,0 +1,99 @@
+.mainColorStyle {
+    color: #424C61;
+}
+.primaryColorStyle {
+    color: #9F854E;
+}
+.mainBgColorStyle {
+    background: #424C61;
+}
+.primaryBgColorStyle {
+    background: #9F854E;
+}
+.grayBgColorStyle {
+    background: #F5F3ED;
+}
+.cairo {
+    font-family: "Cairo", sans-serif;
+}
+.menu-item i {
+    color: #9F854E;
+}
+.menu-item a div {
+    color: #424C61;
+    font-weight: bold;
+    font-size: 16px;
+}
+.titleInput .form-label {
+    color: #424C61;
+    font-weight: bold;
+}
+.selectCatTo{
+    width: fit-content;
+    background: #424C61;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Cairo", sans-serif;
+    font-size: 16px;
+}
+
+.allCateSelect {
+    margin-right: 30px;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 10px #ddd;
+}
+.allCateSelect a {
+    color: #424C61;
+    font-weight: bold;
+
+}
+.allCateSelect a:hover {
+    color: #424C61;
+}
+.allCateSelect .fristParent{
+    justify-content: center;
+}
+.allCateSelect .fristParent .parentCategory{
+    margin: 20px 5px 0;
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 10px #ddd;
+}
+.allCateSelect .fristParent .parentCategory label {
+    color: #424C61;
+    font-weight: bold;
+}
+.allCateSelect .fristParent .parentCategory ul i {
+    transform: rotate(90deg);
+    margin: 0 5px;
+    color: #9F854E;
+}
+.titles {
+    width: fit-content;
+    background: #424C61;
+    color: #fff!important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Cairo", sans-serif;
+    font-size: 16px;
+}
+.titles i {
+    font-size: 18px;
+}
+#videoInputs .row {
+    padding: 20px 0px;
+    margin-top: 10px;
+    background: #F5F3ED;
+}
+.pdfFiles {
+    margin: 16px;
+    padding: 15px;
+    border-radius: 6px;
+    width: 50%;
+}
+.bold {
+    font-weight: bold;
+}

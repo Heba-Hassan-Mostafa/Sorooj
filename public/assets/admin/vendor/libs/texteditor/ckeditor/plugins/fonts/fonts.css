@@ -1,0 +1,66 @@
+@font-face{
+    font-family: Amiri;
+    src: local('Amiri') ,url('https://fonts.googleapis.com/css2?family=Amiri:ital@1&display=swap') format("trueType");
+}
+
+@font-face{
+    font-family: Almarai;
+    src: local('Almarai') ,url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Amiri:ital@1&display=swap') format("trueType");
+}
+
+@font-face{
+    font-family: El Messiri;
+    src: local('El Messiri') ,url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@500&display=swap') format("trueType");
+}
+
+@font-face{
+    font-family: Reem Kufi ;
+    src: local('Reem Kufi') ,url('https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap') format("trueType");
+}
+
+@font-face{
+    font-family: Aref Ruqaa ;
+    src: local('Aref Ruqaa') ,url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap') format("trueType");
+}
+
+@font-face{
+    font-family: Cairo ;
+    src: local('Cairo') ,url('https://fonts.googleapis.com/css2?family=Cairo&display=swap') format("trueType");
+}
+
+
+
+/* @font-face{
+    font-family: uthmanic ;
+    src: local('uthmanic') ,url('//db.onlinewebfonts.com/c/2c1ce06a505728976c1d2993407312b5?family=KFGQPC+Uthmanic+Script+HAFS') format("trueType");
+} */
+
+@font-face {
+    font-family: 'Uthman Naskh';
+    src: local('KFGQPC Uthman Taha Naskh'),
+         url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff/UthmanTN1%20Ver10.woff') format('woff');
+  }
+
+
+  @font-face {
+    font-family: 'Uthman Naskh';
+    font-weight: bold;
+    src: local('KFGQPC Uthman Taha Naskh Bold'), local('KFGQPCUthmanTahaNaskh-Bold'),
+         
+
+         url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff/UthmanTN1B%20Ver10.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Uthman Hafs';
+    src: local('KFGQPC Uthmanic Script HAFS'),
+         
+         url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff/UthmanicHafs1%20Ver09.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'QPC Symbols';
+    
+    src: local('KFGQPC Arabic Symbols 01'),
+         
+
+         url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff/Symbols1_Ver02.woff') format('woff');
+  } 
