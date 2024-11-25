@@ -32,9 +32,13 @@ class CourseController extends BaseApiController
      * @param Course $Course
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show($slug): JsonResponse
     {
-        $course = Course::with(['videos','category','media','favorites'])->findOrFail($id);
+        //$course = Course::with(['videos','category','media','favorites'])->findOrFail($id);
+        $course = Course::with(['videos', 'category', 'media', 'favorites'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
         $course->increment('view_count');
         return $this->respondWithSuccess(__('Courses details'), [
             'Courses' => (new CourseResource($course)),

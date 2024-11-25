@@ -57,6 +57,7 @@ return [
         'video_name'                    => 'اسم الفيديو',
         'video_link'                    => 'رابط الفيديو',
         'enter_youtube_link'            => 'أدخل رابط الفيديو اليوتيوب',
+        'brief_description'             => 'وصف مختصر',
     ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',

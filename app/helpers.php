@@ -372,6 +372,18 @@ if (!function_exists('uploadImages')) {
     }
 }
 
+if (!function_exists('uploadMedia')) {
+    function uploadMedia($collection_name, $file, Model $model, bool $do_clear_media_collection = true)
+    {
+        if ($file instanceof UploadedFile) {
+            if ($do_clear_media_collection) {
+                $model?->clearMediaCollection($collection_name);
+            }
+            return $model->addMedia($file)->toMediaCollection($collection_name);
+        }
+    }
+}
+
 # Not Tested
 if (!function_exists('deleteMedia')) {
     function deleteMedia(?Model $model, string $collectionName, mixed $mediaId = null)

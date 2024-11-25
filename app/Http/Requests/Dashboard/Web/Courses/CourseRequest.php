@@ -5,6 +5,7 @@ namespace App\Http\Requests\Dashboard\Web\Courses;
 use App\Models\Category;
 use App\Rules\UniqueWithoutSoftDeleted;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 
 class CourseRequest extends FormRequest
@@ -19,19 +20,23 @@ class CourseRequest extends FormRequest
     {
         $courseId = $this->route('course')->id ?? null;
         $rules = [
-            'course_name'          => ['required', 'string', 'min:3' ,'max:255','unique:courses,course_name,'.$courseId],
-           // 'course_name'         => [new UniqueWithoutSoftDeleted('courses', 'course_name', $courseId)],
-            'category_id'          => ['required', 'exists:categories,id', 'integer'],
-            'course_content'       => ['sometimes','nullable'],
-            'author_name'          => ['required', 'string','min:5','max:255'],
-            'publish_date'         => ['required', 'date'],
-            'keywords'             => ['required','string'],
-            'description'          => ['required','string'],
-            'image'                =>['nullable','image','mimes:png,jpg,jpeg,gif,webp,svg','max:2048'],
-            'status'               =>['boolean','in:0,1'],
+            //'course_name'          => ['required', 'string', 'min:3' ,'max:255','unique:courses,course_name,'.$courseId],
+            'course_name' => [
+                'required', 'string', 'min:3', 'max:255',
+                Rule::unique('courses', 'course_name')->ignore($courseId)
+            ],
+            'category_id'           => ['required', 'exists:categories,id', 'integer'],
+            'course_content'        => ['sometimes','nullable'],
+            'brief_description'     => ['required','string','min:5','max:255'],
+            'author_name'           => ['required', 'string','min:5','max:255'],
+            'publish_date'          => ['required', 'date'],
+            'keywords'              => ['required','string'],
+            'description'           => ['required','string'],
+            'image'                 =>['nullable','image','mimes:png,jpg,jpeg,gif,webp,svg','max:2048'],
+            'status'                =>['boolean','in:0,1'],
             'videos.*.name'         => 'nullable|string|max:255',
             'videos.*.youtube_link' => 'nullable|url',
-            'attachments.*'          => 'nullable|mimes:pdf|max:64000',
+            'attachments.*'         => 'nullable|mimes:pdf|max:64000',
 
         ];
         if($this->method() == 'PUT'){

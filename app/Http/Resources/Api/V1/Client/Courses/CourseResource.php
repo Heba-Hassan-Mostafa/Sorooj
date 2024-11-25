@@ -13,17 +13,19 @@ class CourseResource extends JsonResource
     public function toArray($request): array
     {
         $user = auth(activeGuard())?->user();
-        $favorite = Favorite::where('user_id', $user->id)->where('favoriteable_type', Course::class)
+        $favorite = Favorite::where('user_id', $user?->id)->where('favoriteable_type', Course::class)
             ->where('favoriteable_id', $this->id)->exists();
 
-        $sudscribed = $this->subscriptions()->where('user_id', $user->id)->exists();
+        $sudscribed = $this->subscriptions()->where('user_id', $user?->id)->exists();
         return [
             'id'                => $this->id,
             'course_name'       => $this->course_name,
+            'slug'              => $this->slug,
             'category'          => new CourseCategoryResource($this->category),
             'author_name'       => $this->author_name,
             'image'             => $this->image,
             'course_content'    => $this->course_content,
+            'brief_description' => $this->brief_description,
             'publish_date'      => $this->publish_date,
             'status'            => $this->status,
             'view_count'        => $this->view_count,

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class CourseConcrete extends BaseConcrete implements CourseContract
 {
@@ -54,13 +55,8 @@ class CourseConcrete extends BaseConcrete implements CourseContract
             }
         }
             // Store attachments if isset
-        if (isset($attributes['attachments'])) {
-            foreach ($attributes['attachments'] as $attachment) {
-                if ($attachment->isValid()) {
-                    uploadImage('attachments', $attachment, $record);
-                }
-            }
-        }
+
+            $this->handleMedia($record, $attributes);
 
         DB::commit();
 
@@ -71,6 +67,18 @@ class CourseConcrete extends BaseConcrete implements CourseContract
            return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
+
+    private function handleMedia($record, $attributes): void
+    {
+        if (isset($attributes['attachments'])) {
+            foreach ($attributes['attachments'] as $media) {
+                if (in_array($media->extension(), ['pdf'])) {
+                    uploadMedia('attachments', $media, $record, false);
+                }
+            }
+        }
+    }
+
 
 //    public function update(Model $model, array $attributes = []): mixed
 //    {
@@ -141,7 +149,6 @@ class CourseConcrete extends BaseConcrete implements CourseContract
             }
 
             // Handle videos
-            // Handle videos
             if (isset($attributes['videos'])) {
                 foreach ($attributes['videos'] as $video) {
                     $data = [
@@ -180,15 +187,8 @@ class CourseConcrete extends BaseConcrete implements CourseContract
             }
 
 
-            // Process attachments
-            if (isset($attributes['attachments'])) {
-                foreach ($attributes['attachments'] as $attachment) {
-                    if ($attachment->isValid()) {
-                        // Add new attachment (overwrite any existing attachments in the same collection)
-                        uploadImage('attachments', $attachment, $record);
-                    }
-                }
-            }
+            // update attachments
+            $this->handleMedia($record, $attributes);
 
             DB::commit();
 

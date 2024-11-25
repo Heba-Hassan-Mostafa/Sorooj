@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ModelTrait;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,16 +15,23 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Course extends Model implements HasMedia
 {
-    use HasFactory , ModelTrait,InteractsWithMedia;
+    use HasFactory , ModelTrait,InteractsWithMedia,Sluggable;
 
-    protected $fillable = ['course_name', 'course_content', 'author_name', 'category_id', 'publish_date',
+    protected $fillable = ['course_name','slug', 'course_content', 'brief_description','author_name', 'category_id', 'publish_date',
                             'status', 'view_count', 'download_count', 'order_position', 'keywords', 'description'];
 
     public $filters = ['course_name', 'author_name', 'category_id', 'publish_date'];
 
     protected $definedRelations = ['category','videos','media','favoritedBy'];
 
-
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'course_name'
+            ]
+        ];
+    }
 
     public function registerMediaCollections(): void
     {
@@ -122,6 +130,11 @@ class Course extends Model implements HasMedia
     {
         return $this->hasMany(Subscription::class, 'course_id');
 
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
 }

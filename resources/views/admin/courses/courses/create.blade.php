@@ -46,19 +46,20 @@
                         </div>
 
                         <div class="col-6 mb-3">
+                            <label for="course_name" class="form-label">{{ trans('dashboard.courses.brief_description') }}</label>
+                            <input type="text" name="brief_description" value="{{ old('brief_description') }}" class="form-control" />
+                            @error('brief_description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-6 mb-3">
                             <label for="publish_date" class="form-label">{{ trans('dashboard.courses.publish_date') }}</label>
                             <input type="text" name="publish_date" value="{{ old('publish_date') }}" class="form-control" id="publish_date" />
                             @error('publish_date')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-6 mb-3">
-                            <label for="image" class="form-label">{{ trans('dashboard.image') }}</label>
-                            <input type="file" name="image" value="{{ old('image') }}" class="form-control" />
-                            @error('image')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+
                         <div class="col-lg-12">
                             <ul id="treeview1" class="list-unstyled">
                                 <div>
@@ -119,7 +120,8 @@
                             </div>
                         </div>
 
-                        <div class="col-12 mb-3">
+
+                        <div class="col-6 mb-3 mt-1">
                             <label for="attachments" class="form-label titles">
                                 <i class="fa-solid fa-file-pdf"></i>
                                 {{ trans('dashboard.attachments') }}</label>
@@ -129,6 +131,13 @@
                             @enderror
                         </div>
 
+                        <div class="col-6 mb-3 mt-1">
+                            <label for="image" class="form-label titles">{{ trans('dashboard.image') }}</label>
+                            <input type="file" name="image" value="{{ old('image') }}" class="form-control" />
+                            @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="col-12 mb-3">
                             <label for="keywords" class="form-label">{{ trans('dashboard.keywords') }}</label>
                             <input type="text" name="keywords" value="{{ old('keywords') }}" class="form-control" />
