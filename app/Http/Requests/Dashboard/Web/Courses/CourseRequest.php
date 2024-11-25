@@ -20,11 +20,10 @@ class CourseRequest extends FormRequest
     {
         $courseId = $this->route('course')->id ?? null;
         $rules = [
-            //'course_name'          => ['required', 'string', 'min:3' ,'max:255','unique:courses,course_name,'.$courseId],
-            'course_name' => [
+           'course_name' => [
                 'required', 'string', 'min:3', 'max:255',
                 Rule::unique('courses', 'course_name')->ignore($courseId)
-            ],
+             ],
             'category_id'           => ['required', 'exists:categories,id', 'integer'],
             'course_content'        => ['sometimes','nullable'],
             'brief_description'     => ['required','string','min:5','max:255'],
@@ -42,6 +41,7 @@ class CourseRequest extends FormRequest
         if($this->method() == 'PUT'){
 
             $rules['category_id'] = ['exists:categories,id', 'integer'];
+
         }
 
         return $rules;
@@ -52,6 +52,7 @@ class CourseRequest extends FormRequest
         return [
             'course_name'          => __('Courses Name'),
             'course_content'       => __('Courses Content'),
+            'brief_description'    => __('Brief Description'),
             'author_name'          => __('Author Name'),
             'publish_date'         => __('Publish Date'),
             'keywords'             => __('Keywords'),

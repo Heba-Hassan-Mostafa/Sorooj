@@ -132,9 +132,4 @@ class Course extends Model implements HasMedia
 
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
 }

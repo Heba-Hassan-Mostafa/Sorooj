@@ -141,61 +141,50 @@ class CourseConcrete extends BaseConcrete implements CourseContract
 
         try {
             // Update main course attributes
+
             $record = parent::update($model, $attributes);
 
-            // Update course image
+           // Update course image
             if (isset($attributes['image']) && $attributes['image']->isValid()) {
                 uploadImage('image', $attributes['image'], $record);
             }
 
-            // Handle videos
-            if (isset($attributes['videos'])) {
-                foreach ($attributes['videos'] as $video) {
-                    $data = [
+        // Update videos
+        if (isset($attributes['videos'])) {
+            $existingVideos = $record->videos->keyBy('id');
+            foreach ($attributes['videos'] as $video) {
+                if (isset($video['id']) && $existingVideos->has($video['id'])) {
+                    // Update existing video
+                    $existingVideos->get($video['id'])->update([
                         'name' => $video['name'],
                         'youtube_link' => $video['youtube_link'],
                         'publish_date' => $record->publish_date,
-                        'videoable_type' => 'Courses',
-                        'videoable_id' => $record->id,
-                    ];
-
-                    if (isset($video['id'])) {
-                        // Find the existing video by ID
-                        $existingVideo = Video::find($video['id']);
-
-                        if ($existingVideo) {
-                            // Compare if the data has changed
-                            if ($existingVideo->name !== $video['name'] ||
-                                $existingVideo->youtube_link !== $video['youtube_link']) {
-                                // Update the existing video only if there are changes
-                                $existingVideo->update($data);
-                            }
-                        }
-                    } else {
-                        // Create a new video if no id is present and data is not a duplicate
-                        $existingVideo = Video::where('name', $video['name'])
-                            ->where('youtube_link', $video['youtube_link'])
-                            ->where('videoable_id', $record->id)
-                            ->first();
-
-                        if (!$existingVideo) {
-                            // Only create a new video if it doesn't already exist
-                            Video::create($data);
-                        }
-                    }
+                    ]);
+                    $existingVideos->forget($video['id']);
+                } else {
+                    // Create new video
+                    $record->videos()->create([
+                        'name' => $video['name'],
+                        'youtube_link' => $video['youtube_link'],
+                        'publish_date' => $record->publish_date,
+                    ]);
                 }
             }
 
-
+            // Delete removed videos
+            foreach ($existingVideos as $remainingVideo) {
+                $remainingVideo->delete();
+            }
+        }
             // update attachments
             $this->handleMedia($record, $attributes);
 
             DB::commit();
 
             return $record;
-        } catch (\Exception $e) {
+       } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with(['error' => $e->getMessage()]);
+           return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
 

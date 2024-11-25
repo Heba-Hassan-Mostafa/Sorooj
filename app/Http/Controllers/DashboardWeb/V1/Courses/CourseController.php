@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Repositories\Contracts\CourseContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class CourseController extends Controller
@@ -17,7 +18,7 @@ class CourseController extends Controller
 
     public function __construct(CourseContract $repository)
     {
-        request()->merge(['loadRelations' => ['category']]);
+        request()->merge(['loadRelations' => ['category','videos','attachments','media']]);
         $this->repository = $repository;
     }
     /**
@@ -74,8 +75,61 @@ class CourseController extends Controller
      */
     public function update(CourseRequest $request, Course $course)
     {
+
         $this->repository->update($course,$request->validated());
         return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.updated-successfully'));
+
+//        public function update(CourseRequest $request, $id)
+//    {
+//        DB::beginTransaction();
+//        try {
+//            // Find course
+//            $course = $this->repository->find($id);
+//
+//            // Update course details
+//            $this->repository->update($course, $request->validated());
+//
+//            // Handle course image
+//            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+//                uploadImage('image', $request->file('image'), $course);
+//            }
+//
+//            // Update videos
+//            if ($request->has('videos')) {
+//                $existingVideos = $course->videos->keyBy('id');
+//                foreach ($request->input('videos') as $video) {
+//                    if (isset($video['id']) && $existingVideos->has($video['id'])) {
+//                        // Update existing video
+//                        $existingVideos->get($video['id'])->update([
+//                            'name' => $video['name'],
+//                            'youtube_link' => $video['youtube_link'],
+//                            'publish_date' => $course->publish_date,
+//                        ]);
+//                        $existingVideos->forget($video['id']);
+//                    } else {
+//                        // Create new video
+//                        $course->videos()->create([
+//                            'name' => $video['name'],
+//                            'youtube_link' => $video['youtube_link'],
+//                            'publish_date' => $course->publish_date,
+//                        ]);
+//                    }
+//                }
+//
+//                // Delete removed videos
+//                foreach ($existingVideos as $remainingVideo) {
+//                    $remainingVideo->delete();
+//                }
+//            }
+//
+//            DB::commit();
+//            return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.updated-successfully'));
+//        } catch (\Exception $e) {
+//            DB::rollBack();
+//            return redirect()->back()->with(['error' => $e->getMessage()]);
+//        }
+//    }
+
     }
 
     /**
