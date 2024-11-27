@@ -86,6 +86,13 @@ Route::group(
             Route::get('/courses/change-status',      [CourseController::class,'changeStatus'])->name('courses.change-status');
             Route::resource('/courses', CourseController::class);
 
+            //delete attachments
+            Route::delete('/courses/{course}/attachments/{attachment}', [CourseController::class, 'deleteCourseAttachment'])
+                ->name('courses.deleteAttachment');
+            //delete image
+            Route::delete('/courses/{course}/image', [CourseController::class, 'deleteCourseImage'])
+                ->name('courses.deleteCourseImage');
+
         });
     });
 });

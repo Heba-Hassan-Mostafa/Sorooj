@@ -80,61 +80,6 @@ class CourseConcrete extends BaseConcrete implements CourseContract
     }
 
 
-//    public function update(Model $model, array $attributes = []): mixed
-//    {
-//        DB::beginTransaction();
-//
-//        try {
-//            // Update main course attributes
-//        $record = parent::update($model, $attributes);
-//
-//            // Update course image
-//            if (isset($attributes['image']) && $attributes['image']->isValid()) {
-//                uploadImage('image', $attributes['image'], $record);
-//            }
-//
-//            // Update or add new videos if provided
-//            if (isset($attributes['videos'])) {
-//                foreach ($attributes['videos'] as $video) {
-//                    if (isset($video['id'])) {
-//                        // Update existing video
-//                        $record->videos()->where('id', $video['id'])->update([
-//                            'name' => $video['name'],
-//                            'youtube_link' => $video['youtube_link'],
-//                            'publish_date' => $record->publish_date,
-//                        ]);
-//                    } else {
-//                        // Add new video
-//                        $record->videos()->create([
-//                            'name' => $video['name'],
-//                            'youtube_link' => $video['youtube_link'],
-//                            'publish_date' => $record->publish_date,
-//                            'videoable_type' => Courses::class,
-//                            'videoable_id' => $record->id,
-//                        ]);
-//                    }
-//                }
-//            }
-//            // Update or add new attachments if provided
-//            if (isset($attributes['attachments'])) {
-//                foreach ($attributes['attachments'] as $attachment) {
-//                    if ($attachment->isValid()) {
-//                        // Add new attachment (overwrite any existing attachments in the same collection)
-//                        uploadImage('attachments', $attachment, $record);
-//                    }
-//                }
-//            }
-//
-//            DB::commit();
-//
-//            return $record;
-//        } catch (\Exception $e) {
-//            DB::rollback();
-//            return redirect()->back()->with(['error' => $e->getMessage()]);
-//        }
-//
-//    }
-
     public function update(Model $model, array $attributes = []): mixed
     {
         DB::beginTransaction();
@@ -221,40 +166,7 @@ class CourseConcrete extends BaseConcrete implements CourseContract
 
     }
 
-//    public function toggleFavorite($courseId)
-//    {
-//        $user = auth()->user();
-//        $course = Course::findOrFail($courseId);
-//
-//        // Check if the course is already favorited by the user
-//        $isFavorited = DB::table('favorites')
-//            ->where('favoriteable_id', $course->id)
-//            ->where('favoriteable_type', Course::class)
-//            ->where('user_id', $user->id)
-//            ->exists();
-//
-//        if ($isFavorited) {
-//            // Remove from favorites
-//            Favorite::where('favoriteable_id', $course->id)
-//                ->where('favoriteable_type', Course::class)
-//                ->where('user_id', $user->id)
-//                ->delete();
-//            $message = __('Course removed from favorites');
-//        } else {
-//            $data = [
-//                'user_id' => $user->id,
-//                'favoriteable_id' => $course->id,
-//                'favoriteable_type' => Course::class,
-//            ];
-//            // Add to favorites
-//            Favorite::create($data);
-//            $message = __('Course added to favorites');
-//        }
-//
-//        return $this->respondWithSuccess($message, [
-//            'is_favorited' => !$isFavorited
-//        ]);
-//    }
+
     public function toggleFavorite($id)
     {
         $userId = auth()->id();

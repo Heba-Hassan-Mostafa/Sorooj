@@ -102,31 +102,6 @@
                             @enderror
                         </div>
 
-{{--                        <div id="videoRepeater" class="mb-4">--}}
-{{--                            <label for="videos" class="form-label titles">--}}
-{{--                                <i class="fa-brands fa-youtube"></i>--}}
-{{--                                {{ trans('dashboard.courses.videos_youtube_links') }}--}}
-{{--                            </label>--}}
-{{--                            <div id="videoInputs">--}}
-{{--                                @foreach($course->videos as $index => $video)--}}
-{{--                                    <div class="row mb-3 videosBox">--}}
-{{--                                        <div class="col-5">--}}
-{{--                                            <input type="text" name="videos[{{ $index }}][name]" value="{{ old("videos.$index.name", $video->name) }}" class="form-control" placeholder="{{ trans('dashboard.courses.video_name') }}" />--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-5">--}}
-{{--                                            <input type="text" name="videos[{{ $index }}][youtube_link]" value="{{ old("videos.$index.youtube_link", $video->youtube_link) }}" class="form-control" placeholder="{{ trans('dashboard.courses.enter_youtube_link') }}" />--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-2">--}}
-{{--                                            <button type="button" class="btn btn-danger removeVideo">{{ trans('dashboard.remove') }}</button>--}}
-{{--                                        </div>--}}
-{{--                                        <input type="hidden" name="videos[{{ $index }}][id]" value="{{ $video->id }}" />--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-
-{{--                            </div>--}}
-{{--                            <button type="button" class="btn btn-success addVideo">{{ trans('dashboard.add') }}</button>--}}
-{{--                        </div>--}}
-
                         <div id="videoRepeater" class="mb-4">
                             <label for="videos" class="form-label titles">
                                 <i class="fa-brands fa-youtube"></i>
@@ -155,30 +130,41 @@
                             <button type="button" class="btn btn-success addVideo">{{ trans('dashboard.add') }}</button>
                         </div>
 
-
                         <div class="col-6 mb-3">
                             <label for="attachments" class="form-label titles">
                                 <i class="fa-solid fa-file-pdf"></i>
                                 {{ trans('dashboard.attachments') }}
                             </label>
                             <input type="file" name="attachments[]" class="form-control" accept=".pdf" multiple />
-                            <div class="grayBgColorStyle pdfFiles">
+                            <div class="" id="attachmentList">
                                 @foreach($course->getMedia('attachments') as $attachment)
-                                    <i class="far fa-file-pdf" style="color: red"></i>
-                                    <a href="{{ $attachment->getUrl() }}" class="cairo mainColorStyle bold" target="_blank">{{ $attachment->file_name }}</a><br>
+                                    <div class="attachment-item grayBgColorStyle pdfFiles" data-id="{{ $attachment->id }}">
+                                        <i class="far fa-file-pdf" style="color: red"></i>
+                                        <a href="{{ $attachment->getUrl() }}" class="cairo mainColorStyle bold" target="_blank">{{ $attachment->file_name }}</a>
+
+                                        <!-- Delete Button -->
+                                        <button type="button" class="btn btn-danger btn-sm delete-attachment" data-id="{{ $attachment->id }}">
+                                            {{ trans('dashboard.delete') }}
+                                        </button>
+                                        <br>
+                                    </div>
                                 @endforeach
                             </div>
                             @error('attachments')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
                         <div class="col-6 mb-3">
-                            <label for="image" class="form-label">{{ trans('dashboard.image') }}</label>
+                            <label for="image" class="form-label titles">{{ trans('dashboard.image') }}</label>
                             <input type="file" name="image" class="form-control" />
+
                             @if($course->getFirstMediaUrl('image'))
                                 <img src="{{ $course->getFirstMediaUrl('image') }}" alt="Course Image" class="img-thumbnail mt-2" width="150" height="135">
+                                <button type="button" class="btn btn-danger btn-sm delete-image" data-id="{{ $course->id }}">
+                                    {{ trans('dashboard.delete') }} {{ trans('dashboard.image') }}
+                                </button>
                             @endif
+
                             @error('image')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -212,35 +198,6 @@
 
     {{--    Add new input for video--}}
     <script>
-        {{--document.addEventListener('DOMContentLoaded', function () {--}}
-        {{--    const videoInputs = document.getElementById('videoInputs');--}}
-        {{--    let videoIndex = 1;--}}
-
-        {{--    // Add new input for video--}}
-        {{--    document.querySelector('.addVideo').addEventListener('click', function () {--}}
-        {{--        const newInput = `--}}
-        {{--        <div class="row mb-3">--}}
-        {{--            <div class="col-5">--}}
-        {{--                <input type="text" name="videos[${videoIndex}][name]" class="form-control" placeholder="{{ trans('dashboard.courses.video_name') }}" />--}}
-        {{--            </div>--}}
-        {{--            <div class="col-5">--}}
-        {{--                <input type="text" name="videos[${videoIndex}][youtube_link]" class="form-control" placeholder="{{ trans('dashboard.courses.enter_youtube_link') }}" />--}}
-        {{--            </div>--}}
-        {{--            <div class="col-2">--}}
-        {{--                <button type="button" class="btn btn-danger removeVideo">{{ trans('dashboard.remove') }}</button>--}}
-        {{--            </div>--}}
-        {{--        </div>`;--}}
-        {{--        videoInputs.insertAdjacentHTML('beforeend', newInput);--}}
-        {{--        videoIndex++;--}}
-        {{--    });--}}
-
-        {{--    // Remove a video input--}}
-        {{--    videoInputs.addEventListener('click', function (e) {--}}
-        {{--        if (e.target.classList.contains('removeVideo')) {--}}
-        {{--            e.target.closest('.row').remove();--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--});--}}
 
         document.addEventListener('DOMContentLoaded', function () {
             const videoInputs = document.getElementById('videoInputs');
@@ -317,6 +274,58 @@
                 min_codate.setDate(cidate.getDate() + 1);
 
             }
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.delete-attachment', function() {
+            var attachmentId = $(this).data('id');
+            var attachmentItem = $(this).closest('.attachment-item');
+
+           // if (confirm('Are you sure you want to delete this attachment?')) {
+                $.ajax({
+                    url: '{{ url("admin/courses/courses/" . $course->id . "/attachments") }}/' + attachmentId,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}' // CSRF token for security
+                    },
+                    success: function(response) {
+                        // Remove the attachment item from the UI
+                        attachmentItem.remove();
+                      //  alert('Attachment deleted successfully.');
+                    },
+                    error: function(xhr) {
+                        alert('Error deleting attachment: ' + xhr.responseText);
+                    }
+                });
+           // }
+        });
+    </script>
+
+    <script>
+        // AJAX for deleting the course image
+        $(document).on('click', '.delete-image', function() {
+            var courseId = $(this).data('id');
+            var imageButton = $(this);
+
+            //if (confirm('Are you sure you want to delete this image?')) {
+                $.ajax({
+                    url: '{{ url("admin/courses/courses") }}/' + courseId + '/image', // Define the route URL
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        // Remove the image and button from the UI
+                        imageButton.prev('img').remove(); // Remove the image
+                        imageButton.remove(); // Remove the delete button
+                       // alert('Image deleted successfully.');
+                    },
+                    error: function(xhr) {
+                        alert('Error deleting image: ' + xhr.responseText);
+                    }
+                });
+            //}
         });
     </script>
 @endsection

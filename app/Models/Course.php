@@ -22,13 +22,14 @@ class Course extends Model implements HasMedia
 
     public $filters = ['course_name', 'author_name', 'category_id', 'publish_date'];
 
-    protected $definedRelations = ['category','videos','media','favoritedBy'];
+    //protected $definedRelations = ['category','videos','media','favoritedBy'];
 
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'course_name'
+                'source' => 'course_name',
+                'onUpdate' => true,
             ]
         ];
     }
@@ -54,7 +55,7 @@ class Course extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn ($value) => ($this->getFirstMediaUrl('image') != ''
-                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/course.jpg')),
+                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/course.png')),
         );
     }
     public function getAttachments()
