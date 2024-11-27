@@ -110,7 +110,7 @@ class User extends Authenticatable implements HasMedia
 
     public function favorites()
     {
-        return $this->morphedByMany(Course::class, 'favoriteable', 'favorites');
+        return $this->morphMany(Favorite::class, 'favoriteable');
     }
 
     public function subscriptions()

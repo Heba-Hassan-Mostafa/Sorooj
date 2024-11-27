@@ -22,7 +22,7 @@ class Course extends Model implements HasMedia
 
     public $filters = ['course_name', 'author_name', 'category_id', 'publish_date'];
 
-    //protected $definedRelations = ['category','videos','media','favoritedBy'];
+    protected $definedRelations = ['category','videos','media','favorites'];
 
     public function sluggable(): array
     {

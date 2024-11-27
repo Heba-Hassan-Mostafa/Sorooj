@@ -167,26 +167,43 @@ class CourseConcrete extends BaseConcrete implements CourseContract
     }
 
 
+//    public function toggleFavorite($id)
+//    {
+//        $userId = auth()->id();
+//
+//        $existingFavorite = Favorite::where('favoriteable_type', Course::class)
+//            ->where('favoriteable_id', $id)
+//            ->where('user_id', $userId)
+//            ->first();
+//
+//        if ($existingFavorite) {
+//            $existingFavorite->delete();
+//            return $this->respondWithSuccess(__('Course removed from favorites'));
+//        } else {
+//            Favorite::create([
+//                'user_id' => $userId,
+//                'favoriteable_id' => $id,
+//                'favoriteable_type' => Course::class,
+//            ]);
+//            return $this->respondWithSuccess(__('Course added to favorites'));
+//        }
+//    }
+
     public function toggleFavorite($id)
     {
-        $userId = auth()->id();
-
-        $existingFavorite = Favorite::where('favoriteable_type', Course::class)
-            ->where('favoriteable_id', $id)
-            ->where('user_id', $userId)
-            ->first();
-
-        if ($existingFavorite) {
-            $existingFavorite->delete();
-            return $this->respondWithSuccess(__('Course removed from favorites'));
+        $course = Course::find($id);
+        $is_order_favorite = Favorite::where('favoriteable_id', $id)->where('favoriteable_type', Course::class)->first();
+        if ($is_order_favorite) {
+            $is_order_favorite->delete();
+            return $this->respondWithSuccess('Removed from favorites', ['is_favorite' => false]);
         } else {
-            Favorite::create([
-                'user_id' => $userId,
-                'favoriteable_id' => $id,
-                'favoriteable_type' => Course::class,
+
+         $course->favorites()->create([
+                'user_id' => auth()->id(),
             ]);
-            return $this->respondWithSuccess(__('Course added to favorites'));
+            return $this->respondWithSuccess('Added to favorites', ['is_favorite' => true]);
         }
+
     }
 
     public function addSubscription($courseId)
