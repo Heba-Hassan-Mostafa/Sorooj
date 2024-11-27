@@ -167,38 +167,11 @@ class CourseConcrete extends BaseConcrete implements CourseContract
     }
 
 
-//    public function toggleFavorite($id)
-//    {
-//        $userId = auth()->id();
-//
-//        $existingFavorite = Favorite::where('favoriteable_type', Course::class)
-//            ->where('favoriteable_id', $id)
-//            ->where('user_id', $userId)
-//            ->first();
-//
-//        if ($existingFavorite) {
-//            $existingFavorite->delete();
-//            return $this->respondWithSuccess(__('Course removed from favorites'));
-//        } else {
-//            Favorite::create([
-//                'user_id' => $userId,
-//                'favoriteable_id' => $id,
-//                'favoriteable_type' => Course::class,
-//            ]);
-//            return $this->respondWithSuccess(__('Course added to favorites'));
-//        }
-//    }
-
     public function toggleFavorite($id)
     {
         $course = Course::findOrFail($id);
         $userId = auth(activeGuard())?->user()->id;
-//        $existingFavorite = Favorite::where('favoriteable_type', Course::class)
-//           ->where('favoriteable_id', $id)
-//           ->where('user_id', $userId)
-//          ->first();
         $existingFavorite =  $course->favorites()->where('user_id', $userId)->first();
-       // dd($existingFavorite);
         if ($existingFavorite) {
             $existingFavorite->delete();
             return $this->respondWithSuccess(__('Course removed from favorites'), ['is_favorite' => false]);
