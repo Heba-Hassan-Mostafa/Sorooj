@@ -1364,5 +1364,7 @@
     "Course unsubscribed successfully": "تم الغاء الاشتراك بنجاح.",
     "Brief Description": "وصف مختصر",
     "Active": "مفعل",
-    "Inactive": "معطل"
+    "Inactive": "معطل",
+    "Book added to favorites": "تم اضافة الكتاب الى المفضلة.",
+    "Book removed from favorites": "تم ازالة الكتاب من المفضلة."
 }

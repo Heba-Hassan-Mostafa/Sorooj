@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Client\AuthController;
+use App\Http\Controllers\Api\V1\Client\Books\BookCategoryController;
+use App\Http\Controllers\Api\V1\Client\Books\BookController;
 use App\Http\Controllers\Api\V1\Client\Courses\CategoryController;
 use App\Http\Controllers\Api\V1\Client\Courses\CourseController;
 use Illuminate\Support\Facades\Route;
@@ -36,21 +38,58 @@ Route::prefix("auth")->group(function () {
     Route::post('send-otp', [AuthController::class, 'sendOTP']);
 });
 
+        //courses
         Route::group(['prefix' => 'courses', 'as' => 'courses.'], function () {
 
+            //categories
             Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
-           // Route::apiResource('courses', CourseController::class);
-            Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
-            Route::get('courses/{slug}', [CourseController::class, 'show'])->name('courses.show');
+            //index
+            Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+            //suggested
+            Route::get('/suggested-courses', [CourseController::class, 'suggestedCourses'])->name('suggested-courses');
 
-            Route::get('suggested-courses', [CourseController::class, 'suggestedCourses'])->name('suggested-courses');
+            //show
+            Route::get('/{slug}', [CourseController::class, 'show'])->name('courses.show');
+
+            //comments
+            Route::post('/add-comment/{courseId}', [CourseController::class, 'addComment'])
+                ->name('add-comment')->middleware('auth:sanctum');
+            //favorite
+            Route::post('/toggle-favorite/{courseId}', [CourseController::class, 'toggleFavorite'])
+                ->name('toggle-favorite')->middleware('auth:sanctum');
+            //subscription
+            Route::post('/add-subscription/{courseId}', [CourseController::class, 'addSubscription'])
+                ->name('add-subscription')->middleware('auth:sanctum');
 
         });
 
+
+
+        //books
+        Route::group(['prefix' => 'books', 'as' => 'books.'], function () {
+
+            //categories
+            Route::get('categories', [BookCategoryController::class, 'index'])->name('category.index');
+            //index
+            Route::get('/', [BookController::class, 'index'])->name('index');
+            //suggested
+            Route::get('/suggested-books', [BookController::class, 'suggestedBooks'])->name('suggested-books');
+            //show
+            Route::get('/{slug}', [BookController::class, 'show'])->name('show');
+
+            //comments
+            Route::post('/add-comment/{courseId}', [BookController::class, 'addComment'])
+                ->name('add-comment')->middleware('auth:sanctum');
+            //favorite
+            Route::post('toggle-favorite/{courseId}', [BookController::class, 'toggleFavorite'])
+                ->name('toggle-favorite')->middleware('auth:sanctum');
+
+
+
+        });
+
+
 Route::middleware(["auth:api"])->group(function () {
 
-    Route::post('courses/add-comment/{courseId}', [CourseController::class, 'addComment'])->name('courses.add-comment');
-    Route::post('courses/toggle-favorite/{courseId}', [CourseController::class, 'toggleFavorite'])->name('courses.toggle-favorite');
-    Route::post('courses/add-subscription/{courseId}', [CourseController::class, 'addSubscription'])->name('courses.add-subscription');
-
+//
 });

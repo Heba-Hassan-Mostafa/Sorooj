@@ -7,8 +7,10 @@ use App\Models\Category;
 use App\Models\User;
 use App\Helpers\Setting;
 use App\Repositories\Concretes\AdminConcrete;
+use App\Repositories\Concretes\BookCategoryConcrete;
 use App\Repositories\Concretes\CourseCategoryConcrete;
 use App\Repositories\Contracts\AdminContract;
+use App\Repositories\Contracts\bookCategoryContract;
 use App\Repositories\Contracts\CourseCategoryContract;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -35,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(CourseCategoryContract::class, function ($app) {
             return new CourseCategoryConcrete(new Category);
+        });
+        $this->app->bind(BookCategoryContract::class, function ($app) {
+            return new BookCategoryConcrete(new Category);
         });
     }
 

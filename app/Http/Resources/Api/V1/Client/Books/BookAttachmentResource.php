@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Api\V1\Client\Courses;
+namespace App\Http\Resources\Api\V1\Client\Books;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseAttachmentResource extends JsonResource
+class BookAttachmentResource extends JsonResource
 {
     public function toArray($request): array
     {
