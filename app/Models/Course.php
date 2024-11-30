@@ -133,4 +133,8 @@ class Course extends Model implements HasMedia
 
     }
 
+    public function status()
+    {
+        return $this->status == 1 ? __('Active') : __('Inactive');
+    }
 }

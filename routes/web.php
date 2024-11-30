@@ -81,9 +81,14 @@ Route::group(
         Route::group(['prefix' => 'courses', 'as' => 'courses.'], function () {
 
             Route::get('/category/change-status',      [CourseCategoryController::class,'changeStatus'])->name('category.change-status');
+            Route::get('/category/sort-categories', [CourseCategoryController::class,'livewire_index'])->name('category.sort-categories');
+
             Route::resource('/category', CourseCategoryController::class);
 
             Route::get('/courses/change-status',      [CourseController::class,'changeStatus'])->name('courses.change-status');
+            Route::get('/sort-courses', [CourseController::class,'livewire_index'])->name('sort-courses');
+            Route::get('/videos/sort/{course}', [CourseController::class,'videosSort'])->name('videos.sort');
+
             Route::resource('/courses', CourseController::class);
 
             //delete attachments

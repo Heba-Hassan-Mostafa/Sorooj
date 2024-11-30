@@ -1362,5 +1362,7 @@
     "Course removed from favorites": "تم ازالة الدورة من المفضلة.",
     "Course subscribed successfully": "تم الاشتراك بنجاح.",
     "Course unsubscribed successfully": "تم الغاء الاشتراك بنجاح.",
-    "Brief Description": "وصف مختصر"
+    "Brief Description": "وصف مختصر",
+    "Active": "مفعل",
+    "Inactive": "معطل"
 }

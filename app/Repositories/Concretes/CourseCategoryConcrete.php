@@ -19,6 +19,11 @@ class CourseCategoryConcrete extends BaseConcrete implements CourseCategoryContr
         parent::__construct($model);
     }
 
+    public function getLivewireCategories()
+    {
+        return Category::where('parent_id',null)->where('type',CategoryTypeEnum::COURSE)->get();
+    }
+
     public function create(array $attributes = []): mixed
     {
         $attributes["type"] = CategoryTypeEnum::COURSE;

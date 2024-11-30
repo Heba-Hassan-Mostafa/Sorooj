@@ -32,6 +32,15 @@ class CourseController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function livewire_index()
+    {
+        $courses = $this->repository->getLivewireCourses();
+        return view('admin.courses.courses.livewire_index',compact('courses'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -130,5 +139,12 @@ class CourseController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Image not found.'], 404);
     }
+
+    public function videosSort(Course $course)
+    {
+       $this->repository->getLivewireCourseVideos($course);
+        return view('admin.courses.courses.videos-sort',compact('course'));
+    }
+
 
 }

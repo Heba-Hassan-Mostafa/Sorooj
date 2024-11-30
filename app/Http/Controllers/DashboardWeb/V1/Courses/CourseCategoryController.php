@@ -32,6 +32,12 @@ class CourseCategoryController extends Controller
         return view('admin.courses.categories.index', compact('categories', 'subCategories'));
     }
 
+    public function livewire_index()
+    {
+        $categories = $this->repository->getLivewireCategories();
+        return view('admin.courses.categories.livewire_index',compact('categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

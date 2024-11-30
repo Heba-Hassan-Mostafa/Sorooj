@@ -13,8 +13,10 @@ class CourseResource extends JsonResource
     public function toArray($request): array
     {
         $user = auth(activeGuard())?->user();
-        $favorite = $this->favorites()->where('user_id', $user?->id)->exists();
+        $favorite = $user ? $this->favorites()->where('user_id', $user->id)->exists() : false;
         $subscribed = $this->subscriptions()->where('user_id', $user?->id)->exists();
+
+        $sortedVideos = $this->videos->sortByDesc('order_position');
 
         return [
             'id'                => $this->id,
@@ -35,7 +37,7 @@ class CourseResource extends JsonResource
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),
 
            $this->mergeWhen($request->route()->getName() == 'courses.courses.show', [
-             'videos'                  => CourseVideoResource::collection($this->videos),
+             'videos'                  => CourseVideoResource::collection($sortedVideos),
               'attachments'            => CourseAttachmentResource::collection($this->getAttachments()),
                'comments'              => CourseCommentResource::collection($this->comments->where('status', CommentStatusEnum::PUBLISHED)),
                 'seo'               => [

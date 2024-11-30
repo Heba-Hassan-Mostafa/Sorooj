@@ -3,15 +3,11 @@
 namespace App\Repositories\Concretes;
 
 use App\Models\Course;
-use App\Models\Favorite;
-use App\Models\Video;
+
 use App\Repositories\Contracts\CourseContract;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class CourseConcrete extends BaseConcrete implements CourseContract
 {
@@ -26,11 +22,28 @@ class CourseConcrete extends BaseConcrete implements CourseContract
         parent::__construct($model);
     }
 
+    public function getLivewireCourses()
+    {
+        return Course::with(['category'])->get();
+    }
+
+    public function getLivewireCourseVideos(Course $model)
+    {
+        return $model->videos()->get();
+
+    }
+
     public function create(array $attributes = []): mixed
     {
         DB::beginTransaction();
 
         try {
+
+            $lastOrderPosition = Course::max('order_position');
+            $nextOrderPosition = $lastOrderPosition + 1;
+
+            // Include the next order position in the attributes
+            $attributes['order_position'] = $nextOrderPosition;
 
          // create course
         $record = parent::create($attributes);
@@ -44,12 +57,15 @@ class CourseConcrete extends BaseConcrete implements CourseContract
         if (isset($attributes['videos'])) {
             foreach ($attributes['videos'] as $video) {
                 if ($video) {
+                    $lastVideoOrder = $record->videos()->max('order_position') ?? 0; // Get the last video's order
+
                     $record->videos()->create([
                         'name' => $video['name'],
                         'youtube_link' => $video['youtube_link'],
                         'publish_date' => $record->publish_date,
                         'videoable_type' => Course::class,
                         'videoable_id' => $record->id,
+                        'order_position' => $lastVideoOrder + 1,
                     ]);
                 }
             }

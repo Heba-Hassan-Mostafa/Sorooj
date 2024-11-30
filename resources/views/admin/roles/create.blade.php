@@ -55,10 +55,11 @@
                                     <div class="row align-items-center">
                                         <label class="fs-2 col-6 brownColor bold" for="permissions">{{trans('dashboard.roles.permissions')}}</label>
                                         <div class="col-6 d-flex justify-content-end">
-                                            <button class="blueBk text-white btnMainStyle">اختيار الكل</button>
+                                            <button class="blueBk text-white btnMainStyle" onclick="CheckAll('box1',this)">
+                                                {{ trans('dashboard.select-all') }}</button>
                                         </div>
                                     </div>
-
+                                    <input type="checkbox" name="select_all" id="example-select-all" onclick="CheckAll('box1',this)">
                                     <br>
                                    <div class="row  p-3" style="background-color: #f7f7f7 ;border-radius: 10px;
                                                                box-shadow: 1px 1px 20px #f7f7f7;margin: 20px auto;" >
@@ -77,14 +78,14 @@
                                                    <div class="row mt-2 mb-5 ps-4 pe-4">
                                                        @foreach($permissionGroup['controls'] as $control)
                                                            <div class="form-group col-md-6 mb-3">
-                                                               <input type="checkbox" name="role_permissions[]" value="{{ $control['id'] }}">
+                                                               <input type="checkbox" name="role_permissions[]" value="{{ $control['id'] }}" class="box1">
                                                                <label class="fs-5 mainColor" style="margin-right: 8px">{{ $control['name'] }}</label>
                                                            </div>
                                                        @endforeach
                                                    </div>
                                                </div>
                                              </div>
-                                           
+
 
                                        @endforeach
 

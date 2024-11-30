@@ -58,6 +58,8 @@ return [
         'video_link'                    => 'رابط الفيديو',
         'enter_youtube_link'            => 'أدخل رابط الفيديو اليوتيوب',
         'brief_description'             => 'وصف مختصر',
+        'course-videos-reorder'         => ' تغيير ترتيب الفيديوات ',
+        'edit-course'                   =>'تعديل الدورة'
     ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',
@@ -89,4 +91,6 @@ return [
     'add'                                    => 'اضف',
     'remove'                                 => 'حذف',
     'attachments'                           => 'المرفقات',
+    'change_order'                           => 'تغيير الترتيب',
+    'select-all'                             => 'تحديد الكل',
 ];

@@ -2,13 +2,11 @@
     <ul>
         <i class="fas fa-level-down-alt icon-path"></i>
         <label style="font-size: 16px;">
-            <input type="radio" name="category_id" value= "{{ $subcategory->id }}">
-
-
+            <input type="radio" name="category_id" value="{{ $subcategory->id }}">
             {{ $subcategory->name }}</label>
 
         @if(count($subcategory->subcategory))
-            @include('admin.courses.categories.subCategoryList',['subcategories' => $subcategory->subcategory])
+            @include('admin.courses.courses.subCategoryList',['subcategories' => $subcategory->subcategory])
         @endif
     </ul>
 

@@ -18,6 +18,8 @@ class CourseController extends BaseApiController
      */
 
     protected array $conditions = ['where' => ['status' => 1]];
+    protected string $orderBy = 'order_position';
+
 
     public function __construct(CourseContract $repository)
     {

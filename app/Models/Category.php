@@ -79,6 +79,9 @@ class Category extends Model
         return $this->hasMany(Course::class);
 
     }
-
+    public function status()
+    {
+        return $this->status == 1 ? __('Active') : __('Inactive');
+    }
 
 }

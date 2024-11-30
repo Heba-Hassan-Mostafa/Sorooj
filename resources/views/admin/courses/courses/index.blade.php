@@ -13,6 +13,9 @@
     <a href="{{ route('admin.courses.courses.create') }}" class="btn btn-primary mb-2">
         {{ trans('dashboard.courses.add-course') }}
     </a>
+    <a href="{{ route('admin.courses.sort-courses') }}" class="btn btn-warning font-weight-bold p-2"
+       role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
+        {{ trans('dashboard.change_order') }}</a>
     <div class="card">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
@@ -25,7 +28,6 @@
                     <th>{{ trans('dashboard.courses.author_name') }}</th>
                     <th>{{ trans('dashboard.courses.publish_date') }}</th>
                     <th>{{ trans('dashboard.courses.view_count') }}</th>
-                    <th>{{ trans('dashboard.courses.download_count') }}</th>
                     <th>{{ trans('dashboard.status') }}</th>
                     <th>{{ trans('dashboard.options') }}</th>
 
@@ -48,7 +50,6 @@
                         <td>{{ $course->author_name }}</td>
                         <td>{{ $course->publish_date }}</td>
                         <td>{{ $course->view_count ?? 0 }}</td>
-                        <td>{{ $course->download_count ?? 0 }}</td>
 
                         <td>
                             <label class="switch switch-success" for="{{ $course->id }}">
@@ -78,6 +79,10 @@
                                         @csrf
                                         @method('Delete')
                                     </form>
+
+                                <a href="{{ route('admin.courses.videos.sort',$course->id) }}"  class="btn btn-warning btn-sm text-white"  title="{{ trans('dashboard.courses.course-videos-reorder') }}">
+                                    <i class="fas fa-sort"></i>
+                                </a>
                             </div>
                         </td>
 
