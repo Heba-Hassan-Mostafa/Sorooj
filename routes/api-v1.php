@@ -5,6 +5,11 @@ use App\Http\Controllers\Api\V1\Client\Books\BookCategoryController;
 use App\Http\Controllers\Api\V1\Client\Books\BookController;
 use App\Http\Controllers\Api\V1\Client\Courses\CategoryController;
 use App\Http\Controllers\Api\V1\Client\Courses\CourseController;
+use App\Http\Controllers\Api\V1\Client\HomePage\FatwaQuestionController;
+use App\Http\Controllers\Api\V1\Client\HomePage\MostViewedController;
+use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
+use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
+use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,11 +89,21 @@ Route::prefix("auth")->group(function () {
             Route::post('toggle-favorite/{courseId}', [BookController::class, 'toggleFavorite'])
                 ->name('toggle-favorite')->middleware('auth:sanctum');
 
-
-
         });
 
-
+    Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
+        //slider
+        Route::get('slider', [SliderController::class, 'index'])->name('slider.index');
+        //UpcomingEvent
+        Route::get('upcoming-events', [UpcomingEventController::class, 'index'])->name('upcoming-events.index');
+        //Videos
+        Route::get('videos', [VideoController::class, 'index'])->name('videos.index');
+        //most-viewed
+        Route::get('most-viewed', [MostViewedController::class, 'index'])->name('most-viewed.index');
+        //add-fatwa
+        Route::post('add-fatwa', [FatwaQuestionController::class, 'store'])
+            ->name('add-fatwa.store')->middleware('auth:sanctum');
+    });
 Route::middleware(["auth:api"])->group(function () {
 
 //
