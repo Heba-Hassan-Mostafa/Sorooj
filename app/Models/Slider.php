@@ -19,7 +19,7 @@ class Slider extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn ($value) => ($this->getFirstMediaUrl('image') != ''
-                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/slider.png')),
+                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/default_slider.webp')),
         );
     }
 }

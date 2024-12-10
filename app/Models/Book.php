@@ -55,7 +55,7 @@ class Book extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn ($value) => ($this->getFirstMediaUrl('image') != ''
-                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/book.png')),
+                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/books.webp')),
         );
     }
 

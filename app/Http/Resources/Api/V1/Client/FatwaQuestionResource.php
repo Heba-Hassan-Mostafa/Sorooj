@@ -10,13 +10,15 @@ class FatwaQuestionResource extends JsonResource
     {
         return [
             'id'      => $this->id,
+            'slug'    => $this->slug,
+            'question' => $this->message,
             'name'    => $this->name,
             'user'    => [
                 'id'   => $this->user?->id,
                 'name' => $this->user?->first_name,
                 'email' => $this->user?->email
             ],
-            'message' => $this->message,
+            'answer' => new FatwaAnswerResource($this->fatwaAnswer),
             'status'  => $this->status,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];

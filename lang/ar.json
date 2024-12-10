@@ -1365,8 +1365,15 @@
     "Brief Description": "وصف مختصر",
     "Active": "مفعل",
     "Inactive": "معطل",
+    "book": "كتب وابحاث",
+    "course": "دورة تعليمية",
+    "E-mail": "البريد الالكتروني",
     "Book added to favorites": "تم اضافة الكتاب الى المفضلة.",
     "Book removed from favorites": "تم ازالة الكتاب من المفضلة.",
     "Most Viewed": "الاكثر مشاهدة",
-    "Fatwa Question added successfully": " تم اضافة سؤالك بنجاح"
+    "Fatwa Question added successfully": " تم اضافة سؤالك بنجاح",
+    "Fatwa Question not found": "سؤالك غير موجود",
+    "No published Fatwa Answer found for this question": "لم يتم العثور على سؤالك",
+    "Subscriber added successfully": "تم الاشتراك بنجاح",
+    "The email format is invalid": "صيغة البريد الالكتروني غير صالحة."
 }

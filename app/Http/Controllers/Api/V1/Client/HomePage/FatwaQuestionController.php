@@ -16,10 +16,14 @@ class FatwaQuestionController extends BaseApiController
      * @param FatwaQuestionContract $repository
      */
 
-    protected array $conditions = ['where' => ['status' => 1]];
+    protected array $conditions = [
+        'where' => ['status' => 1],
+        'has' => ['fatwaAnswer'],
+    ];
 
     public function __construct(FatwaQuestionContract $repository)
     {
+        request()->merge(['loadRelations' => 'fatwaAnswer']);
         parent::__construct($repository, FatwaQuestionResource::class);
     }
 

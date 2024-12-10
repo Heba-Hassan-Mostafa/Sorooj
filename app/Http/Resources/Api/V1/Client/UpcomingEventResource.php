@@ -13,7 +13,6 @@ class UpcomingEventResource extends JsonResource
             'title'         => $this->title,
             'description'   => $this->description,
             'image'         => $this->image,
-            'start'         => $this->start,
             'end'           => $this->end,
             'is_active'     => $this->is_active
         ];

@@ -5,8 +5,10 @@ use App\Http\Controllers\Api\V1\Client\Books\BookCategoryController;
 use App\Http\Controllers\Api\V1\Client\Books\BookController;
 use App\Http\Controllers\Api\V1\Client\Courses\CategoryController;
 use App\Http\Controllers\Api\V1\Client\Courses\CourseController;
+use App\Http\Controllers\Api\V1\Client\HomePage\FatwaAnswerController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaQuestionController;
 use App\Http\Controllers\Api\V1\Client\HomePage\MostViewedController;
+use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
@@ -90,20 +92,34 @@ Route::prefix("auth")->group(function () {
                 ->name('toggle-favorite')->middleware('auth:sanctum');
 
         });
+        # fatwa
+            Route::group(['prefix' => 'fatwa', 'as' => 'fatwa.'], function () {
 
-    Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
-        //slider
-        Route::get('slider', [SliderController::class, 'index'])->name('slider.index');
-        //UpcomingEvent
-        Route::get('upcoming-events', [UpcomingEventController::class, 'index'])->name('upcoming-events.index');
-        //Videos
-        Route::get('videos', [VideoController::class, 'index'])->name('videos.index');
-        //most-viewed
-        Route::get('most-viewed', [MostViewedController::class, 'index'])->name('most-viewed.index');
-        //add-fatwa
-        Route::post('add-fatwa', [FatwaQuestionController::class, 'store'])
-            ->name('add-fatwa.store')->middleware('auth:sanctum');
-    });
+                //get-questions-answers
+                Route::get('get-questions', [FatwaQuestionController::class, 'index'])->name('get-questions.index');
+                //get-answer
+                Route::get('/{slug}', [FatwaAnswerController::class, 'show'])->name('fatwaAnswers.show');
+            });
+
+            Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
+                //slider
+                Route::get('slider', [SliderController::class, 'index'])->name('slider.index');
+                //UpcomingEvent
+                Route::get('upcoming-events', [UpcomingEventController::class, 'index'])->name('upcoming-events.index');
+                //Videos
+                Route::get('videos', [VideoController::class, 'index'])->name('videos.index');
+                //most-viewed
+                Route::get('most-viewed', [MostViewedController::class, 'index'])->name('most-viewed.index');
+                //get-questions-answers
+                Route::get('get-questions-answers', [FatwaQuestionController::class, 'index'])->name('get-questions-answers.index');
+                //add-fatwa
+                Route::post('add-fatwa', [FatwaQuestionController::class, 'store'])
+                    ->name('add-fatwa.store')->middleware('auth:sanctum');
+                //add-subscriber
+                Route::post('add-subscriber', [SubscriberController::class, 'store'])
+                    ->name('add-subscriber.store');
+
+            });
 Route::middleware(["auth:api"])->group(function () {
 
 //

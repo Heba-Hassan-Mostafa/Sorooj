@@ -55,7 +55,7 @@ class Course extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn ($value) => ($this->getFirstMediaUrl('image') != ''
-                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/course.png')),
+                ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/courses.webp')),
         );
     }
     public function getAttachments()

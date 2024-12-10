@@ -17,7 +17,7 @@ class FatwaQuestionRequest extends FormRequest
 
         return [
             'name'          => 'required|string|max:190',
-            'message'       => 'required|string',
+            'message'       => 'required|string|max:190',
         ];
 
     }

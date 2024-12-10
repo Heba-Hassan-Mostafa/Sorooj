@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\ModelTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,18 +14,28 @@ class UpcomingEvent extends Model implements HasMedia
 {
     use HasFactory , ModelTrait, InteractsWithMedia;
 
-    protected $fillable = ['title', 'description', 'start', 'end', 'is_active'];
+    protected $fillable = ['title', 'description', 'end', 'is_active'];
+
+    protected $filters = ['end'];
 
     protected $casts = [
-        'start' => 'datetime',
         'end' => 'datetime',
     ];
 
     protected function image(): Attribute
-{
+    {
     return Attribute::make(
         get: fn ($value) => ($this->getFirstMediaUrl('image') != ''
-            ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/event.png')),
+            ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/events.webp')),
     );
-}
+    }
+
+    public function scopeOfEnd($query , $keyword = true)
+    {
+        if ($keyword){
+            return $query->where('end', '>', Carbon::now());
+
+        }
+        return $query;
+    }
 }

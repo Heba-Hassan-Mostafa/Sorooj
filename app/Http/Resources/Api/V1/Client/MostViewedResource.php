@@ -17,6 +17,7 @@ class MostViewedResource extends JsonResource
             'view_count'        => $this->view_count,
             'image'             => $this->image,
             'type'              => $this->type,
+            'trans_type'        => __($this->type),
         ];
     }
 }

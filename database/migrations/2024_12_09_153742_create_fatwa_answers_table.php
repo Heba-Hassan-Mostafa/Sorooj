@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fatwa_questions', function (Blueprint $table) {
+        Schema::create('fatwa_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->longText('message');
-            $table->string('slug');
-            $table->boolean('status')->default(0);
+            $table->foreignId('fatwa_question_id')->constrained()->cascadeOnDelete();
+            $table->longText('answer_content')->nullable();
+            $table->string('audio_file')->nullable();
+            $table->string('youtube_link')->nullable();
+            $table->date('publish_date');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fatwa_questions');
+        Schema::dropIfExists('fatwa_answers');
     }
 };
