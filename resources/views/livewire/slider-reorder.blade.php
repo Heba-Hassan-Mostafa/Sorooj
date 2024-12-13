@@ -24,8 +24,8 @@
                     @endif
 
                 </td>
-                <td>{{ $slider->title }}</td>
-                <td>{{ $slider->link }}</td>
+                <td>{{ $slider->title ?? '-----' }}</td>
+                <td>{{ $slider->link ?? '-----' }}</td>
                 <td>{{ $slider->created_at?->format('Y-m-d') }}</td>
                 <td>{{  $slider->status() }}</td>
 

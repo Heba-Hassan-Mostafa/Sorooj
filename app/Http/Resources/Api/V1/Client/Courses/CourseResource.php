@@ -37,7 +37,7 @@ class CourseResource extends JsonResource
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),
 
            $this->mergeWhen($request->route()->getName() == 'courses.courses.show', [
-              'videos'                  => CourseVideoResource::collection($sortedVideos),
+              'videos'                  => CourseVideoResource::collection($this->videos),
                'attachments'            => CourseAttachmentResource::collection($this->getAttachments()),
                'comments'              => CourseCommentResource::collection($this->comments->where('status', CommentStatusEnum::PUBLISHED)),
                 'seo'               => [

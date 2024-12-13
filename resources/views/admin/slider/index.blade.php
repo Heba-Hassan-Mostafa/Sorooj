@@ -43,8 +43,8 @@
                             @endif
 
                         </td>
-                        <td>{{ $slider->title }}</td>
-                        <td>{{ $slider->link }}</td>
+                        <td>{{ $slider->title ?? '-----' }}</td>
+                        <td>{{ $slider->link ?? '-----' }}</td>
                         <td>{{ $slider->created_at->format('Y-m-d') }}</td>
                         <td>
                             <label class="switch switch-success" for="{{ $slider->id }}">
