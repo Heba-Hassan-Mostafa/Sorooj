@@ -16,8 +16,17 @@ class SliderConcrete extends BaseConcrete implements SliderContract
     {
         parent::__construct($model);
     }
+    public function getLivewireSliders()
+    {
+        return Slider::get();
+    }
     public function create(array $attributes = []): mixed
     {
+        $lastOrderPosition = Slider::max('order_position');
+        $nextOrderPosition = $lastOrderPosition + 1;
+
+        // Include the next order position in the attributes
+        $attributes['order_position'] = $nextOrderPosition;
 
         $record = parent::create($attributes);
         if (isset($attributes['image'])) {

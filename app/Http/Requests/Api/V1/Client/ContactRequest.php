@@ -20,7 +20,7 @@ class ContactRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
-            'mobile' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string'],
             'message' => ['required', 'string', 'max:255'],
             'type' => ['required', Rule::in(ContactTypeEnum::values())],
         ];

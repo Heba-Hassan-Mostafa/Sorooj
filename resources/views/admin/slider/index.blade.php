@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ trans('dashboard.sidebar.courses') }}
+    {{ trans('dashboard.sidebar.slider') }}
 @endsection
 @section('content')
     <h4 class="py-3">
@@ -8,12 +8,12 @@
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/
             </span>
         </a>
-        {{ trans('dashboard.sidebar.courses') }}
+        {{ trans('dashboard.sidebar.slider') }}
     </h4>
-    <a href="{{ route('admin.courses.courses.create') }}" class="btn btn-primary mb-2">
-        {{ trans('dashboard.courses.add-course') }}
+    <a href="{{ route('admin.slider.slider.create') }}" class="btn btn-primary mb-2">
+        {{ trans('dashboard.slider.add-slider') }}
     </a>
-    <a href="{{ route('admin.courses.sort-courses') }}" class="btn btn-warning font-weight-bold p-2"
+    <a href="{{ route('admin.slider.sort-slider') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
     <div class="card">
@@ -22,39 +22,34 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>{{ trans('dashboard.courses.course_image') }}</th>
-                    <th>{{ trans('dashboard.courses.course_name') }}</th>
-                    <th>{{ trans('dashboard.courses.course_category') }}</th>
-                    <th>{{ trans('dashboard.courses.author_name') }}</th>
-                    <th>{{ trans('dashboard.courses.publish_date') }}</th>
-                    <th>{{ trans('dashboard.courses.view_count') }}</th>
+                    <th>{{ trans('dashboard.slider.image') }}</th>
+                    <th>{{ trans('dashboard.slider.title') }}</th>
+                    <th>{{ trans('dashboard.slider.link') }}</th>
+                    <th>{{ trans('dashboard.slider.created_at') }}</th>
                     <th>{{ trans('dashboard.status') }}</th>
                     <th>{{ trans('dashboard.options') }}</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($courses as $course)
+                @foreach ($sliders as $slider)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                            @if (!empty($course->image))
-                                <img src="{{ asset($course->image) }}" style="width:50px;height:50px;"  alt=""/>
+                            @if (!empty($slider->image))
+                                <img src="{{ asset($slider->image) }}" style="width:50px;height:50px;"  alt=""/>
                             @else
-                                <img src="{{ asset('assets/admin/images/courses.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                <img src="{{ asset('assets/admin/images/default_slider.webp') }}" style="width:50px;height:50px;"  alt=""/>
                             @endif
 
                         </td>
-                        <td>{{ $course->course_name }}</td>
-                        <td>{{ $course->category?->name }}</td>
-                        <td>{{ $course->author_name }}</td>
-                        <td>{{ $course->publish_date }}</td>
-                        <td>{{ $course->view_count ?? 0 }}</td>
-
+                        <td>{{ $slider->title }}</td>
+                        <td>{{ $slider->link }}</td>
+                        <td>{{ $slider->created_at->format('Y-m-d') }}</td>
                         <td>
-                            <label class="switch switch-success" for="{{ $course->id }}">
-                                <input type="checkbox" class="switch-input status" id="{{ $course->id }}"
-                                       data-id="{{ $course->id }}" {{ $course->status == true ? 'checked' : '' }} />
+                            <label class="switch switch-success" for="{{ $slider->id }}">
+                                <input type="checkbox" class="switch-input status" id="{{ $slider->id }}"
+                                       data-id="{{ $slider->id }}" {{ $slider->status == true ? 'checked' : '' }} />
                                 <span class="switch-toggle-slider">
                                         <span class="switch-on">
                                             <i class="ti ti-check"></i>
@@ -67,22 +62,18 @@
                         </td>
                         <td>
                             <div class="m-2">
-                                    <a href="{{ route('admin.courses.courses.edit',$course->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
+                                    <a href="{{ route('admin.slider.slider.edit',$slider->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a onclick="fireDeleteEvent({{ $course->id }})" type="button"
+                                    <a onclick="fireDeleteEvent({{ $slider->id }})" type="button"
                                        title="{{ trans('dashboard.delete') }}" data-toggle="tooltip"
                                        class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>
 
-                                    <form action="{{ route('admin.courses.courses.destroy', $course->id) }}" method="POST"
-                                          id="form-{{ $course->id }}">
+                                    <form action="{{ route('admin.slider.slider.destroy', $slider->id) }}" method="POST"
+                                          id="form-{{ $slider->id }}">
                                         @csrf
                                         @method('Delete')
                                     </form>
-
-{{--                                <a href="{{ route('admin.courses.videos.sort',$course->id) }}"  class="btn btn-warning btn-sm text-white"  title="{{ trans('dashboard.courses.course-videos-reorder') }}">--}}
-{{--                                    <i class="fas fa-sort"></i>--}}
-{{--                                </a>--}}
                             </div>
                         </td>
 
@@ -112,7 +103,7 @@
 
                     dataType: "json",
 
-                    url: '{{ route('admin.courses.courses.change-status') }}',
+                    url: '{{ route('admin.slider.change-status') }}',
 
                     data: {
                         'status': status,

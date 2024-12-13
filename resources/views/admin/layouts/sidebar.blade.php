@@ -36,7 +36,10 @@
                 </li>
             </ul>
 
-            <!-- courses & categories-->
+
+
+
+        <!-- courses & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
@@ -66,12 +69,12 @@
 
         <!-- Apps & Pages -->
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Apps &amp; Pages</span>
+            <span class="menu-header-text">{{ trans('dashboard.sidebar.home-sections') }}</span>
         </li>
-        <li class="menu-item">
-            <a href="app-email.html" class="menu-link">
+        <li class="menu-item {{ url()->current() == route('admin.slider.slider.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.slider.slider.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-mail"></i>
-                <div data-i18n="Email">Email</div>
+                <div>{{ trans('dashboard.sidebar.slider') }}</div>
             </a>
         </li>
 

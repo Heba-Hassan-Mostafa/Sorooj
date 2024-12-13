@@ -12,9 +12,8 @@ class ContactResource extends JsonResource
             'id'                => $this->id,
             'name'              => $this->name,
             'email'             => $this->email,
-            'mobile'             => $this->phone,
+            'mobile'             => $this->mobile,
             'message'           => $this->message,
-            'status'            => $this->status,
             'type'              => $this->type,
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),
         ];

@@ -22,4 +22,9 @@ class Slider extends Model implements HasMedia
                 ? $this->getFirstMediaUrl('image') : asset('assets/admin/images/default_slider.webp')),
         );
     }
+
+    public function status()
+    {
+        return $this->status == 1 ? __('Active') : __('Inactive');
+    }
 }

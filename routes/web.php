@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Transaction\PaymentController;
 use App\Http\Controllers\DashboardWeb\DashboardController;
 use App\Http\Controllers\DashboardWeb\V1\AdminController;
 use App\Http\Controllers\DashboardWeb\V1\AuthController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardWeb\V1\Slider\SliderController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -97,6 +96,16 @@ Route::group(
             //delete image
             Route::delete('/courses/{course}/image', [CourseController::class, 'deleteCourseImage'])
                 ->name('courses.deleteCourseImage');
+
+        });
+
+        Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
+
+            Route::get('/change-status',      [SliderController::class,'changeStatus'])->name('change-status');
+            Route::get('/sort-slider', [SliderController::class,'livewire_index'])->name('sort-slider');
+
+            Route::resource('/slider', SliderController::class);
+
 
         });
     });

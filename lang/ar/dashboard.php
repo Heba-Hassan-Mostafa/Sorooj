@@ -6,6 +6,8 @@ return [
         'admins'                => 'المديرين',
         'courses'               => 'الدورات المجانية',
         'courses-categories'    => 'أقسام الدورات',
+        'slider'                => 'البنرات المتحركة',
+        'home-sections'         => 'اقسام الصفحة الرئيسية',
 
 
     ],
@@ -60,6 +62,15 @@ return [
         'brief_description'             => 'وصف مختصر',
         'course-videos-reorder'         => ' تغيير ترتيب الفيديوات ',
         'edit-course'                   =>'تعديل الدورة'
+    ],
+    'slider' => [
+        'add-slider'                    => 'اضافة صورة جديدة',
+        'edit-slider'                   => 'تعديل صورة',
+        'title'                         => 'العنوان',
+        'link'                          => 'الرابط',
+        'image'                         => 'صورة',
+        'created_at'                    => 'تاريخ الانشاء',
+
     ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',

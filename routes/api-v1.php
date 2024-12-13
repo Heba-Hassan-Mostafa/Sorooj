@@ -125,7 +125,7 @@ Route::prefix("auth")->group(function () {
 
             });
             //contact-us
-            Route::get('contacts', [ContactController::class, 'store'])->name('contacts.store');
+            Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
 Route::middleware(["auth:api"])->group(function () {
 
 //
