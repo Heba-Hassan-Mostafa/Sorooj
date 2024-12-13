@@ -43,8 +43,4 @@ class ContactController extends BaseApiController
         ]);
 
     }
-
-
-
-
 }
