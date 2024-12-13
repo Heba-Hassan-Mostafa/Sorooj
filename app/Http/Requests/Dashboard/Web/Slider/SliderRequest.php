@@ -20,10 +20,7 @@ class SliderRequest extends FormRequest
     {
         $sliderId = $this->route('slider')->id ?? null;
         $rules = [
-            'title' => [
-                'sometimes', 'string', 'min:3', 'max:255',
-                Rule::unique('sliders', 'title')->ignore($sliderId)
-            ],
+            'title'                 => ['sometimes','nullable', 'string', 'min:3', 'max:255'],
             'link'                  => ['sometimes', 'nullable', 'url'],
             'image'                 =>['nullable','image','mimes:png,jpg,jpeg,gif,webp,svg','max:2048'],
         ];

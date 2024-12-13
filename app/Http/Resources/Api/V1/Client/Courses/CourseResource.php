@@ -16,7 +16,7 @@ class CourseResource extends JsonResource
         $favorite = $user ? $this->favorites()->where('user_id', $user->id)->exists() : false;
         $subscribed = $this->subscriptions()->where('user_id', $user?->id)->exists();
 
-        $sortedVideos = $this->videos->sortByASC('order_position');
+        $sortedVideos = $this->videos->sortByDesc('order_position');
 
         return [
             'id'                => $this->id,
