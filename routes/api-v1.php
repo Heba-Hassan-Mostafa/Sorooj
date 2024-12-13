@@ -3,11 +3,13 @@
 use App\Http\Controllers\Api\V1\Client\AuthController;
 use App\Http\Controllers\Api\V1\Client\Books\BookCategoryController;
 use App\Http\Controllers\Api\V1\Client\Books\BookController;
+use App\Http\Controllers\Api\V1\Client\ContactController;
 use App\Http\Controllers\Api\V1\Client\Courses\CategoryController;
 use App\Http\Controllers\Api\V1\Client\Courses\CourseController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaAnswerController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaQuestionController;
 use App\Http\Controllers\Api\V1\Client\HomePage\MostViewedController;
+use App\Http\Controllers\Api\V1\Client\HomePage\StatisticsController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
@@ -118,8 +120,12 @@ Route::prefix("auth")->group(function () {
                 //add-subscriber
                 Route::post('add-subscriber', [SubscriberController::class, 'store'])
                     ->name('add-subscriber.store');
+                //statistics
+                Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
 
             });
+            //contact-us
+            Route::get('contacts', [ContactController::class, 'store'])->name('contacts.store');
 Route::middleware(["auth:api"])->group(function () {
 
 //
