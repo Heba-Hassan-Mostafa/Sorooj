@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Traits\ModelTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model
 {
-    use HasFactory, ModelTrait;
+    use HasFactory, ModelTrait,Sluggable;
     protected $fillable = [
         'name',
         'slug',
@@ -24,6 +25,15 @@ class Category extends Model
 
     protected $definedRelations = ['parent','subcategory','appearedSubcategory'];
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true,
+            ]
+        ];
+    }
     #Scopes
     public function scopeOfName($query, $keyword)
     {
@@ -77,6 +87,11 @@ class Category extends Model
     public function courses()
     {
         return $this->hasMany(Course::class);
+
+    }
+    public function books()
+    {
+        return $this->hasMany(Book::class);
 
     }
     public function status()

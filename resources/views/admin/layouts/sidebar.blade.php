@@ -67,7 +67,35 @@
 {{--            </ul>--}}
         </li>
 
-        <!-- Apps & Pages -->
+        <!-- books & categories-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.books') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.books.category.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.books.category.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.books-categories') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.books.books.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.books.books.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.books') }}</div>
+                    </a>
+                </li>
+            </ul>
+
+            {{--            <ul class="menu-sub">--}}
+            {{--                <li class="menu-item {{ url()->current() == route('admin.users.index') ? 'active' : '' }}">--}}
+            {{--                    <a href="{{ route('admin.users.index') }}" class="menu-link">--}}
+            {{--                        <div>{{ trans('dashboard.users') }}</div>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            </ul>--}}
+        </li>
+
+        <!-- home & sections -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">{{ trans('dashboard.sidebar.home-sections') }}</span>
         </li>

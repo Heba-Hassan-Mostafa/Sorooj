@@ -27,8 +27,11 @@ class CourseCategoryConcrete extends BaseConcrete implements CourseCategoryContr
     public function create(array $attributes = []): mixed
     {
         $attributes["type"] = CategoryTypeEnum::COURSE;
-        $attributes["slug"] = $attributes["name"];
 
+        $lastOrderPosition = Category::whereType(CategoryTypeEnum::COURSE)->whereNull('parent_id')->max('order_position');
+        $nextOrderPosition = $lastOrderPosition + 1;
+
+        $attributes['order_position'] = $nextOrderPosition;
         $record = parent::create($attributes);
 
         return $record;
@@ -37,8 +40,6 @@ class CourseCategoryConcrete extends BaseConcrete implements CourseCategoryContr
 
     public function update(Model $model, array $attributes = []): mixed
     {
-
-        $attributes["slug"] = $attributes["name"];
 
         $record = parent::update($model, $attributes);
 

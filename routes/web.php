@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardWeb\DashboardController;
 use App\Http\Controllers\DashboardWeb\V1\AdminController;
 use App\Http\Controllers\DashboardWeb\V1\AuthController;
+use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
@@ -77,6 +79,7 @@ Route::group(
         Route::get('/admins/change-status',      [AdminController::class,'changeStatus'])->name('admins.change-status');
         Route::resource('/admins', AdminController::class);
 
+        // Courses
         Route::group(['prefix' => 'courses', 'as' => 'courses.'], function () {
 
             Route::get('/category/change-status',      [CourseCategoryController::class,'changeStatus'])->name('category.change-status');
@@ -99,6 +102,31 @@ Route::group(
 
         });
 
+        // Books
+        Route::group(['prefix' => 'books', 'as' => 'books.'], function () {
+
+            Route::get('/category/change-status',      [BookCategoryController::class,'changeStatus'])->name('category.change-status');
+            Route::get('/category/sort-categories', [BookCategoryController::class,'livewire_index'])->name('category.sort-categories');
+
+            Route::resource('/category', BookCategoryController::class);
+
+            Route::get('/books/change-status',      [BookController::class,'changeStatus'])->name('books.change-status');
+            Route::get('/sort-books', [BookController::class,'livewire_index'])->name('sort-books');
+            Route::get('/videos/sort/{book}', [BookController::class,'videosSort'])->name('videos.sort');
+
+            Route::resource('/books', BookController::class);
+
+            //delete attachments
+            Route::delete('/books/{book}/attachments/{attachment}', [BookController::class, 'deleteBookAttachment'])
+                ->name('books.deleteAttachment');
+            //delete image
+            Route::delete('/books/{book}/image', [BookController::class, 'deleteBookImage'])
+                ->name('books.deleteBookImage');
+
+        });
+
+
+        // Slider
         Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
 
             Route::get('/change-status',      [SliderController::class,'changeStatus'])->name('change-status');

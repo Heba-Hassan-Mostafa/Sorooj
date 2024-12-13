@@ -6,6 +6,8 @@ return [
         'admins'                => 'المديرين',
         'courses'               => 'الدورات المجانية',
         'courses-categories'    => 'أقسام الدورات',
+        'books'                 => 'الكتب والابحاث',
+        'books-categories'       => 'أقسام الكتب',
         'slider'                => 'البنرات المتحركة',
         'home-sections'         => 'اقسام الصفحة الرئيسية',
 
@@ -62,6 +64,27 @@ return [
         'brief_description'             => 'وصف مختصر',
         'course-videos-reorder'         => ' تغيير ترتيب الفيديوات ',
         'edit-course'                   =>'تعديل الدورة'
+    ],
+    'books' =>[
+        'add-book-category'             => 'اضافة قسم جديد',
+        'edit-book-category'            => 'تعديل قسم',
+        'book-category-name'            => 'اسم القسم',
+        'book-count'                    =>'عدد الكتب',
+        'choose-category'               => 'اختر القسم',
+        'parent-category'               => 'القسم الرئيسي',
+        'book-subcategories'            => 'الاقسام الفرعية',
+        'parent-categories'             => 'الاقسام الرئيسة',
+        'download_count'                => 'عدد التحميلات',
+        'view_count'                    => 'عدد المشاهدات',
+        'publish_date'                  => 'تاريخ النشر',
+        'author_name'                   => 'اسم الشيخ',
+        'book_category'                 => 'القسم',
+        'book_name'                     => 'اسم الكتاب/البحث',
+        'book_content'                  => 'وصف الكتاب/البحث',
+        'book_image'                    => 'صورة الكتاب/البحث',
+        'add-book'                     => 'اضافة كتاب جديدة',
+        'brief_description'             => 'وصف مختصر',
+        'edit-book'                     =>'تعديل الكتاب'
     ],
     'slider' => [
         'add-slider'                    => 'اضافة صورة جديدة',
