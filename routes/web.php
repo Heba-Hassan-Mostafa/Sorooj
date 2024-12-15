@@ -141,7 +141,8 @@ Route::group(
         // Events
         Route::group(['prefix' => 'events', 'as' => 'events.'], function () {
 
-            Route::get('/change-status',      [UpcomingEventController::class,'changeStatus'])->name('change-status');
+            Route::get('/upcoming-events/change-status',      [UpcomingEventController::class,'changeStatus'])
+                ->name('upcoming-events.change-status');
             Route::resource('/upcoming-events', UpcomingEventController::class);
 
 

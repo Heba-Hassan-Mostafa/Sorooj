@@ -88,9 +88,15 @@ class UpcomingEventController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $this->repository->toggleField($request->id,'status');
+        //$this->repository->toggleField($request->id,'status');
 
-        return response()->json(['success'=>'Status change successfully.']);
+        $event = UpcomingEvent::findOrFail($request->id);
+        $newStatus = $request->status;
+
+        $event->status = $newStatus;
+        $event->save();
+
+        return response()->json(['success' => 'Status changed successfully.']);
 
     }
 

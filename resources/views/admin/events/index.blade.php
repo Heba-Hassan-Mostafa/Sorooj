@@ -110,7 +110,7 @@
 
                     dataType: "json",
 
-                    url: '{{ route('admin.events.change-status') }}',
+                    url: '{{ route('admin.events.upcoming-events.change-status') }}',
 
                     data: {
                         'status': status,
