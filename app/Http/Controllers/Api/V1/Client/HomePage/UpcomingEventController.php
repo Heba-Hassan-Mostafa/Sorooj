@@ -16,7 +16,7 @@ class UpcomingEventController extends BaseApiController
 
     protected array $conditions = [
         'where' => [
-            'is_active' => 1
+            'status' => 1
         ]
     ];
     protected int $limit = 0;
