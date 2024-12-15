@@ -7,9 +7,11 @@ use App\Models\Category;
 use App\Models\User;
 use App\Helpers\Setting;
 use App\Repositories\Concretes\AdminConcrete;
+use App\Repositories\Concretes\BlogCategoryConcrete;
 use App\Repositories\Concretes\BookCategoryConcrete;
 use App\Repositories\Concretes\CourseCategoryConcrete;
 use App\Repositories\Contracts\AdminContract;
+use App\Repositories\Contracts\BlogCategoryContract;
 use App\Repositories\Contracts\bookCategoryContract;
 use App\Repositories\Contracts\CourseCategoryContract;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(BookCategoryContract::class, function ($app) {
             return new BookCategoryConcrete(new Category);
+        });
+        $this->app->bind(BlogCategoryContract::class, function ($app) {
+            return new BlogCategoryConcrete(new Category);
         });
     }
 

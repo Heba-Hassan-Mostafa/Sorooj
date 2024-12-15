@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('upcoming_events', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->dateTime('end');
+            $table->string('main_title');
+            $table->string('event_title');
+            $table->string('instructor');
+            $table->dateTime('event_date');
+            $table->string('country_time');
+            $table->text('location');
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });

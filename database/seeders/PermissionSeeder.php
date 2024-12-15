@@ -42,8 +42,8 @@ class PermissionSeeder extends Seeder
     {
         # Models
         $adminModels = [
-            'users', 'roles', 'permissions', 'notifications', 'admins', 'chats','settings','categories','subcategories',
-            'courses', 'subscribers','books'
+            'users', 'roles', 'permissions', 'notifications', 'admins','settings','categories','subcategories',
+            'courses', 'subscribers','books','blogs','videos','comments','audios','upcoming_events'
         ];
         # Default Methods
         $methods = ['index', 'create', 'edit', 'delete', 'show', 'activate'];

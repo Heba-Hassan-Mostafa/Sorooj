@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Client\AuthController;
+use App\Http\Controllers\Api\V1\Client\Blogs\BlogCategoryController;
+use App\Http\Controllers\Api\V1\Client\Blogs\BlogController;
 use App\Http\Controllers\Api\V1\Client\Books\BookCategoryController;
 use App\Http\Controllers\Api\V1\Client\Books\BookController;
 use App\Http\Controllers\Api\V1\Client\ContactController;
@@ -73,7 +75,6 @@ Route::prefix("auth")->group(function () {
         });
 
 
-
         //books
         Route::group(['prefix' => 'books', 'as' => 'books.'], function () {
 
@@ -94,6 +95,28 @@ Route::prefix("auth")->group(function () {
                 ->name('toggle-favorite')->middleware('auth:sanctum');
 
         });
+
+            //blogs
+            Route::group(['prefix' => 'blogs', 'as' => 'blogs.'], function () {
+
+                //categories
+                Route::get('categories', [BlogCategoryController::class, 'index'])->name('category.index');
+                //index
+                Route::get('/', [BlogController::class, 'index'])->name('blogs.index');
+                //suggested
+                Route::get('/suggested-blogs', [BlogController::class, 'suggestedBlogs'])->name('suggested-blogs');
+
+                //show
+                Route::get('/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+                //comments
+                Route::post('/add-comment/{blogId}', [BlogController::class, 'addComment'])
+                    ->name('add-comment')->middleware('auth:sanctum');
+                //favorite
+                Route::post('/toggle-favorite/{blogId}', [BlogController::class, 'toggleFavorite'])
+                    ->name('toggle-favorite')->middleware('auth:sanctum');
+
+            });
         # fatwa
             Route::group(['prefix' => 'fatwa', 'as' => 'fatwa.'], function () {
 

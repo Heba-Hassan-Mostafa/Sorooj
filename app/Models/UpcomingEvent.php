@@ -14,12 +14,12 @@ class UpcomingEvent extends Model implements HasMedia
 {
     use HasFactory , ModelTrait, InteractsWithMedia;
 
-    protected $fillable = ['title', 'description', 'end', 'is_active'];
+    protected $fillable = ['main_title', 'event_title', 'instructor', 'event_date','country_time', 'location','is_active'];
 
-    protected $filters = ['end'];
+    protected $filters = ['event_date'];
 
     protected $casts = [
-        'end' => 'datetime',
+        'event_date' => 'datetime',
     ];
 
     protected function image(): Attribute
@@ -30,10 +30,10 @@ class UpcomingEvent extends Model implements HasMedia
     );
     }
 
-    public function scopeOfEnd($query , $keyword = true)
+    public function scopeOfEvent_date($query , $keyword = true)
     {
         if ($keyword){
-            return $query->where('end', '>', Carbon::now());
+            return $query->where('event_date', '>', Carbon::now());
 
         }
         return $query;

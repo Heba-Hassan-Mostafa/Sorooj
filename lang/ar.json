@@ -1375,5 +1375,8 @@
     "Fatwa Question not found": "سؤالك غير موجود",
     "No published Fatwa Answer found for this question": "لم يتم العثور على سؤالك",
     "Subscriber added successfully": "تم الاشتراك بنجاح",
-    "The email format is invalid": "صيغة البريد الالكتروني غير صالحة."
+    "The email format is invalid": "صيغة البريد الالكتروني غير صالحة.",
+    "Blog not found or inactive.": "المدونة غير موجودة او غير مفعلة.",
+    "Blog added to favorites": "تم اضافة المدونة الى المفضلة.",
+    "Blog removed from favorites": "تم ازالة المدونة من المفضلة."
 }
