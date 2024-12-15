@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\DashboardWeb\V1\Slider;
+namespace App\Http\Controllers\DashboardWeb\V1\HomeSections;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Web\Slider\SliderRequest;
+use App\Http\Requests\Dashboard\Web\HomeSections\SliderRequest;
 use App\Models\Slider;
 use App\Repositories\Contracts\SliderContract;
 use Illuminate\Http\Request;

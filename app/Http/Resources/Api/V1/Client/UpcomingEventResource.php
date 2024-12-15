@@ -19,7 +19,7 @@ class UpcomingEventResource extends JsonResource
             'country_time'       => $this->country_time,
             'location'           => $this->location,
             'image'              => $this->image,
-            'is_active'          => $this->is_active
+            'status'             => $this->status
         ];
     }
 }

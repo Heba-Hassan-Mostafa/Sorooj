@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('event_date');
             $table->string('country_time');
             $table->text('location');
-            $table->boolean('is_active')->default(1);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

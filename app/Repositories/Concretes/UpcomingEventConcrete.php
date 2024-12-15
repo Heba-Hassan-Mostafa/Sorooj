@@ -18,6 +18,7 @@ class UpcomingEventConcrete extends BaseConcrete implements UpcomingEventContrac
     }
     public function create(array $attributes = []): mixed
     {
+        $attributes['event_date'] = $attributes['event_date_date'] . ' ' . $attributes['event_date_time'];
 
         $record = parent::create($attributes);
         if (isset($attributes['image'])) {
@@ -30,6 +31,7 @@ class UpcomingEventConcrete extends BaseConcrete implements UpcomingEventContrac
 
     public function update(Model $model, array $attributes = []): mixed
     {
+        $attributes['event_date'] = $attributes['event_date_date'] . ' ' . $attributes['event_date_time'];
         $record = parent::update($model, $attributes);
         if (isset($attributes['image'])) {
             uploadImage('image', $attributes['image'], $record);

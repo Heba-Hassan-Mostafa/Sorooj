@@ -106,5 +106,26 @@
             </a>
         </li>
 
+        <!-- events -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.upcoming-events') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.events.upcoming-events.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.events.upcoming-events.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.upcoming-events') }}</div>
+                    </a>
+                </li>
+{{--                <li class="menu-item {{ url()->current() == route('admin.books.books.index') ? 'active' : '' }}">--}}
+{{--                    <a href="{{ route('admin.books.books.index') }}" class="menu-link">--}}
+{{--                        <div>{{ trans('dashboard.sidebar.books') }}</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+            </ul>
+
+        </li>
+
     </ul>
 </aside>

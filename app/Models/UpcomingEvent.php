@@ -14,7 +14,7 @@ class UpcomingEvent extends Model implements HasMedia
 {
     use HasFactory , ModelTrait, InteractsWithMedia;
 
-    protected $fillable = ['main_title', 'event_title', 'instructor', 'event_date','country_time', 'location','is_active'];
+    protected $fillable = ['main_title', 'event_title', 'instructor', 'event_date','country_time', 'location','status'];
 
     protected $filters = ['event_date'];
 

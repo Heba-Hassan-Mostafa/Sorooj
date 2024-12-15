@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Web\Slider;
+namespace App\Http\Requests\Dashboard\Web\HomeSections;
 
 use App\Models\Category;
 use App\Rules\UniqueWithoutSoftDeleted;

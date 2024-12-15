@@ -7,8 +7,9 @@ use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
+use App\Http\Controllers\DashboardWeb\V1\HomeSections\UpcomingEventController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
-use App\Http\Controllers\DashboardWeb\V1\Slider\SliderController;
+use App\Http\Controllers\DashboardWeb\V1\HomeSections\SliderController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -133,6 +134,15 @@ Route::group(
             Route::get('/sort-slider', [SliderController::class,'livewire_index'])->name('sort-slider');
 
             Route::resource('/slider', SliderController::class);
+
+
+        });
+
+        // Events
+        Route::group(['prefix' => 'events', 'as' => 'events.'], function () {
+
+            Route::get('/change-status',      [UpcomingEventController::class,'changeStatus'])->name('change-status');
+            Route::resource('/upcoming-events', UpcomingEventController::class);
 
 
         });

@@ -10,6 +10,7 @@ return [
         'books-categories'       => 'أقسام الكتب',
         'slider'                => 'البنرات المتحركة',
         'home-sections'         => 'اقسام الصفحة الرئيسية',
+        'upcoming-events'       => 'الاحداث القادمة',
 
 
     ],
@@ -93,6 +94,20 @@ return [
         'link'                          => 'الرابط',
         'image'                         => 'صورة',
         'created_at'                    => 'تاريخ الانشاء',
+
+    ],
+    'events' => [
+        'add-event'                    => 'اضافة حدث جديد',
+        'edit-event'                   => 'تعديل حدث',
+        'main-title'                   => 'العنوان الرئيسى',
+        'event-title'                  => 'عنوان الحدث',
+        'instructor'                  => 'اسم الدكتور',
+        'day'                          => 'اليوم',
+        'event-date'                  => 'تاريخ الحدث',
+        'event-time'                  => 'وقت الحدث',
+        'country-time'                => 'التوقيت',
+        'location'                    => 'المكان',
+        'image'                        => 'صورة الحدث',
 
     ],
     'main'                                  => 'الرئيسية',
