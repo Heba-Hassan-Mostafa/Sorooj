@@ -127,11 +127,9 @@ class BookConcrete extends BaseConcrete implements BookContract
 
     public function suggestedBooks()
     {
-        $randomBooks = book::get();
+        $randomBooks = Book::with('media')
+            ->ActiveCategory()->Active()->Publish()->inRandomOrder()->paginate(3);
 
-        if ($randomBooks->isEmpty()) {
-            return response()->json(['message' => 'No books found'], 404);
-        }
         return $randomBooks;
 
     }
