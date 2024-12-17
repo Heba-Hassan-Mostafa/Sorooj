@@ -68,8 +68,8 @@ class BlogController extends BaseApiController
     public function suggestedBlogs()
     {
         $blogs = $this->repository->suggestedBlogs();
-        return $this->respondWithSuccess(__('Suggested courses'), [
-            'suggested_courses' => BlogResource::collection($blogs),
+        return $this->respondWithSuccess(__('Suggested blogs'), [
+            'suggested_blogs' => BlogResource::collection($blogs),
         ]);
 
     }
