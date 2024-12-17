@@ -27,11 +27,6 @@ class BlogConcrete extends BaseConcrete implements BlogContract
         return Blog::with(['category'])->get();
     }
 
-    public function getLivewireBlogVideos(Blog $model)
-    {
-        return $model->videos()->get();
-
-    }
 
     public function create(array $attributes = []): mixed
     {
@@ -54,22 +49,17 @@ class BlogConcrete extends BaseConcrete implements BlogContract
         }
 
         // Store videos if isset
-        if (isset($attributes['videos'])) {
-            foreach ($attributes['videos'] as $video) {
-                if ($video) {
-                    $lastVideoOrder = $record->videos()->max('order_position') ?? 0; // Get the last video's order
 
                     $record->videos()->create([
-                        'name' => $video['name'],
-                        'youtube_link' => $video['youtube_link'],
+                        'name' => $attributes['video_name'],
+                        'youtube_link' => $attributes['youtube_link'],
                         'publish_date' => $record->publish_date,
                         'videoable_type' => Blog::class,
                         'videoable_id' => $record->id,
-                        'order_position' => $lastVideoOrder + 1,
                     ]);
-                }
-            }
-        }
+
+
+
             // Store attachments if isset
 
             $this->handleMedia($record, $attributes);
@@ -111,32 +101,15 @@ class BlogConcrete extends BaseConcrete implements BlogContract
             }
 
         // Update videos
-        if (isset($attributes['videos'])) {
-            $existingVideos = $record->videos->keyBy('id');
-            foreach ($attributes['videos'] as $video) {
-                if (isset($video['id']) && $existingVideos->has($video['id'])) {
-                    // Update existing video
-                    $existingVideos->get($video['id'])->update([
-                        'name' => $video['name'],
-                        'youtube_link' => $video['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                    ]);
-                    $existingVideos->forget($video['id']);
-                } else {
-                    // Create new video
-                    $record->videos()->create([
-                        'name' => $video['name'],
-                        'youtube_link' => $video['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                    ]);
-                }
-            }
 
-            // Delete removed videos
-            foreach ($existingVideos as $remainingVideo) {
-                $remainingVideo->delete();
-            }
-        }
+                    // Create new video
+                    $record->videos()->update([
+                        'name' => $attributes['video_name'],
+                        'youtube_link' => $attributes['youtube_link'],
+                        'publish_date' => $record->publish_date,
+                    ]);
+
+
             // update attachments
             $this->handleMedia($record, $attributes);
 

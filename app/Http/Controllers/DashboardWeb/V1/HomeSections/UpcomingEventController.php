@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Web\HomeSections\EventRequest;
 use App\Models\UpcomingEvent;
 use App\Repositories\Contracts\UpcomingEventContract;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -22,9 +23,17 @@ class UpcomingEventController extends Controller
      */
     public function index()
     {
-        $events = $this->repository->all();
+        $events = $this->repository->all()->where('event_date','>=',Carbon::now());
 
         return view('admin.events.index', compact('events'));
+    }
+
+    public function pastEvents()
+    {
+        $events = $this->repository->all()->where('event_date','<',Carbon::now());
+
+        return view('admin.events.past_events',compact('events'));
+
     }
 
 

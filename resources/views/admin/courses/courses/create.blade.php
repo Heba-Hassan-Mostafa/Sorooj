@@ -148,8 +148,7 @@
 
                         <div class="col-12 mb-3">
                             <label for="description" class="form-label">{{ trans('dashboard.description') }}</label>
-                            <textarea name="description" class="form-control" cols="30" rows="10">
-                                {!! old('description') !!}</textarea>
+                            <textarea name="description" class="form-control" cols="30" rows="10">{!! old('description') !!}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

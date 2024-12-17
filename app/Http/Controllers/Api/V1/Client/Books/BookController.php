@@ -69,7 +69,7 @@ class BookController extends BaseApiController
     {
         $books = $this->repository->suggestedBooks();
         return $this->respondWithSuccess(__('Suggested Books'), [
-            'suggested-Books' => BookResource::collection($books),
+            'suggested_Books' => BookResource::collection($books),
         ]);
 
     }

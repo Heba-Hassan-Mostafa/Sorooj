@@ -95,6 +95,34 @@
             {{--            </ul>--}}
         </li>
 
+        <!-- blogs & categories-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.blogs') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.blogs.category.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.blogs.category.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.blogs-categories') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.blogs.blogs.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.blogs.blogs.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.blogs') }}</div>
+                    </a>
+                </li>
+            </ul>
+
+            {{--            <ul class="menu-sub">--}}
+            {{--                <li class="menu-item {{ url()->current() == route('admin.users.index') ? 'active' : '' }}">--}}
+            {{--                    <a href="{{ route('admin.users.index') }}" class="menu-link">--}}
+            {{--                        <div>{{ trans('dashboard.users') }}</div>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            </ul>--}}
+        </li>
+
         <!-- home & sections -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">{{ trans('dashboard.sidebar.home-sections') }}</span>
@@ -118,11 +146,11 @@
                         <div>{{ trans('dashboard.sidebar.upcoming-events') }}</div>
                     </a>
                 </li>
-{{--                <li class="menu-item {{ url()->current() == route('admin.books.books.index') ? 'active' : '' }}">--}}
-{{--                    <a href="{{ route('admin.books.books.index') }}" class="menu-link">--}}
-{{--                        <div>{{ trans('dashboard.sidebar.books') }}</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+               <li class="menu-item {{ url()->current() == route('admin.events.past-events') ? 'active' : '' }}">
+                    <a href="{{ route('admin.events.past-events') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.past-events') }}</div>
+                    </a>
+                </li>
             </ul>
 
         </li>

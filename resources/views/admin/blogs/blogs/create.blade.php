@@ -11,34 +11,34 @@
     </style>
 @endsection
 @section('title')
-    {{ trans('dashboard.books.add-book') }}
+    {{ trans('dashboard.blogs.add-blog') }}
 @endsection
 @section('content')
     <h4 class="py-3 mb-4 mainColorStyle cairo">
         <a href="{{ route('admin.dashboard') }}">
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/ </span>
         </a>
-        <a href="{{ route('admin.books.books.index') }}">
-            <span class="text-muted fw-light">{{ trans('dashboard.sidebar.books') }}/</span>
+        <a href="{{ route('admin.blogs.blogs.index') }}">
+            <span class="text-muted fw-light">{{ trans('dashboard.sidebar.blogs') }}/</span>
         </a>
-        {{ trans('dashboard.books.add-book') }}
+        {{ trans('dashboard.blogs.add-blog') }}
     </h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
-                <form action="{{ route('admin.books.books.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.blogs.blogs.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row titleInput">
                         <div class="col-6 mb-3">
-                            <label for="book_name" class="form-label">{{ trans('dashboard.books.book_name') }}</label>
-                            <input type="text" name="book_name" value="{{ old('book_name') }}" class="form-control" />
-                            @error('book_name')
+                            <label for="blog_name" class="form-label">{{ trans('dashboard.blogs.blog_name') }}</label>
+                            <input type="text" name="blog_name" value="{{ old('blog_name') }}" class="form-control" />
+                            @error('blog_name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="col-6 mb-3">
-                            <label for="author_name" class="form-label">{{ trans('dashboard.books.author_name') }}</label>
+                            <label for="author_name" class="form-label">{{ trans('dashboard.blogs.author_name') }}</label>
                             <input type="text" name="author_name" value="{{ old('author_name') }}" class="form-control" />
                             @error('author_name')
                             <span class="text-danger">{{ $message }}</span>
@@ -46,14 +46,14 @@
                         </div>
 
                         <div class="col-6 mb-3">
-                            <label for="book_name" class="form-label">{{ trans('dashboard.books.brief_description') }}</label>
+                            <label for="blog_name" class="form-label">{{ trans('dashboard.blogs.brief_description') }}</label>
                             <input type="text" name="brief_description" value="{{ old('brief_description') }}" class="form-control" />
                             @error('brief_description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="publish_date" class="form-label">{{ trans('dashboard.books.publish_date') }}</label>
+                            <label for="publish_date" class="form-label">{{ trans('dashboard.blogs.publish_date') }}</label>
                             <input type="text" name="publish_date" value="{{ old('publish_date') }}" class="form-control" id="publish_date" />
                             @error('publish_date')
                             <span class="text-danger">{{ $message }}</span>
@@ -65,10 +65,10 @@
                                 <div>
                                     <h4 class="selectCatTo">
                                         <i class="fa-solid fa-list"></i>
-                                        {{ trans('dashboard.books.choose-category') }}</h4>
+                                        {{ trans('dashboard.blogs.choose-category') }}</h4>
 
                                 </div>
-                                <li class="allCateSelect grayBgColorStyle"><a href="#">{{ trans('dashboard.sidebar.books-categories') }}</a>
+                                <li class="allCateSelect grayBgColorStyle"><a href="#">{{ trans('dashboard.sidebar.blogs-categories') }}</a>
                                     <ul class="row fristParent">
                                 </li>
                                 @foreach ($categories as $category)
@@ -78,7 +78,7 @@
                                             {{ $category->name }}
                                         </label>
 
-                                        @include('admin.books.books.subCategoryList', [
+                                        @include('admin.blogs.blogs.subCategoryList', [
                                             'subcategories' => $category->subcategory,
                                         ])
                                     </ul>
@@ -91,15 +91,32 @@
 
                         <div class="col-12 mb-3">
 
-                            <label for="book_name" class="form-label titles">
+                            <label for="blog_name" class="form-label titles">
                                 <i class="fa-solid fa-pen-to-square"></i>
-                                {{ trans('dashboard.books.book_content') }}</label>
-                            <textarea name="book_content" class="form-control" cols="30" rows="10"  id='ckeditor'>
-                                {!! old('book_content') !!}</textarea>
-                            @error('book_content')
+                                {{ trans('dashboard.blogs.blog_content') }}</label>
+                            <textarea name="blog_content" class="form-control" cols="30" rows="10"  id='ckeditor'>
+                                {!! old('blog_content') !!}</textarea>
+                            @error('blog_content')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div id="videoRepeater" class="mb-4 ">
+                            <label for="videos" class="form-label titles">
+                                <i class="fa-brands fa-youtube"></i>
+                                {{ trans('dashboard.blogs.videos_youtube_links') }}
+                            </label>
+                            <div id="videoInputs">
+                                <div class="row mb-2 videosBox">
+                                    <div class="col-5">
+                                        <input type="text" name="video_name" class="form-control" placeholder="{{ trans('dashboard.blogs.video_name') }}" />
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="text" name="youtube_link" class="form-control" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="col-6 mb-3 mt-1">
                             <label for="attachments" class="form-label titles">
@@ -143,6 +160,7 @@
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/admin/vendor/libs/treeview/treeview.js') }}"></script>
+
 
 
 {{--    ckeditor    --}}

@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardWeb\DashboardController;
 use App\Http\Controllers\DashboardWeb\V1\AdminController;
 use App\Http\Controllers\DashboardWeb\V1\AuthController;
+use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
@@ -126,6 +128,31 @@ Route::group(
 
         });
 
+        // Blogs
+        Route::group(['prefix' => 'blogs', 'as' => 'blogs.'], function () {
+
+            Route::get('/category/change-status',      [BlogCategoryController::class,'changeStatus'])->name('category.change-status');
+            Route::get('/category/sort-categories', [BlogCategoryController::class,'livewire_index'])->name('category.sort-categories');
+
+            Route::resource('/category', BlogCategoryController::class);
+
+            Route::get('/blogs/change-status',      [BlogController::class,'changeStatus'])->name('blogs.change-status');
+            Route::get('/sort-blogs', [BlogController::class,'livewire_index'])->name('sort-blogs');
+            Route::get('/videos/sort/{blog}', [BlogController::class,'videosSort'])->name('videos.sort');
+
+            Route::resource('/blogs', BlogController::class);
+
+            //delete attachments
+            Route::delete('/blogs/{blog}/attachments/{attachment}', [BlogController::class, 'deleteBlogAttachment'])
+                ->name('blogs.deleteAttachment');
+            //delete image
+            Route::delete('/blogs/{blog}/image', [BlogController::class, 'deleteBlogImage'])
+                ->name('blogs.deleteBlogImage');
+            //delete video
+            Route::delete('/blogs/{blog}/video', [BlogController::class, 'deleteBlogVideo'])
+                ->name('blogs.deleteBlogVideo');
+        });
+
 
         // Slider
         Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
@@ -143,6 +170,8 @@ Route::group(
 
             Route::get('/upcoming-events/change-status',      [UpcomingEventController::class,'changeStatus'])
                 ->name('upcoming-events.change-status');
+            Route::get('/past-events',      [UpcomingEventController::class,'pastEvents'])
+                ->name('past-events');
             Route::resource('/upcoming-events', UpcomingEventController::class);
 
 

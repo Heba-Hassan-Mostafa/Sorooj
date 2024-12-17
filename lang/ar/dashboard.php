@@ -11,7 +11,9 @@ return [
         'slider'                => 'البنرات المتحركة',
         'home-sections'         => 'اقسام الصفحة الرئيسية',
         'upcoming-events'       => 'الاحداث القادمة',
-
+        'past-events'           => 'الاحداث المنتهية',
+        'blogs'                 => 'المدونة',
+        'blogs-categories'     => 'أقسام المدونة',
 
     ],
     'roles' =>[
@@ -65,6 +67,31 @@ return [
         'brief_description'             => 'وصف مختصر',
         'course-videos-reorder'         => ' تغيير ترتيب الفيديوات ',
         'edit-course'                   =>'تعديل الدورة'
+    ],
+    'blogs' =>[
+        'add-blog-category'            => 'اضافة قسم جديد',
+        'edit-blog-category'           => 'تعديل قسم',
+        'blog-category-name'           => 'اسم القسم',
+        'blog-count'                   =>'عدد المدونات',
+        'choose-category'                => 'اختر القسم',
+        'parent-category'                => 'القسم الرئيسي',
+        'blog-subcategories'           => 'الاقسام الفرعية',
+        'parent-categories'              => 'الاقسام الرئيسة',
+        'download_count'                 => 'عدد التحميلات',
+        'view_count'                    => 'عدد المشاهدات',
+        'publish_date'                  => 'تاريخ النشر',
+        'author_name'                   => 'اسم الشيخ',
+        'blog_category'               => 'القسم',
+        'blog_name'                   => 'اسم المدونة',
+        'blog_content'                => 'وصف المدونة',
+        'blog_image'                  => 'صورة المدونة',
+        'add-blog'                    => 'اضافة مدونة جديدة',
+        'videos_youtube_links'          => 'روابط الفيديو الخاصة بالمدونة',
+        'video_name'                    => 'اسم الفيديو',
+        'video_link'                    => 'رابط الفيديو',
+        'enter_youtube_link'            => 'أدخل رابط الفيديو اليوتيوب',
+        'brief_description'             => 'وصف مختصر',
+        'edit-blog'                    =>'تعديل المدونة'
     ],
     'books' =>[
         'add-book-category'             => 'اضافة قسم جديد',

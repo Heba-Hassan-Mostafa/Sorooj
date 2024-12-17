@@ -94,6 +94,12 @@ class Category extends Model
         return $this->hasMany(Book::class);
 
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+
+    }
     public function status()
     {
         return $this->status == 1 ? __('Active') : __('Inactive');

@@ -21,7 +21,7 @@ class Blog extends Model implements HasMedia
 
     public $filters = ['blog_name', 'author_name', 'category_id', 'publish_date'];
 
-    protected $definedRelations = ['category', 'videos', 'media', 'favorites'];
+   // protected $definedRelations = ['category', 'videos', 'media', 'favorites'];
 
     public function sluggable(): array
     {
