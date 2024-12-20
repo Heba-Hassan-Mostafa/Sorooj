@@ -11,6 +11,7 @@ class MostViewedResource extends JsonResource
         return [
             'id'                => $this->id,
             'name'              => $this->name,
+            'slug'              => $this->slug,
             'author_name'       => $this->author_name,
             'brief_description' => $this->brief_description,
             'publish_date'      => $this->publish_date,

@@ -17,14 +17,14 @@ class MostViewedController extends Controller
     {
         // Fetch top viewed courses and books
         $courses = Course::select('id', 'course_name as name', 'view_count','author_name as author_name',
-            'brief_description as brief_description', 'publish_date as publish_date')
+            'brief_description as brief_description', 'publish_date as publish_date','slug as slug')
             ->addSelect(DB::raw("'course' as type")) // Add type as a raw SQL value
             ->orderByDesc('view_count')
             ->limit(10)
             ->get();
 
         $books = Book::select('id', 'book_name as name', 'view_count','author_name as author_name',
-            'brief_description as brief_description', 'publish_date as publish_date')
+            'brief_description as brief_description', 'publish_date as publish_date','slug as slug')
             ->addSelect(DB::raw("'book' as type")) // Add type as a raw SQL value
             ->orderByDesc('view_count')
             ->limit(10)
