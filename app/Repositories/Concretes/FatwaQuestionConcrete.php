@@ -23,11 +23,21 @@ class FatwaQuestionConcrete extends BaseConcrete implements FatwaQuestionContrac
         return $record;
 
     }
-//
-//    public function update(Model $model, array $attributes = []): mixed
-//    {
-//        $record = parent::update($model, $attributes);
-//        return $record;
-//    }
+
+    public function update(Model $model, array $attributes = []): mixed
+    {
+        $record = $model->fatwaAnswer()->create([
+            'answer_content'        =>$attributes['answer_content'],
+            'publish_date'          =>$attributes['publish_date'],
+            'youtube_link'          =>$attributes['youtube_link'],
+        ]);
+
+        // store audio file
+        if (isset($attributes['audio_file']) && $attributes['audio_file']->isValid()) {
+            uploadImage('audio_file', $attributes['audio_file'], $record);
+        }
+
+        return $record;
+    }
 
 }

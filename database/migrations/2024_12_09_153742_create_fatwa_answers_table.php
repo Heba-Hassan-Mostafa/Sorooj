@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('fatwa_question_id')->constrained()->cascadeOnDelete();
             $table->longText('answer_content')->nullable();
-            $table->string('audio_file')->nullable();
             $table->string('youtube_link')->nullable();
             $table->date('publish_date');
             $table->timestamps();

@@ -13,7 +13,7 @@ class FatwaAnswerResource extends JsonResource
             'id'                => $this->id,
             'fatwa_question_id' => $this->fatwa_question_id,
             'answer_content'    => $this->answer_content,
-            'audio_file'        => $this->audio_file,
+            'audio_file'        => $this->getFirstMediaUrl('audio_file'),
             'youtube_link'      => $video,
             'publish_date'      => $this->publish_date,
         ];

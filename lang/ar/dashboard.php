@@ -13,7 +13,11 @@ return [
         'upcoming-events'       => 'الاحداث القادمة',
         'past-events'           => 'الاحداث المنتهية',
         'blogs'                 => 'المدونة',
-        'blogs-categories'     => 'أقسام المدونة',
+        'blogs-categories'      => 'أقسام المدونة',
+        'questions'             => 'الاسئلة',
+        'questions_answers'     => 'الاسئلة والاجوبة',
+        'answers'             => 'الاجوبة',
+
 
     ],
     'roles' =>[
@@ -120,6 +124,21 @@ return [
         'title'                         => 'العنوان',
         'link'                          => 'الرابط',
         'image'                         => 'صورة',
+        'created_at'                    => 'تاريخ الانشاء',
+
+    ],
+    'fatwa' => [
+        'user_name'                    => 'الاسم',
+        'user_email'                   => 'البريد الالكترونى',
+        'user_phone'                   => 'رقم الجوال',
+        'reply-done'                   => 'تم الرد',
+        'reply'                        => 'الرد',
+        'question'                     => 'السؤال',
+        'answer'                       => 'الجواب',
+        'youtube_link'                 => 'رابط الفيديو اليوتيوب',
+        'audio_file'                   => 'ملف الصوت',
+        'edit-answer'                   => 'تعديل الجواب',
+
         'created_at'                    => 'تاريخ الانشاء',
 
     ],

@@ -95,6 +95,8 @@
             {{--            </ul>--}}
         </li>
 
+
+
         <!-- blogs & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -123,6 +125,26 @@
             {{--            </ul>--}}
         </li>
 
+        <!-- questions & answers-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.questions_answers') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.fatwa.questions.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.fatwa.questions.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.questions') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.fatwa.answers.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.fatwa.answers.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.answers') }}</div>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
         <!-- home & sections -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">{{ trans('dashboard.sidebar.home-sections') }}</span>

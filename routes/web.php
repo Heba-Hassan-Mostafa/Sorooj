@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
+use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaAnswerController;
+use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\UpcomingEventController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SliderController;
@@ -176,5 +178,20 @@ Route::group(
 
 
         });
+
+        // Fatwa questions
+        Route::group(['prefix' => 'fatwa', 'as' => 'fatwa.'], function () {
+
+            Route::get('/change-status',      [FatwaQuestionController::class,'changeStatus'])->name('change-status');
+
+            Route::resource('/questions', FatwaQuestionController::class);
+
+            Route::resource('/answers', FatwaAnswerController::class);
+
+            Route::delete('/answers/{answer}/audio', [FatwaAnswerController::class, 'deleteAudioFile'])
+                ->name('answers.deleteAudioFile');
+        });
+
+
     });
 });

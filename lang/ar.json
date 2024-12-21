@@ -1378,5 +1378,7 @@
     "The email format is invalid": "صيغة البريد الالكتروني غير صالحة.",
     "Blog not found or inactive.": "المدونة غير موجودة او غير مفعلة.",
     "Blog added to favorites": "تم اضافة المدونة الى المفضلة.",
-    "Blog removed from favorites": "تم ازالة المدونة من المفضلة."
+    "Blog removed from favorites": "تم ازالة المدونة من المفضلة.",
+    "Answer": "الجواب",
+    "Audio File": "ملف صوتي"
 }
