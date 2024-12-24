@@ -22,7 +22,7 @@
                     @if (!empty($course->image))
                         <img src="{{ asset($course->image) }}" style="width:50px;height:50px;"  alt=""/>
                     @else
-                        <img src="{{ asset('assets/admin/images/course.jpg') }}" style="width:50px;height:50px;"  alt=""/>
+                        <img src="{{ asset('assets/admin/images/courses.webp') }}" style="width:50px;height:50px;"  alt=""/>
                     @endif
 
                 </td>
