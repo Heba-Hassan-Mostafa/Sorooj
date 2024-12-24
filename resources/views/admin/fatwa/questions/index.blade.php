@@ -18,7 +18,7 @@
                     <th>#</th>
                     <th>{{ trans('dashboard.fatwa.user_name') }}</th>
                     <th>{{ trans('dashboard.fatwa.user_email') }}</th>
-                    <th>{{ trans('dashboard.fatwa.user_phone') }}</th>
+                    <th>{{ trans('dashboard.fatwa.question') }}</th>
                     <th>{{ trans('dashboard.fatwa.created_at') }}</th>
                     <th>{{ trans('dashboard.fatwa.reply') }}</th>
                     <th>{{ trans('dashboard.status') }}</th>
@@ -32,7 +32,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td> {{ $question->name }}</td>
                         <td>{{ $question->user?->email ?? '-----' }}</td>
-                        <td>{{ $question->user?->mobile ?? '-----' }}</td>
+                        <td>{{\Illuminate\Support\Str::limit( $question->message , 100) }}</td>
                         <td>{{ $question->created_at->format('Y-m-d') }}</td>
                         <td>
                                 <?php

@@ -28,7 +28,7 @@ class FatwaAnswerController extends BaseApiController
         if (!$question) {
             return $this->respondWithError(__('Fatwa Question not found'));
         }
-        $fatwaAnswer = $question->fatwaAnswer->Published()->first();
+        $fatwaAnswer = FatwaAnswer::where('fatwa_question_id', $question->id)->Published()->first();
         if (!$fatwaAnswer) {
             return $this->respondWithError(__('No published Fatwa Answer found for this question'));
         }

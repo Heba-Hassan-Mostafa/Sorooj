@@ -56,9 +56,13 @@ class FatwaQuestionController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $this->repository->toggleField($request->id,'status');
+        $question = FatwaQuestion::findOrFail($request->id);
+        $newStatus = $request->status;
 
-        return response()->json(['success'=>'Status change successfully.']);
+        $question->status = $newStatus;
+        $question->save();
+
+        return response()->json(['success' => 'Status changed successfully.']);
 
     }
 
