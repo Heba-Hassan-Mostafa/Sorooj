@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaAnswerController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
+use App\Http\Controllers\DashboardWeb\V1\HomeSections\SubscriberController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\UpcomingEventController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SliderController;
@@ -208,6 +209,9 @@ Route::group(
             Route::delete('/answers/{answer}/audio', [FatwaAnswerController::class, 'deleteAudioFile'])
                 ->name('answers.deleteAudioFile');
         });
+
+        //subscribers
+        Route::resource('/subscribers', SubscriberController::class);
 
 
     });

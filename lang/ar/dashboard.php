@@ -19,6 +19,7 @@ return [
         'answers'               => 'الاجوبة',
         'videos'                => 'المكتبة المرئية',
         'videos-categories'     => 'أقسام المكتبة المرئية',
+        'subscribers'           => 'المشتركين',
 
     ],
     'roles' =>[

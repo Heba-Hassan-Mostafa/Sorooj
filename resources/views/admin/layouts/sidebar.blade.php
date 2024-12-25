@@ -146,6 +146,8 @@
 
         </li>
 
+
+
         <!-- questions & answers-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -196,6 +198,13 @@
                 </li>
             </ul>
 
+        </li>
+
+        <li class="menu-item {{ url()->current() == route('admin.subscribers.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.subscribers.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <div>{{ trans('dashboard.sidebar.subscribers') }}</div>
+            </a>
         </li>
 
     </ul>
