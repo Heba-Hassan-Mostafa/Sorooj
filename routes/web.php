@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\UpcomingEventController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SliderController;
+use App\Http\Controllers\DashboardWeb\V1\Videos\VideoCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Videos\VideoController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -155,6 +157,21 @@ Route::group(
                 ->name('blogs.deleteBlogVideo');
         });
 
+        // videos
+        Route::group(['prefix' => 'videos', 'as' => 'videos.'], function () {
+
+            Route::get('/category/change-status',      [VideoCategoryController::class,'changeStatus'])->name('category.change-status');
+            Route::get('/category/sort-categories', [VideoCategoryController::class,'livewire_index'])->name('category.sort-categories');
+
+            Route::resource('/category', VideoCategoryController::class);
+
+            Route::get('/videos/change-status',      [VideoController::class,'changeStatus'])->name('videos.change-status');
+            Route::get('/sort-videos', [VideoController::class,'livewire_index'])->name('sort-videos');
+            Route::get('/videos/sort/{video}', [BookController::class,'videosSort'])->name('videos.sort');
+
+            Route::resource('/videos', VideoController::class);
+
+        });
 
         // Slider
         Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {

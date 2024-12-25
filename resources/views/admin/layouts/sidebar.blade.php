@@ -125,6 +125,27 @@
             {{--            </ul>--}}
         </li>
 
+        <!-- videos & categories-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.videos') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.videos.category.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.videos.category.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.videos-categories') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.videos.videos.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.videos.videos.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.videos') }}</div>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+
         <!-- questions & answers-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

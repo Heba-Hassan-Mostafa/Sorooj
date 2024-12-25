@@ -100,6 +100,12 @@ class Category extends Model
         return $this->hasMany(Blog::class);
 
     }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+
+    }
     public function status()
     {
         return $this->status == 1 ? __('Active') : __('Inactive');

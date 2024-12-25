@@ -10,10 +10,12 @@ use App\Repositories\Concretes\AdminConcrete;
 use App\Repositories\Concretes\BlogCategoryConcrete;
 use App\Repositories\Concretes\BookCategoryConcrete;
 use App\Repositories\Concretes\CourseCategoryConcrete;
+use App\Repositories\Concretes\VideoCategoryConcrete;
 use App\Repositories\Contracts\AdminContract;
 use App\Repositories\Contracts\BlogCategoryContract;
-use App\Repositories\Contracts\bookCategoryContract;
+use App\Repositories\Contracts\BookCategoryContract;
 use App\Repositories\Contracts\CourseCategoryContract;
+use App\Repositories\Contracts\VideoCategoryContract;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Response;
@@ -45,6 +47,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(BlogCategoryContract::class, function ($app) {
             return new BlogCategoryConcrete(new Category);
+        });
+        $this->app->bind(VideoCategoryContract::class, function ($app) {
+            return new VideoCategoryConcrete(new Category);
         });
     }
 

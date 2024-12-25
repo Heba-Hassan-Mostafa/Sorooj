@@ -14,12 +14,12 @@ class Video extends Model implements HasMedia
 {
     use HasFactory, ModelTrait,InteractsWithMedia;
 
-    protected $fillable = ['name', 'youtube_link', 'video_file', 'category_id', 'status', 'publish_date', 'order_position',
-                            'view_count', 'download_count', 'keywords', 'description', 'videoable_id', 'videoable_type'];
+    protected $fillable = ['name', 'youtube_link', 'video_file', 'category_id', 'status', 'publish_date', 'brief_description',
+        'order_position','view_count', 'download_count', 'keywords', 'description', 'videoable_id', 'videoable_type'];
 
     public $filters = ['name', 'category_id', 'publish_date'];
 
-    protected $definedRelations = ['category'];
+    protected $definedRelations = [];
 
 
     #Scopes

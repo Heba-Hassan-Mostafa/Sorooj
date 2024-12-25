@@ -6,8 +6,7 @@ use App\Enum\CategoryTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Web\Courses\CategoryRequest;
 use App\Models\Category;
-use App\Repositories\Contracts\bookCategoryContract;
-use App\Repositories\Contracts\CourseCategoryContract;
+use App\Repositories\Contracts\BookCategoryContract;
 use Illuminate\Http\Request;
 
 

@@ -16,8 +16,9 @@ return [
         'blogs-categories'      => 'أقسام المدونة',
         'questions'             => 'الاسئلة',
         'questions_answers'     => 'الاسئلة والاجوبة',
-        'answers'             => 'الاجوبة',
-
+        'answers'               => 'الاجوبة',
+        'videos'                => 'المكتبة المرئية',
+        'videos-categories'     => 'أقسام المكتبة المرئية',
 
     ],
     'roles' =>[
@@ -155,6 +156,24 @@ return [
         'location'                    => 'المكان',
         'image'                        => 'صورة الحدث',
 
+    ],
+    'videos' =>[
+        'add-video-category'             => 'اضافة قسم جديد',
+        'edit-video-category'            => 'تعديل قسم',
+        'video-category-name'            => 'اسم القسم',
+        'video-count'                    =>'عدد الفيديوات',
+        'choose-category'                => 'اختر القسم',
+        'parent-category'                => 'القسم الرئيسي',
+        'video-subcategories'            => 'الاقسام الفرعية',
+        'parent-categories'              => 'الاقسام الرئيسة',
+        'publish_date'                   => 'تاريخ النشر',
+        'video_category'                 => 'القسم',
+        'video_name'                     => 'اسم الفيديو',
+        'add-video'                      => 'اضافة فيديو جديد',
+        'brief_description'              => 'وصف مختصر',
+        'edit-video'                     =>'تعديل الفيديو',
+        'category_id'                    => 'القسم',
+        'select-category'                => 'اختر القسم',
     ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',

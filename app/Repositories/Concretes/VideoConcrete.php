@@ -18,8 +18,21 @@ class VideoConcrete extends BaseConcrete implements VideoContract
     {
         parent::__construct($model);
     }
+
+    public function getLivewireVideos()
+    {
+        return Video::with(['category'])->get();
+    }
     public function create(array $attributes = []): mixed
     {
+        $attributes['videoable_type'] = 'Video';
+        $attributes['videoable_id'] = null;
+
+        $lastOrderPosition = Video::where('videoable_type','Video')->max('order_position');
+        $nextOrderPosition = $lastOrderPosition + 1;
+
+        // Include the next order position in the attributes
+        $attributes['order_position'] = $nextOrderPosition;
 
         $record = parent::create($attributes);
         return $record;

@@ -4,10 +4,10 @@ namespace App\Repositories\Concretes;
 
 use App\Enum\CategoryTypeEnum;
 use App\Models\Category;
-use App\Repositories\Contracts\BookCategoryContract;
+use App\Repositories\Contracts\VideoCategoryContract;
 use Illuminate\Database\Eloquent\Model;
 
-class BookCategoryConcrete extends BaseConcrete implements BookCategoryContract
+class VideoCategoryConcrete extends BaseConcrete implements VideoCategoryContract
 {
     /**
      * AdminConcrete constructor.
@@ -21,14 +21,14 @@ class BookCategoryConcrete extends BaseConcrete implements BookCategoryContract
 
     public function getLivewireCategories()
     {
-        return Category::whereNull('parent_id')->whereType(CategoryTypeEnum::BOOK)->get();
+        return Category::whereNull('parent_id')->whereType(CategoryTypeEnum::VIDEO)->get();
     }
 
     public function create(array $attributes = []): mixed
     {
-        $attributes["type"] = CategoryTypeEnum::BOOK;
+        $attributes["type"] = CategoryTypeEnum::VIDEO;
 
-        $lastOrderPosition = Category::whereType(CategoryTypeEnum::BOOK)->whereNull('parent_id')->max('order_position');
+        $lastOrderPosition = Category::whereType(CategoryTypeEnum::VIDEO)->whereNull('parent_id')->max('order_position');
         $nextOrderPosition = $lastOrderPosition + 1;
 
         $attributes['order_position'] = $nextOrderPosition;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1\Client\Books;
 
 use App\Enum\CategoryTypeEnum;
 use App\Http\Resources\Api\V1\Client\Books\BookCategoryResource;
-use App\Repositories\Contracts\bookCategoryContract;
+use App\Repositories\Contracts\BookCategoryContract;
 use App\Http\Controllers\Api\BaseApiController;
 
 class BookCategoryController extends BaseApiController

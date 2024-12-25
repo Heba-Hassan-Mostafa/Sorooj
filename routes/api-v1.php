@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
+use App\Http\Controllers\Api\V1\Client\Videos\VideoCategoryController;
+use App\Http\Controllers\Api\V1\Client\Videos\VideoLibraryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -116,6 +118,14 @@ Route::prefix("auth")->group(function () {
                 Route::post('/toggle-favorite/{blogId}', [BlogController::class, 'toggleFavorite'])
                     ->name('toggle-favorite')->middleware('auth:sanctum');
 
+            });
+            //videos library
+            Route::group(['prefix' => 'videos', 'as' => 'videos.'], function () {
+
+                //categories
+                Route::get('/categories', [VideoCategoryController::class, 'index'])->name('category.index');
+                //index
+                Route::get('/', [VideoLibraryController::class, 'index'])->name('index');
             });
         # fatwa
             Route::group(['prefix' => 'fatwa', 'as' => 'fatwa.'], function () {

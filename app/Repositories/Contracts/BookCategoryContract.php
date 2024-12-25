@@ -3,7 +3,7 @@
 namespace App\Repositories\Contracts;
 
 
-interface bookCategoryContract extends BaseContract
+interface BookCategoryContract extends BaseContract
 {
 
 }
