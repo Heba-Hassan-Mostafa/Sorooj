@@ -35,17 +35,10 @@ class SocialiteController extends Controller
                 'email_verified_at' => now(),
                 'first_name' => $response->getName(),
                 'last_name' => $response->getNickname(),
-                'mobile' => $response->phoneNumber,
             ]
         );
 
         $data = [$provider . '_id' => $response->getId()];
-
-        if ($user->wasRecentlyCreated) {
-            $data['name'] = $response->getName() ?? $response->getNickname();
-
-            event(new Registered($user));
-        }
 
         $user->update($data);
 
