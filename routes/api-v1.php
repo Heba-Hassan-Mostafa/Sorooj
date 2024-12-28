@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Client\Books\BookController;
 use App\Http\Controllers\Api\V1\Client\ContactController;
 use App\Http\Controllers\Api\V1\Client\Courses\CategoryController;
 use App\Http\Controllers\Api\V1\Client\Courses\CourseController;
+use App\Http\Controllers\Api\V1\Client\FavoriteController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaAnswerController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaQuestionController;
 use App\Http\Controllers\Api\V1\Client\HomePage\MostViewedController;
@@ -16,6 +17,8 @@ use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
+use App\Http\Controllers\Api\V1\Client\SocialAuthController;
+use App\Http\Controllers\Api\V1\Client\SocialiteController;
 use App\Http\Controllers\Api\V1\Client\Videos\VideoCategoryController;
 use App\Http\Controllers\Api\V1\Client\Videos\VideoLibraryController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +52,12 @@ Route::prefix("auth")->group(function () {
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
     Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
     Route::post('send-otp', [AuthController::class, 'sendOTP']);
+
+    Route::get('/{provider}/redirect', [SocialiteController::class, 'loginSocial'])
+        ->name('socialite.redirect');
+
+    Route::get('/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
+        ->name('socialite.callback');
 });
 
         //courses
@@ -159,6 +168,29 @@ Route::prefix("auth")->group(function () {
             });
             //contact-us
             Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
+
+            Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+
+                //get-courses-favorites
+                Route::get('/get-all-favorites', [FavoriteController::class, 'index'])
+                    ->name('get-all-favorites')->middleware('auth:sanctum');
+            //get-courses-favorites
+            Route::get('/get-courses-favorites', [CourseController::class, 'getFavorites'])
+                ->name('get-courses-favorites')->middleware('auth:sanctum');
+
+                //get-courses-favorites
+                Route::get('/get-courses-subscriptions', [CourseController::class, 'getSubscriptions'])
+                    ->name('get-courses-subscriptions')->middleware('auth:sanctum');
+
+                //get-books-favorites
+                Route::get('/get-books-favorites', [BookController::class, 'getFavorites'])
+                    ->name('get-books-favorites')->middleware('auth:sanctum');
+
+                //get-questions
+                Route::get('/get-my-questions', [FatwaQuestionController::class, 'getMyQuestions'])
+                    ->name('get-my-questions')->middleware('auth:sanctum');
+
+            });
 Route::middleware(["auth:api"])->group(function () {
 
 //

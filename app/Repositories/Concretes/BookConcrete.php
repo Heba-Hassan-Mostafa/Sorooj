@@ -153,4 +153,15 @@ class BookConcrete extends BaseConcrete implements BookContract
 
     }
 
+    public function getFavorites()
+    {
+        $user = auth(activeGuard())?->user();
+        if (!$user) {
+            return response()->json(['message' => __('User not found')], 404);
+        }
+        $favoriteBooks = $user->favoriteBooks;
+        return $favoriteBooks;
+
+    }
+
 }

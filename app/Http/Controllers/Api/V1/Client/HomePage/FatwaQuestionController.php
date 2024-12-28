@@ -43,4 +43,11 @@ class FatwaQuestionController extends BaseApiController
 
     }
 
+    public function getMyQuestions()
+    {
+        $fatwaQuestions = $this->repository->getMyQuestions();
+        return $this->respondWithCollection($fatwaQuestions);
+
+    }
+
 }

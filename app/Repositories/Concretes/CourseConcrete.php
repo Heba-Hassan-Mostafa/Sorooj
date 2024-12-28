@@ -4,6 +4,7 @@ namespace App\Repositories\Concretes;
 
 use App\Models\Course;
 
+use App\Models\User;
 use App\Repositories\Contracts\CourseContract;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -218,6 +219,29 @@ class CourseConcrete extends BaseConcrete implements CourseContract
              $course->subscriptions()->create($data);
             return $this->respondWithSuccess(__('Course subscribed successfully'));
         }
+    }
+
+
+    public function getFavorites()
+    {
+        $user = auth(activeGuard())?->user();
+        if (!$user) {
+            return response()->json(['message' => __('User not found')], 404);
+        }
+        $favoriteCourses = $user->favoriteCourses;
+        return $favoriteCourses;
+
+    }
+
+    public function getMySubscriptions()
+    {
+        $user = auth(activeGuard())?->user();
+        if (!$user) {
+            return response()->json(['message' => __('User not found')], 404);
+        }
+        $courses = $user->subscriptions()->with('course')->get()->pluck('course')->filter();
+        return $courses;
+
     }
 
 }

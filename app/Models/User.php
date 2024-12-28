@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -113,9 +114,26 @@ class User extends Authenticatable implements HasMedia
         return $this->morphMany(Favorite::class, 'favoriteable');
     }
 
+
+    public function favoriteCourses(): MorphToMany
+    {
+        return $this->morphedByMany(Course::class, 'favoriteable', 'favorites')
+            ->withTimestamps();
+    }
+
+    public function favoriteBooks(): MorphToMany
+    {
+        return $this->morphedByMany(Book::class, 'favoriteable', 'favorites')
+            ->withTimestamps();
+    }
+    public function fatwaQuestions()
+    {
+        return $this->hasMany(FatwaQuestion::class);
+    }
+
     public function subscriptions()
     {
-        return $this->hasMany(Subscription::class, 'user_id');
+        return $this->hasMany(Subscription::class);
 
     }
 

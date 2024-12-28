@@ -80,4 +80,12 @@ class BookController extends BaseApiController
        return $this->repository->toggleFavorite($bookId);
     }
 
+
+    public function getFavorites()
+    {
+        $favorites = $this->repository->getFavorites();
+        return $this->respondWithCollection($favorites);
+
+    }
+
 }

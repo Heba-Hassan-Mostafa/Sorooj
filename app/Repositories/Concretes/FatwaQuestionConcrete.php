@@ -40,4 +40,16 @@ class FatwaQuestionConcrete extends BaseConcrete implements FatwaQuestionContrac
         return $record;
     }
 
+
+    public function getMyQuestions()
+    {
+        $user = auth(activeGuard())?->user();
+        if (!$user) {
+            return response()->json(['message' => __('User not found')], 404);
+        }
+            $fatwaQuestions = $user->fatwaQuestions()->whereStatus(1)->whereHas('fatwaAnswer')->get();
+            return $fatwaQuestions;
+
+    }
+
 }

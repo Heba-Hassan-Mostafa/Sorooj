@@ -86,4 +86,16 @@ class CourseController extends BaseApiController
         return $this->repository->addSubscription($courseId);
     }
 
+    public function getFavorites()
+    {
+        $favorites = $this->repository->getFavorites();
+        return $this->respondWithCollection($favorites);
+
+    }
+    public function getSubscriptions()
+    {
+        $subscriptions = $this->repository->getMySubscriptions();
+        return $this->respondWithCollection($subscriptions);
+
+    }
 }
