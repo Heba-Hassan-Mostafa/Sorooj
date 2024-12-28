@@ -33,7 +33,7 @@ class SocialiteController extends Controller
             [
                 'password' => bcrypt(Str::random(16)), // Secure random password
                 'email_verified_at' => now(),
-                'name' => $response->getName(),
+                'first_name' => $response->getName(),
             ]
         );
 

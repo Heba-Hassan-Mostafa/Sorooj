@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['*', 'sanctum/csrf-cookie'],
+    'paths' => ['*', 'sanctum/csrf-cookie','/{provider}/callback', '/{provider}/redirect'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['http://localhost:3000', 'http://sorooj.test','https://sorooj.vercel.app','https://www.sorooj.org'],
     'allowed_origins_patterns' => [],
