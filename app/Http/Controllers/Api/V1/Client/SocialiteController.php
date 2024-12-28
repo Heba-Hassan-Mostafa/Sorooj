@@ -46,7 +46,7 @@ class SocialiteController extends Controller
         // Generate a token for API authentication
         $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
             // Redirect to the main domain with the token (optional)
-            return redirect()->away('https://www.sorooj.org/home?token=' . $accessToken);
+            return redirect()->away('https://www.sorooj.org?token=' . $accessToken);
         } catch (\Exception $e) {
             // Redirect to the error page on the main domain
             return redirect()->away('https://www.sorooj.org/error?message=' . urlencode($e->getMessage()));
