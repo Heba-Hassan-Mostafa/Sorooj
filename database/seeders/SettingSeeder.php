@@ -2,226 +2,117 @@
 
 namespace Database\Seeders;
 
-use App\Enum\Chat\ChatTypeEnum;
 use App\Models\Setting;
 use App\Helpers\Setting as SettingHelper;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class SettingSeeder extends Seeder
 {
     public function run(): void
     {
-        # for frontend to display enum keys translated
-        $setting = Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'enum_map',
+        DB::table('settings')->truncate();
+
+        $values = [
+            [
+                'app-contacts' => [
+                    'phones'   => ['man'=>'966555555555', 'women'=>'966666666666'],
+                    'email'     => 'sorooj@gmail.com',
+                    'facebook'  => 'https://www.facebook.com/',
+                    'instagram' => 'https://www.instagram.com/',
+                    'telegram'  => 'https://www.telegram.com/',
+                    'twitter'   => 'https://www.twitter.com/',
+                    'youtube'   => 'https://www.youtube.com/',
+                    'about-center-home' => 'مركز سُرج للدراسات والأبحاث , هو مركز علمي دعوي بحثي يعني بتأصيل العقيدة الإسلامية وتعزيز الفطرة الإيمانية وتحصين المجتمع المسلم من الحرب علي الفطرة والإيمان والإسلام , وضرورة تقرير قواعد الشرح الصحيحة المستمدة من القران الكريم والسنه النبوية , وفق منهج السلف الصالح',
                 ],
-                [
-                    'name' => 'enum_map',
-                    'key' => 'enum_map',
-                    'value' => [
-                        'map' => [
-                            "chat-type" => [
-                                'class_name' => ChatTypeEnum::class,
-                                'prefix' => null,
-                            ],
-                        ],
-                    ],
-                ]
-            );
-        $setting = Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'static_pages',
+                'about-center' =>[
+                    'content' => 'مركز سُرج للدراسات والأبحاث , هو مركز علمي دعوي بحثي يعني بتأصيل العقيدة الإسلامية وتعزيز الفطرة الإيمانية وتحصين المجتمع المسلم من الحرب علي الفطرة والإيمان والإسلام , وضرورة تقرير قواعد الشرح الصحيحة المستمدة من القران الكريم والسنه النبوية , وفق منهج السلف الصالح',
+                    'video' => 'https://www.youtube.com/watch?v=3-9uWAOCdq8',
                 ],
-                [
-                    'name' => 'static_pages',
-                    'key' => 'static_pages',
-                    'value' => [
-                        "about_us" => [
-                            'content' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
-                            ]
-                        ],
-                        'privacy_policy' => [
-                            'content' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
-                            ]
-                        ],
-                        'terms_and_conditions' => [
-                            'content' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
-                            ]
-                        ],
-                    ],
-                ]
-            );
-        $setting = Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'setting',
+                'vision'=>[
+                    'content' =>'مركز سُرج للدراسات والأبحاث , هو مركز علمي دعوي بحثي يعني بتأصيل العقيدة الإسلامية وتعزيز الفطرة الإيمانية وتحصين المجتمع المسلم من الحرب علي الفطرة والإيمان والإسلام , وضرورة تقرير قواعد الشرح الصحيحة المستمدة من القران الكريم والسنه النبوية , وفق منهج السلف الصالح',
+
                 ],
-                [
-                    'name' => 'setting',
-                    'key' => 'setting',
-                    'value' => [
-                        'tax' => 15,
-                        'commission' => 20,
-                        'minimum_price_per_hour' => 15,
-                        'declien_order_fees' => 15,
-                        'notify_before_job_in_hours' => 2,
-                        'notify_idel_requested_in_days' => 2,
-                        'competions_prize_allocations' => [
-                            Str::slug('Single Winner') => [
-                                'title' => ['en' => __('Single Winner', [], 'en'), 'ar' => __('Single Winner', [], 'ar')],
-                                'precentage' => [
-                                    100
-                                ],
-                            ],
-                            Str::slug('Two Winner') => [
-                                'title' => ['en' => __('Two Winners', [], 'en'), 'ar' => __('Two Winners', [], 'ar')],
-                                'precentage' => [
-                                    70,
-                                    30,
-                                ],
-                            ],
-                            Str::slug('Triple Winner') => [
-                                'title' => ['en' => __('Triple Winners', [], 'en'), 'ar' => __('Triple Winners', [], 'ar')],
-                                'precentage' => [
-                                    50,
-                                    30,
-                                    20,
-                                ],
-                            ],
-                        ],
-                    ],
-                ]
-            );
-        $setting = Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'main_page',
+                'message'=>[
+                    'content'=>'في ظل الهجمات الشرسة علي المسلمين في شتي المجالات والسبل والوسائل , يسعي المركز إلي إيجاد بيئة علمية فطرية إيمانية , ترسخ اليقين وسلامة المعتقد وتعني بنشر محاسن الإسلام , والسعي في ثبات منظومة الأسرة والمجتمع , مع الدعوة إلي الإيمان لهداية بقية المذاهب والأديان مع بناء الحصن المنيع ضد كل هجمة مهما كان حجمها باستثمار كافة الجهود , وكافة الوسائل الحديثة والمتطورة والتقليدية في ي تحقيق تلك الأهداف , ليشمل جميع فئات المجتمع , من المربين والمؤثرين والمتأثرين والمتشككين',
+
                 ],
-                [
-                    'name' => 'main_page',
-                    'key' => 'main_page',
-                    'value' => [
-                        'main_section' => [
-                            'title' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
+                'general-objectives' => [
+                    'تأصيل العقيدة الصحيحة المستمدة من الكتاب والسنه وفق منهج سلف الأمه',
+                    'بث ونشر محاسن الإسلام وتحصيل الأمان العقدي.',
+                    'ترسيخ المسلمات الدينية والثوابت الإيمانية.',
+                    'تحصين المسلمين ووقاية الشباب والأسرة المسلمة من آثار الأفكار والشبهات المعاصرة.',
+                    'الإعداد البحثي لطلاب العلم والدعاة وفق قواعد البحث العلمي لتخريج نخبة من المختصين في مجال الكتابة العلمية بجميع أشكالها مع طرح المواضيع البحثية المتفقة مع رؤية ورسالة المركز.',
+                    'رصد أبرز المذاهب الفكرية المعاصرة وتتبع منابعها ومخرجاتها ومراكزها والتعامل معها وفق منهج أهل السنة والجماعة.',
+                    'تقديم المحتوى المرئي والمسموع والمطبوع، بآليات وبرامج حديثة عبر المنصات المتاحة ووسائل التواصل الاجتماعي مع إظهار جهود أهل السنة والجماعة في مسائل تعزيز اليقين، والرد على الشبهات.'
+                ],
+                'tracks-center-areas' => [
+                    'content' => 'استكشاف المسارات الاربعة المتنوعة التى يقدمها المركز والتى تشمل مجالات التعليم والبحث العلمى والابتكار التكنولوجى والتنمية المستدامة مما يتيح للمتدربين والباحثين فرصة فريدة لتوسيع افاقهم وتحقيق اهدافهم المهنية فى بيئة تعليمية متكاملة',
+
+                    'tracks' => json_encode([
+                            [
+                                'title' => 'المسار الأول : سراج اليقين',
+                                'content'=>'حيث يعنى بمهمات العقيدة ومسلمات الدين، وقضايا الإيمان لتقرير الدين الخالص. وآلية العمل فيه تكو ن بعداد المواد العلمية والدعوية مسموعة، أو مقروءة، أو مرئية، موجهة لفئات المسلمين أجمعين حيث تُعنى بتأصيل ما ليسع المسلم جهله في العقيدة والثوابت والإيمان.',
                             ],
-                            'description' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
+                            [
+                                'title' => 'المسار الثاني : سراج الراسخين',
+                                'content' => 'وهو يُعنى بتأصيل وتأهيل طلاب العلم والدعاة، والمرب ين والمؤثرين، تأصيلًا علميًّا ضمن منصة أكاديمة تعليمية وتفاعلية. وآلية العمل فيه: تكون بتأس يس وتطوير أكاديمية سُرُج العلمية، وفق خطة دراسية منتظمة.',
                             ],
-                        ],
-                        'about_section' => [
-                            'title' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
+                            [
+                                'title' => 'المسار الثالث : سراج الأمان',
+                                'content' => 'وهو سراج يُعنى ببراز محاسن الإسلام والأمان العقدي الذي يخاطب الف رد المسلم، والأسرة المسلمة وفئة الشباب، وبيان كمال الشريعة الإسلامية، وشمولية الإسلام ، تحصينا للمؤمن في ظل المتغيرات والشبهات المعاصرة وآلية العمل فيه: تكون بتوفير المنشورات الصوتية والمطبوعة والمرئية، التوعوية، وفتح مجالت التواصل الحديثة للإجابة عن الأسئلة والإشكالات.',
                             ],
-                            'description' => [
-                                'ar' => fake()->paragraph(1),
-                                'en' => fake()->paragraph(1),
+                            [
+                                'title' => 'المسار الرابع : سراج الرصد',
+                                'content' => 'رصد النشطة والمراكز التي تعنى بالمشكلات الفكرية موافقة أو مخالفة، وبيان آلية التعامل معها في ظل المستجدات المعاصرة وفق خطة معدة لذلك',
                             ],
-                        ],
-                        'count_section' => [
-                            'designers_title' => [
-                                'ar' => __('designers_title', [], 'ar'),
-                                'en' => __('designers_title', [], 'en'),
-                            ],
-                            'clients_title' => [
-                                'ar' => __('clients_title', [], 'ar'),
-                                'en' => __('clients_title', [], 'en'),
-                            ],
-                            'projects_title' => [
-                                'ar' => __('projects_title', [], 'ar'),
-                                'en' => __('projects_title', [], 'en'),
-                            ],
-                            'jobs_title' => [
-                                'ar' => __('jobs_title', [], 'ar'),
-                                'en' => __('jobs_title', [], 'en'),
-                            ],
-                        ],
+                        ]),
                     ],
-                ]
-            );
-        if (!$setting->wasRecentlyCreated) {
-            $setting->clearMediaCollection('mainSection');
-            $setting->clearMediaCollection('aboutSection');
-            $setting->clearMediaCollection('contactSection');
+                'center-mechanism' => [
+                   'points' => json_encode([
+                       [
+                           'title' => 'تصوير وتسجيل البرامج المرئية والمسموعه',
+                       ],
+                       [
+                           'title' => 'الدورات العلمية المختصه',
+                       ],
+                       [
+                           'title' => 'أكادمية سرج العملية لتأصيل طلاب العلم وتأهيل الدعاة في برامج دراسية سنوية',
+                       ],
+                       [
+                           'title' => 'الندوات والحوارات البناءه',
+                       ],
+                       [
+                           'title' => 'المحاضرات والكلمات',
+                       ],
+                       [
+                           'title' => 'الفتاوي والاستشارات واللقاءات المفتوحه',
+                       ],
+                       [
+                           'title' => 'تاليف الكتب المختصه والأبحاث المحكمة والمقالات',
+                       ],
+                       [
+                           'title' => 'تأصيل طلاب العلم وتأهيل الدعاة',
+                       ],
+                       [
+                           'title' => 'نشر الفوائد العلمية والدعوية عبر وسائل التواصل',
+                       ],
+                   ])
+                ],
+                'privacy-policy' => 'سياسة الخصوصية',
+                'terms-and-conditions' => 'الشروط والأحكام',
+            ],
+        ];
+
+        foreach ($values as $item) {
+            foreach ($item as $key => $value) {
+                Setting::create([
+                    'key' => $key,
+                    'name' => $key,
+                    'value' => $value
+                ]);
+            }
         }
-
-        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/mainSection.png'))->toMediaCollection('mainSection');
-        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/aboutSection.png'))->toMediaCollection('aboutSection');
-        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/contactSection.png'))->toMediaCollection('contactSection');
-
-
-        Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'contact',
-                ],
-                [
-                    'name' => 'contact',
-                    'key' => 'contact',
-                    'value' => [
-                        'mobile' => [
-                            '0564555666',
-                            '0564333444'
-                        ],
-                        'whatsapp' => [
-                            '+966564454545'
-                        ],
-                        'email' => 'support@samem.co',
-                    ],
-                ]
-            );
-        Setting::query()
-            ->updateOrCreate(
-                [
-                    'key' => 'social',
-                ],
-                [
-                    'name' => 'social',
-                    'key' => 'social',
-                    'value' => [
-                        'facebook' => 'https://www.google.com',
-                        'x' => 'https://www.google.com',
-                        'snapchat' => 'https://www.google.com',
-                        'instagram' => 'https://www.google.com',
-                    ],
-                ]
-            );
-        $setting = Setting::query()
-            ->updateOrCreate([
-                'key' => 'header_logo',
-            ], [
-                'name' => 'header_logo',
-                'key' => 'header_logo',
-                'value' => [],
-            ]);
-        if (!$setting->wasRecentlyCreated)
-            $setting->clearMediaCollection('settingHeaderLogo');
-        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/logo.png'))->toMediaCollection('settingHeaderLogo');
-        $setting = Setting::query()
-            ->updateOrCreate([
-                'key' => 'footer_logo',
-            ], [
-                'name' => 'footer_logo',
-                'key' => 'footer_logo',
-                'value' => [],
-            ]);
-        if (!$setting->wasRecentlyCreated)
-            $setting->clearMediaCollection('settingFooterLogo');
-        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/footerLogo.png'))->toMediaCollection('settingFooterLogo');
         # rebind the singleton instance
         app()->singleton('setting', function ($app) {
             cache()->forget('settings');

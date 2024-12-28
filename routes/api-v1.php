@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
 use App\Http\Controllers\Api\V1\Client\SocialAuthController;
 use App\Http\Controllers\Api\V1\Client\SocialiteController;
+use App\Http\Controllers\Api\V1\Client\StaticPageController;
 use App\Http\Controllers\Api\V1\Client\Videos\VideoCategoryController;
 use App\Http\Controllers\Api\V1\Client\Videos\VideoLibraryController;
 use Illuminate\Support\Facades\Route;
@@ -189,6 +190,18 @@ Route::prefix("auth")->group(function () {
                 //get-questions
                 Route::get('/get-my-questions', [FatwaQuestionController::class, 'getMyQuestions'])
                     ->name('get-my-questions')->middleware('auth:sanctum');
+
+            });
+
+            Route::group(['prefix' => 'static-pages'], function () {
+
+                Route::get('about-center', [StaticPageController::class, 'getAboutCenter']);
+                Route::get('vision', [StaticPageController::class, 'getVision']);
+                Route::get('message', [StaticPageController::class, 'getMessage']);
+                Route::get('general-objectives', [StaticPageController::class, 'getGeneralObjectives']);
+                Route::get('tracks-center-areas', [StaticPageController::class, 'getTracksCenterAreas']);
+                Route::get('center-mechanism', [StaticPageController::class, 'getCenterMechanism']);
+                Route::get('social-contacts', [StaticPageController::class, 'getContactsInfo']);
 
             });
 Route::middleware(["auth:api"])->group(function () {
