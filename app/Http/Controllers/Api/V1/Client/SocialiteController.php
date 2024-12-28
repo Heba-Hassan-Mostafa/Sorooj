@@ -22,6 +22,7 @@ class SocialiteController extends Controller
 
     public function callbackSocial(Request $request, string $provider)
     {
+        try {
         $this->validateProvider($request);
 
         $response = Socialite::driver($provider)->stateless()->user();
@@ -44,8 +45,13 @@ class SocialiteController extends Controller
 
         // Generate a token for API authentication
         $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-
-        return response()->json(['user' => $user, 'token' => $accessToken]);
+            // Redirect to the main domain with the token (optional)
+            return redirect()->away('https://www.sorooj.org/home?token=' . $accessToken);
+        } catch (\Exception $e) {
+            // Redirect to the error page on the main domain
+            return redirect()->away('https://www.sorooj.org/error?message=' . urlencode($e->getMessage()));
+        }
+       // return response()->json(['user' => $user, 'token' => $accessToken]);
     }
     protected function validateProvider(Request $request): array
     {
