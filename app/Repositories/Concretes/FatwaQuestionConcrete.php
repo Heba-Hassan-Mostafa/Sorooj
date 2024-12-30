@@ -48,7 +48,18 @@ class FatwaQuestionConcrete extends BaseConcrete implements FatwaQuestionContrac
             return response()->json(['message' => __('User not found')], 404);
         }
             $fatwaQuestions = $user->fatwaQuestions()->whereStatus(1)->whereHas('fatwaAnswer')->get();
-            return $fatwaQuestions;
+        // Manually paginate the filtered courses
+        $perPage = 10; // Adjust the per-page value as needed
+        $currentPage = request('page', 1); // Default to the first page
+        $paginatedQuestions = new \Illuminate\Pagination\LengthAwarePaginator(
+            $fatwaQuestions->forPage($currentPage, $perPage),
+            $fatwaQuestions->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return $paginatedQuestions;
 
     }
 

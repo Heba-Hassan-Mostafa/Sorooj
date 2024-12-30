@@ -23,7 +23,7 @@ class CourseController extends BaseApiController
 
     public function __construct(CourseContract $repository)
     {
-        request()->merge(['loadRelations' => 'category','videos','media','favorites','subscriptions']);
+       // request()->merge(['loadRelations' => 'category','videos','media','favorites','subscriptions']);
         parent::__construct($repository, CourseResource::class);
     }
 

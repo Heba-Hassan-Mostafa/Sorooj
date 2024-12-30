@@ -23,7 +23,7 @@ class FatwaQuestionController extends BaseApiController
 
     public function __construct(FatwaQuestionContract $repository)
     {
-        request()->merge(['loadRelations' => 'fatwaAnswer']);
+       // request()->merge(['loadRelations' => 'fatwaAnswer']);
         parent::__construct($repository, FatwaQuestionResource::class);
     }
 

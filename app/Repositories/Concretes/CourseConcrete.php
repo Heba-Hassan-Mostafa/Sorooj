@@ -239,8 +239,19 @@ class CourseConcrete extends BaseConcrete implements CourseContract
         if (!$user) {
             return response()->json(['message' => __('User not found')], 404);
         }
-        $courses = $user->subscriptions()->with('course')->get()->pluck('course')->filter();
-        return $courses;
+        $courses = $user->subscriptions()->with('course')->get()->pluck('course');
+        // Manually paginate the filtered courses
+        $perPage = 10; // Adjust the per-page value as needed
+        $currentPage = request('page', 1); // Default to the first page
+        $paginatedCourses = new \Illuminate\Pagination\LengthAwarePaginator(
+            $courses->forPage($currentPage, $perPage),
+            $courses->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return $paginatedCourses;
 
     }
 

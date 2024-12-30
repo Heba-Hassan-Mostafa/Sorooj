@@ -35,7 +35,7 @@ class RegisterClientRequest extends FormRequest
             "first_name" => ["required","string","max:190"],
             "last_name" => ["nullable","string","max:190"],
             "country_code" => ["nullable"],
-            "mobile" => ["nullable"],
+            "mobile" => ["required","unique:users,mobile"],
             "email" => ["sometimes","unique:users,email"],
             "password" => ["required",Password::default()],
             'device_token' => 'nullable',
