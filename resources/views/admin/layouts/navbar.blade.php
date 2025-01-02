@@ -125,7 +125,7 @@
                     <li>
                         <a class="dropdown-item" href="">
                             <i class="ti ti-settings me-2 ti-sm"></i>
-                            <span class="align-middle">{{ trans('dashboard.settings') }}</span>
+                            <span class="align-middle">{{ trans('dashboard.sidebar.settings') }}</span>
                         </a>
                     </li>
                     <li>

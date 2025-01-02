@@ -7,14 +7,17 @@ use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
+use App\Http\Controllers\DashboardWeb\V1\ClientController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaAnswerController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SubscriberController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\UpcomingEventController;
+use App\Http\Controllers\DashboardWeb\V1\ManagementMemberController;
 use App\Http\Controllers\DashboardWeb\V1\RoleController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SliderController;
+use App\Http\Controllers\DashboardWeb\V1\SettingController;
 use App\Http\Controllers\DashboardWeb\V1\Videos\VideoCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Videos\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -213,6 +216,18 @@ Route::group(
         //subscribers
         Route::resource('/subscribers', SubscriberController::class);
 
+        //clients
+        Route::get('clients/change-status',      [ClientController::class,'changeStatus'])->name('clients.change-status');
+        Route::resource('/clients', ClientController::class);
+
+        //management-members
+        Route::get('management-members/change-status',      [ManagementMemberController::class,'changeStatus'])->name('management-members.change-status');
+        Route::resource('/management-members', ManagementMemberController::class);
+
+        Route::get('settings/contacts', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('settings/about-center', [SettingController::class, 'aboutCenter'])->name('settings.aboutCenter');
+
+        Route::put('settings/update', [SettingController::class, 'update'])->name('settings.update');
 
     });
 });

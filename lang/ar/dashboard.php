@@ -20,6 +20,11 @@ return [
         'videos'                => 'المكتبة المرئية',
         'videos-categories'     => 'أقسام المكتبة المرئية',
         'subscribers'           => 'المشتركين',
+        'clients'               => 'العملاء',
+        'management-members'    => 'أعضاء مجلس الادارة',
+        'settings'              => 'الاعدادات',
+        'settings-contacts'    => 'اعدادات بيانات الاتصال',
+        'settings-about'       => 'اعدادات عن المركز',
 
     ],
     'roles' =>[
@@ -176,6 +181,18 @@ return [
         'category_id'                    => 'القسم',
         'select-category'                => 'اختر القسم',
     ],
+    'members' => [
+        'add-new-member'                => 'اضافة عضو جديد',
+        'edit-member'                   => 'تعديل عضو',
+        'name'                          => 'الاسم',
+        'position'                       => 'الوظيفة',
+        'image'                          => 'صورة',
+
+        ],
+    'settings' => [
+        'site-name'                     => 'اسم الموقع',
+        'phones_man'                    => 'رقم الهاتف للرجال',
+        ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',
     'edit'                                  => 'تعديل',

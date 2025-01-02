@@ -199,13 +199,44 @@
             </ul>
 
         </li>
-
+        <li class="menu-item {{ url()->current() == route('admin.clients.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.clients.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <div>{{ trans('dashboard.sidebar.clients') }}</div>
+            </a>
+        </li>
         <li class="menu-item {{ url()->current() == route('admin.subscribers.index') ? 'active' : '' }}">
             <a href="{{ route('admin.subscribers.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-mail"></i>
                 <div>{{ trans('dashboard.sidebar.subscribers') }}</div>
             </a>
         </li>
+
+        <li class="menu-item {{ url()->current() == route('admin.management-members.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.management-members.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <div>{{ trans('dashboard.sidebar.management-members') }}</div>
+            </a>
+        </li>
+        <!-- users & roles-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.settings') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.settings.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.settings-contacts') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.settings.aboutCenter') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.aboutCenter') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.settings-about') }}</div>
+                    </a>
+                </li>
+            </ul>
+
 
     </ul>
 </aside>

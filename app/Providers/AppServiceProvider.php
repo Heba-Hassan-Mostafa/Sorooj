@@ -9,11 +9,13 @@ use App\Helpers\Setting;
 use App\Repositories\Concretes\AdminConcrete;
 use App\Repositories\Concretes\BlogCategoryConcrete;
 use App\Repositories\Concretes\BookCategoryConcrete;
+use App\Repositories\Concretes\ClientConcrete;
 use App\Repositories\Concretes\CourseCategoryConcrete;
 use App\Repositories\Concretes\VideoCategoryConcrete;
 use App\Repositories\Contracts\AdminContract;
 use App\Repositories\Contracts\BlogCategoryContract;
 use App\Repositories\Contracts\BookCategoryContract;
+use App\Repositories\Contracts\ClientContract;
 use App\Repositories\Contracts\CourseCategoryContract;
 use App\Repositories\Contracts\VideoCategoryContract;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +40,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(AdminContract::class, function ($app) {
             return new AdminConcrete(new User);
+        });
+        $this->app->bind(ClientContract::class, function ($app) {
+            return new ClientConcrete(new User);
         });
         $this->app->bind(CourseCategoryContract::class, function ($app) {
             return new CourseCategoryConcrete(new Category);
