@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardWeb\DashboardController;
 use App\Http\Controllers\DashboardWeb\V1\AdminController;
+use App\Http\Controllers\DashboardWeb\V1\Audios\AudioCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Audios\AudioController;
 use App\Http\Controllers\DashboardWeb\V1\AuthController;
 use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogController;
@@ -171,9 +173,23 @@ Route::group(
 
             Route::get('/videos/change-status',      [VideoController::class,'changeStatus'])->name('videos.change-status');
             Route::get('/sort-videos', [VideoController::class,'livewire_index'])->name('sort-videos');
-            Route::get('/videos/sort/{video}', [BookController::class,'videosSort'])->name('videos.sort');
 
             Route::resource('/videos', VideoController::class);
+
+        });
+        // audios
+        Route::group(['prefix' => 'audios', 'as' => 'audios.'], function () {
+
+            Route::get('/category/change-status',      [AudioCategoryController::class,'changeStatus'])->name('category.change-status');
+            Route::get('/category/sort-categories', [AudioCategoryController::class,'livewire_index'])->name('category.sort-categories');
+
+            Route::resource('/category', AudioCategoryController::class);
+
+            Route::get('/audios/change-status',      [AudioController::class,'changeStatus'])->name('audios.change-status');
+            Route::get('/sort-audios', [AudioController::class,'livewire_index'])->name('sort-audios');
+            Route::delete('/delete/{audio}/audio', [FatwaAnswerController::class, 'deleteAudioFile'])
+                ->name('audios.deleteAudioFile');
+            Route::resource('/audios', AudioController::class);
 
         });
 

@@ -146,6 +146,27 @@
 
         </li>
 
+        <!-- audios & categories-->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ trans('dashboard.sidebar.audios') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ url()->current() == route('admin.audios.category.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.audios.category.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.audios-categories') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ url()->current() == route('admin.audios.audios.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.audios.audios.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.audios') }}</div>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+
 
 
         <!-- questions & answers-->

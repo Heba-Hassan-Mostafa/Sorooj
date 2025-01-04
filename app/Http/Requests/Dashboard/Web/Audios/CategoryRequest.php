@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Web\Videos;
+namespace App\Http\Requests\Dashboard\Web\Audios;
 
 use Illuminate\Foundation\Http\FormRequest;
 

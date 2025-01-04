@@ -10,13 +10,17 @@ enum CategoryTypeEnum: string
 
     public const VIDEO = 'video';
 
+    public const AUDIO = 'audio';
+
+
     public static function values(): array
     {
         return [
             self::COURSE,
             self::BOOK,
             self::BLOG,
-            self::VIDEO
+            self::VIDEO,
+            self::AUDIO
         ];
     }
 }

@@ -13,7 +13,13 @@ class StaticPageController extends Controller
 
     public function getAboutCenter(): JsonResponse
     {
-        $data['data'] = collect(setting('about-center'))->toArray() ?? '';
+        $data = collect(setting('about-center'))->toArray() ?? '';
+        $data['content'] = $data['content'] ?? '';
+        $url = $data['video'] ?? '';
+        $data['video'] = getYoutubeId($url);
+        $data = [
+            'data' => $data
+        ];
         $data['status'] = 200;
         return $this->setStatusCode(200)->respondWithArray($data);
     }
@@ -54,20 +60,51 @@ class StaticPageController extends Controller
         ];
         return $this->setStatusCode(200)->respondWithArray($data);
     }
+//    public function getCenterMechanism(): JsonResponse
+//    {
+//        $points = setting('center-mechanism');
+//        $data = is_string($points->points)
+//            ? json_decode($points->points, true)
+//            :$points->points;
+//        $data = [
+//            'data' => [
+//                'points' => $data,
+//            ],
+//            'status' => 200
+//        ];
+//        return $this->setStatusCode(200)->respondWithArray($data);
+//    }
     public function getCenterMechanism(): JsonResponse
     {
         $points = setting('center-mechanism');
+
+        // Decode points if it's a JSON string
         $data = is_string($points->points)
             ? json_decode($points->points, true)
-            :$points->points;
-        $data = [
+            : $points->points;
+
+        // Add index to each point's title
+        $indexedPoints = [];
+        if (is_array($data)) {
+            foreach ($data as $index => $point) {
+                $indexedPoints[] = [
+                    'index' => $index + 1, // Add 1 to make it 1-based index
+                    'title' => $point['title'] ?? '', // Ensure title is available
+                ];
+            }
+        }
+
+        // Prepare response data
+        $responseData = [
             'data' => [
-                'points' => $data,
+                'points' => $indexedPoints,
             ],
-            'status' => 200
+            'status' => 200,
         ];
-        return $this->setStatusCode(200)->respondWithArray($data);
+
+        return $this->setStatusCode(200)->respondWithArray($responseData);
     }
+
     public function getContactsInfo(): JsonResponse
     {
         $data['data'] = collect(setting('app-contacts'))->toArray() ?? '';

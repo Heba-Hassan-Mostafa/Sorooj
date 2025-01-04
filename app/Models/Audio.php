@@ -18,6 +18,7 @@ class Audio extends Model implements HasMedia
 
     public $filters = ['name', 'category_id', 'publish_date'];
 
+    protected $table = 'audios';
     public function scopeOfName($query, $keyword)
     {
         return $query->where('name', 'like', '%' . $keyword . '%');

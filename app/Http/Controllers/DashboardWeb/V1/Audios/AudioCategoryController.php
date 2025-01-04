@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\DashboardWeb\V1\Videos;
+namespace App\Http\Controllers\DashboardWeb\V1\Audios;
 
 use App\Enum\CategoryTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Web\Videos\CategoryRequest;
+use App\Http\Requests\Dashboard\Web\Courses\CategoryRequest;
 use App\Models\Category;
+use App\Repositories\Contracts\AudioCategoryContract;
 use App\Repositories\Contracts\VideoCategoryContract;
 use Illuminate\Http\Request;
 
 
-class VideoCategoryController extends Controller
+class AudioCategoryController extends Controller
 {
-    protected VideoCategoryContract $repository;
+    protected AudioCategoryContract $repository;
 
-    public function __construct(VideoCategoryContract $repository)
+    public function __construct(AudioCategoryContract $repository)
     {
         $this->repository = $repository;
     }
@@ -24,14 +25,14 @@ class VideoCategoryController extends Controller
     public function index()
     {
         $categories = $this->repository->all()
-            ->where('parent_id',null)->where('type',CategoryTypeEnum::VIDEO);
-        return view('admin.videos.categories.index', compact('categories'));
+            ->where('parent_id',null)->where('type',CategoryTypeEnum::AUDIO);
+        return view('admin.audios.categories.index', compact('categories'));
     }
 
     public function livewire_index()
     {
         $categories = $this->repository->getLivewireCategories();
-        return view('admin.videos.categories.livewire_index',compact('categories'));
+        return view('admin.audios.categories.livewire_index',compact('categories'));
     }
 
     /**
@@ -39,7 +40,7 @@ class VideoCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.videos.categories.create');
+        return view('admin.audios.categories.create');
     }
 
 
@@ -49,7 +50,7 @@ class VideoCategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->repository->create($request->validated());
-        return redirect()->route('admin.videos.category.index')->with('success', __('dashboard.added-successfully'));
+        return redirect()->route('admin.audios.category.index')->with('success', __('dashboard.added-successfully'));
 
     }
 
@@ -59,7 +60,7 @@ class VideoCategoryController extends Controller
     public function show($id)
     {
          $category = $this->repository->find($id);
-        return view('admin.videos.categories.show',compact('category'));
+        return view('admin.audios.categories.show',compact('category'));
     }
 
     /**
@@ -68,7 +69,7 @@ class VideoCategoryController extends Controller
     public function edit($id)
     {
         $category = $this->repository->find($id);
-        return view('admin.videos.categories.edit',compact('category'));
+        return view('admin.audios.categories.edit',compact('category'));
     }
 
     /**
@@ -77,7 +78,7 @@ class VideoCategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $this->repository->update($category,$request->validated());
-        return redirect()->route('admin.videos.category.index')->with('success', __('dashboard.updated-successfully'));
+        return redirect()->route('admin.audios.category.index')->with('success', __('dashboard.updated-successfully'));
     }
 
     /**
@@ -87,10 +88,10 @@ class VideoCategoryController extends Controller
     {
         $res = $this->repository->canRemove($category);
         if (!$res) {
-            return redirect()->route('admin.videos.category.index')->with('error', __('dashboard.cannot-delete'));
+            return redirect()->route('admin.audios.category.index')->with('error', __('dashboard.cannot-delete'));
         }
         $this->repository->remove($category);
-        return redirect()->route('admin.videos.category.index')->with('success', __('dashboard.deleted-successfully'));
+        return redirect()->route('admin.audios.category.index')->with('success', __('dashboard.deleted-successfully'));
     }
 
     public function changeStatus(Request $request)

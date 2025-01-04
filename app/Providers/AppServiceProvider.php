@@ -7,12 +7,14 @@ use App\Models\Category;
 use App\Models\User;
 use App\Helpers\Setting;
 use App\Repositories\Concretes\AdminConcrete;
+use App\Repositories\Concretes\AudioCategoryConcrete;
 use App\Repositories\Concretes\BlogCategoryConcrete;
 use App\Repositories\Concretes\BookCategoryConcrete;
 use App\Repositories\Concretes\ClientConcrete;
 use App\Repositories\Concretes\CourseCategoryConcrete;
 use App\Repositories\Concretes\VideoCategoryConcrete;
 use App\Repositories\Contracts\AdminContract;
+use App\Repositories\Contracts\AudioCategoryContract;
 use App\Repositories\Contracts\BlogCategoryContract;
 use App\Repositories\Contracts\BookCategoryContract;
 use App\Repositories\Contracts\ClientContract;
@@ -55,6 +57,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(VideoCategoryContract::class, function ($app) {
             return new VideoCategoryConcrete(new Category);
+        });
+        $this->app->bind(AudioCategoryContract::class, function ($app) {
+            return new AudioCategoryConcrete(new Category);
         });
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Concretes;
 
-use App\Models\Video;
+use App\Models\Audio;
 use App\Repositories\Contracts\AudioContract;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,29 +10,33 @@ class AudioConcrete extends BaseConcrete implements AudioContract
 {
     /**
      * SliderConcrete constructor.
-     * @param Video $model
+     * @param Audio $model
      */
-    public function __construct(Video $model)
+    public function __construct(Audio $model)
     {
         parent::__construct($model);
     }
 
-    public function getLivewireVideos()
+    public function getLivewireAudios()
     {
-        return Video::with(['category'])->get();
+        return Audio::with(['category'])->get();
     }
     public function create(array $attributes = []): mixed
     {
-        $attributes['videoable_type'] = 'Video';
-        $attributes['videoable_id'] = null;
+        $attributes['audioable_type'] = 'Audio';
+        $attributes['audioable_id'] = null;
 
-        $lastOrderPosition = Video::where('videoable_type','Video')->max('order_position');
+        $lastOrderPosition = Audio::where('audioable_type','Audio')->max('order_position');
         $nextOrderPosition = $lastOrderPosition + 1;
 
         // Include the next order position in the attributes
         $attributes['order_position'] = $nextOrderPosition;
 
         $record = parent::create($attributes);
+
+        if (isset($attributes['audio_file']) && $attributes['audio_file']->isValid()) {
+            uploadImage('audio_file', $attributes['audio_file'], $record);
+        }
         return $record;
 
     }
