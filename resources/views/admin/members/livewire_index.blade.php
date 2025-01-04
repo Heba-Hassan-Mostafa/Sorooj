@@ -8,7 +8,7 @@
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/
             </span>
         </a>
-        {{ trans('dashboard.sidebar.courses') }}
+        {{ trans('dashboard.sidebar.management-members') }}
     </h4>
     <div class="card">
         @livewire('members-reorder')
