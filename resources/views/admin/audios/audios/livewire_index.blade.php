@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ trans('dashboard.sidebar.videos') }}
+    {{ trans('dashboard.sidebar.audios') }}
 @endsection
 @section('content')
     <h4 class="py-3">
@@ -8,10 +8,10 @@
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/
             </span>
         </a>
-        {{ trans('dashboard.sidebar.videos') }}
+        {{ trans('dashboard.sidebar.audios') }}
     </h4>
     <div class="card">
-        @livewire('videos-library-reorder')
+        @livewire('audios-library-reorder')
 
     </div>
 

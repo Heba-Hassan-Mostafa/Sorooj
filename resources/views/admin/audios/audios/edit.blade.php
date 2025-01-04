@@ -75,7 +75,7 @@
 
                         <div class="col-6 mb-3">
                             <label for="audio_file" class="form-label">{{ trans('dashboard.fatwa.audio_file') }}</label>
-                            <input type="text" name="audio_file" value="{{ old('audio_file' ,$audio->audio_file) }}" class="form-control" />
+                            <input type="file" name="audio_file"  class="form-control" />
                             @if($audio->getFirstMediaUrl('audio_file'))
                                 <audio src="{{ $audio->getFirstMediaUrl('audio_file') }}" controls></audio>
                                 <button type="button" class="btn btn-danger btn-sm delete-audio" data-id="{{ $audio->id }}">

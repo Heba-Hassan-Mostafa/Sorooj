@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('audios', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('slug')->unique();
             $table->string('youtube_link')->nullable();
-            $table->string('audio_file')->nullable();
             $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('brief_description')->nullable();
             $table->boolean('status')->default(1);

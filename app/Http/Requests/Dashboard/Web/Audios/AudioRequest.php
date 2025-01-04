@@ -25,8 +25,8 @@ class AudioRequest extends FormRequest
             'category_id'           => ['required', 'exists:categories,id', 'integer'],
             'brief_description'     => ['required','string','min:5','max:255'],
             'publish_date'          => ['required', 'date'],
-            'youtube_link'          => ['required','url'],
-            'audio_file'            => ['required','file','mimes:mp3'],
+            'youtube_link'          => ['nullable','url'],
+            'audio_file'            => ['nullable','file','mimes:mp3'],
             'keywords'              => ['required','string'],
             'description'           => ['required','string'],
 

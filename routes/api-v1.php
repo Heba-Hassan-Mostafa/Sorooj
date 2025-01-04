@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Client\Audios\AudioCategoryController;
+use App\Http\Controllers\Api\V1\Client\Audios\AudioLibraryController;
 use App\Http\Controllers\Api\V1\Client\AuthController;
 use App\Http\Controllers\Api\V1\Client\Blogs\BlogCategoryController;
 use App\Http\Controllers\Api\V1\Client\Blogs\BlogController;
@@ -18,7 +20,6 @@ use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
 use App\Http\Controllers\Api\V1\Client\ManagementMemberController;
-use App\Http\Controllers\Api\V1\Client\SocialAuthController;
 use App\Http\Controllers\Api\V1\Client\SocialiteController;
 use App\Http\Controllers\Api\V1\Client\StaticPageController;
 use App\Http\Controllers\Api\V1\Client\Videos\VideoCategoryController;
@@ -137,6 +138,20 @@ Route::prefix("auth")->group(function () {
                 Route::get('/categories', [VideoCategoryController::class, 'index'])->name('category.index');
                 //index
                 Route::get('/', [VideoLibraryController::class, 'index'])->name('index');
+            });
+
+            //audios library
+            Route::group(['prefix' => 'audios', 'as' => 'audios.'], function () {
+
+                //categories
+                Route::get('/categories', [AudioCategoryController::class, 'index'])->name('category.index');
+                //index
+                Route::get('/', [AudioLibraryController::class, 'index'])->name('index');
+
+                //show
+                Route::get('/{slug}', [AudioLibraryController::class, 'show'])->name('audios.show');
+
+
             });
         # fatwa
             Route::group(['prefix' => 'fatwa', 'as' => 'fatwa.'], function () {

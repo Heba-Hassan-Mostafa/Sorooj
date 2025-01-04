@@ -187,7 +187,7 @@ Route::group(
 
             Route::get('/audios/change-status',      [AudioController::class,'changeStatus'])->name('audios.change-status');
             Route::get('/sort-audios', [AudioController::class,'livewire_index'])->name('sort-audios');
-            Route::delete('/delete/{audio}/audio', [FatwaAnswerController::class, 'deleteAudioFile'])
+            Route::delete('/delete/{audio}/audio', [AudioController::class, 'deleteAudioFile'])
                 ->name('audios.deleteAudioFile');
             Route::resource('/audios', AudioController::class);
 

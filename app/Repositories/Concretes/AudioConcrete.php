@@ -45,6 +45,9 @@ class AudioConcrete extends BaseConcrete implements AudioContract
     {
         $record = parent::update($model, $attributes);
 
+        if (isset($attributes['audio_file']) && $attributes['audio_file']->isValid()) {
+            uploadImage('audio_file', $attributes['audio_file'], $record);
+        }
         return $record;
 
     }

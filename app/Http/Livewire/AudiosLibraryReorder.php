@@ -21,7 +21,7 @@ class AudiosLibraryReorder extends Component
     {
         foreach($items as $item)
         {
-            Audio::where('videoable_type','Audio')->find($item['value'])->update(['order_position'=>$item['order']]);
+            Audio::where('audioable_type','Audio')->find($item['value'])->update(['order_position'=>$item['order']]);
         }
     }
 }
