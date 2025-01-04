@@ -29,4 +29,9 @@ class ManagementMember extends Model implements HasMedia
             get: fn ($value) => ($this->getFirstMediaUrl('avatar') != '' ? $this->getFirstMediaUrl('avatar') : asset('assets/avatar.png')),
         );
     }
+
+    public function status()
+    {
+        return $this->is_active == 1 ? __('Active') : __('Inactive');
+    }
 }

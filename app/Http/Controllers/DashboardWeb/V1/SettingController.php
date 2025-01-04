@@ -5,9 +5,7 @@ namespace App\Http\Controllers\DashboardWeb\V1;
 use App\Models\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SettingRequest;
-use App\Http\Resources\Api\Setting\SettingResource;
 use App\Repositories\Contracts\SettingContract;
-use Illuminate\Http\JsonResponse;
 
 class SettingController extends Controller
 {
@@ -27,35 +25,68 @@ class SettingController extends Controller
     public function aboutCenter()
     {
         $settings = Setting::all()->pluck('value', 'key');
-       // $settings['center-mechanism'] = json_decode($settings['center-mechanism'], true);
 
         return view('admin.settings.about_center', compact('settings'));
     }
-
-    /**
-     * @param SettingRequest $request
-     * @return JsonResponse
-     */
-    public function store(SettingRequest $request): JsonResponse
+    public function websiteSettings()
     {
-        cache()->clear();
-        $setting = $this->repository->defaultUpdateOrCreate(
-            [
-                'key' => $request->key,
-            ],
-            [
-                'key' => $request->key,
-                'name' => $request->key,
-                'value' => $request->validated('value')
-            ]
-        );
-        # rebind the singleton instance
-        app()->singleton('setting', function ($app) {
-            cache()->forget('settings');
-            return new Setting();
-        });
-        return $this->respondWithSuccess(__('setting added successfully'), [
-            'setting' => new SettingResource($setting),
-        ]);
+        $settings = Setting::all()->pluck('value', 'key');
+        // Fetch the current logo URL if it exists
+        $logo = Setting::where('key', 'logo')->first();
+        $icon = Setting::where('key', 'icon')->first();
+
+        $logoUrl = $logo ? $logo->getFirstMediaUrl('logo') : null;
+        $iconUrl = $icon ? $icon->getFirstMediaUrl('icon') : null;
+
+        return view('admin.settings.website_settings', compact('settings','logoUrl','iconUrl'));
+    }
+    public function live()
+    {
+        $settings = Setting::all()->pluck('value', 'key');
+
+        return view('admin.settings.live', compact('settings'));
+    }
+
+    public function update(SettingRequest $request)
+    {
+//        cache()->clear();
+//        $setting = $this->repository->defaultUpdateOrCreate(
+//            [
+//                'key' => $request->key,
+//            ],
+//            [
+//                'key' => $request->key,
+//                'name' => $request->key,
+//                'value' => $request->validated('value')
+//            ]
+//        );
+//        # rebind the singleton instance
+//        app()->singleton('setting', function ($app) {
+//            cache()->forget('settings');
+//            return new Setting();
+//        });
+        $settings = $request->except(['_token', '_method', 'logo', 'icon']);
+
+        foreach ($settings as $key => $value) {
+            Setting::updateOrCreate(['key' => $key], ['value' => $value]);
+        }
+
+        // Handle logo upload
+        if ($request->hasFile('logo')) {
+            $setting = Setting::firstOrCreate(['key' => 'logo']);
+            $setting->clearMediaCollection('logo'); // Clear old logo
+            $setting->addMedia($request->file('logo'))->toMediaCollection('logo');
+        }
+        if ($request->hasFile('icon')) {
+            $setting = Setting::firstOrCreate(['key' => 'icon']);
+            $setting->clearMediaCollection('icon'); // Clear old logo
+            $setting->addMedia($request->file('icon'))->toMediaCollection('icon');
+        }
+        return redirect()->back()->with('success', __('dashboard.updated-successfully'));
+
+
+//        return $this->respondWithSuccess(__('setting added successfully'), [
+//            'setting' => new SettingResource($setting),
+//        ]);
     }
 }

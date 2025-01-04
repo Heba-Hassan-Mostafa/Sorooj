@@ -222,10 +222,13 @@ Route::group(
 
         //management-members
         Route::get('management-members/change-status',      [ManagementMemberController::class,'changeStatus'])->name('management-members.change-status');
+        Route::get('/sort-members', [ManagementMemberController::class,'livewire_index'])->name('management-members.sort-members');
         Route::resource('/management-members', ManagementMemberController::class);
 
         Route::get('settings/contacts', [SettingController::class, 'index'])->name('settings.index');
         Route::get('settings/about-center', [SettingController::class, 'aboutCenter'])->name('settings.aboutCenter');
+        Route::get('settings/website-settings', [SettingController::class, 'websiteSettings'])->name('settings.websiteSettings');
+        Route::get('live-broadcasting', [SettingController::class, 'live'])->name('settings.live');
 
         Route::put('settings/update', [SettingController::class, 'update'])->name('settings.update');
 

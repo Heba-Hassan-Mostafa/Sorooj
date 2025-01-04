@@ -7,7 +7,7 @@
         <a href="{{ route('admin.dashboard') }}">
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/ </span>
         </a>
-        <a href="{{ route('admin.settings.index') }}">
+        <a href="{{ route('admin.settings.aboutCenter') }}">
             <span class="text-muted fw-light">{{ trans('dashboard.sidebar.settings-about') }}</span>
         </a>
     </h4>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label for="about_center" class="form-label">{{ trans('dashboard.settings.about_center') }}</label>
-                            <input type="text" name="about-center[content]" value="{{ $settings['about-center']['content'] ?? '' }}" class="form-control" />
+                            <textarea  name="about-center[content]" class="form-control" cols="10" rows="3">{{ $settings['about-center']['content'] ?? '' }}</textarea>
                             @error('about_center')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -34,116 +34,90 @@
                         </div>
                         <div class="col-6 mb-3">
                             <label for="vision" class="form-label">{{ trans('dashboard.settings.vision') }}</label>
-                            <input type="text" name="vision[content]" value="{{ $settings['vision']['content'] ?? '' }}" class="form-control" />
+                            <textarea name="vision[content]" class="form-control" cols="10" rows="3">{{ $settings['vision']['content'] ?? '' }}</textarea>
                             @error('vision')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-6 mb-3">
                             <label for="message" class="form-label">{{ trans('dashboard.settings.message') }}</label>
-                            <input type="text" name="message[content]" value="{{ $settings['message']['content'] ?? '' }}" class="form-control" />
+                            <textarea name="message[content]" class="form-control" cols="10" rows="3">{!! $settings['message']['content'] ?? '' !!} </textarea>
                             @error('message')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <h4>{{ trans('dashboard.settings.general-objectives') }}</h4>
-                    @foreach ($settings['general-objectives'] as $index => $objective)
-                            <div class="col-6 mb-3">
-                                <label for="general-objectives-{{ $index }}" class="form-label">{{ trans('dashboard.settings.general-objectives') }} {{ $index + 1 }}</label>
-                                <input type="text" class="form-control" id="general-objectives-{{ $index }}" name="general-objectives[]" value="{{ $objective }}">
+                            <div class="col-12 mb-3">
+                                <label for="general-objectives" class="form-label">{{ trans('dashboard.settings.general-objectives') }}</label>
+                                <textarea name="general-objectives" class="form-control"  cols="30" rows="10"  id='ckeditor'>{{ $settings['general-objectives'] ?? '' }}</textarea>
                                 @error('general-objectives')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        @endforeach
+                        @php
+                            $tracksCenterAreas = $settings['tracks-center-areas'] ?? [];
+                            $tracks = isset($tracksCenterAreas['tracks'])
+                                ? (is_string($tracksCenterAreas['tracks'])
+                                    ? json_decode($tracksCenterAreas['tracks'], true)
+                                    : $tracksCenterAreas['tracks'])
+                                : [];
+                        @endphp
 
-                        <!-- Tracks Center Areas -->
-                        <h4>Tracks Center Areas</h4>
-                        <div class="col-6 mb-3">
+                        <div class="col-12 mb-3">
                             <label for="tracks-content" class="form-label">Content</label>
-                            <textarea class="form-control" id="tracks-content" name="tracks-center-areas[content]" rows="3">{{ $settings['tracks-center-areas']['content'] }}</textarea>
+                            <textarea class="form-control" id="tracks-content" name="tracks-center-areas[content]" rows="3">{{ $tracksCenterAreas['content'] ?? '' }}</textarea>
                         </div>
-                        @foreach (json_decode($settings['tracks-center-areas']['tracks'], true) as $index => $track)
-                            <div class="col-6 mb-3">
-                                <label for="track-title-{{ $index }}" class="form-label">Track Title {{ $index + 1 }}</label>
-                                <input type="text" class="form-control" id="track-title-{{ $index }}" name="tracks-center-areas[tracks][{{ $index }}][title]" value="{{ $track['title'] }}">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="track-content-{{ $index }}" class="form-label">Track Content {{ $index + 1 }}</label>
-                                <textarea class="form-control" id="track-content-{{ $index }}" name="tracks-center-areas[tracks][{{ $index }}][content]" rows="3">{{ $track['content'] }}</textarea>
-                            </div>
-                        @endforeach
 
+                        @if(is_array($tracks))
+                            @foreach ($tracks as $index => $track)
+                                <div class="col-6 mb-3">
+                                    <label for="track-title-{{ $index }}" class="form-label">{{ trans('dashboard.settings.track-title') }} {{ $index + 1 }}</label>
+                                    <input type="text" class="form-control" id="track-title-{{ $index }}" name="tracks-center-areas[tracks][{{ $index }}][title]" value="{{ $track['title'] ?? '' }}">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label for="track-content-{{ $index }}" class="form-label">{{ trans('dashboard.settings.track-content') }} {{ $index + 1 }}</label>
+                                    <textarea class="form-control" id="track-content-{{ $index }}" name="tracks-center-areas[tracks][{{ $index }}][content]" rows="3">{{ $track['content'] ?? '' }}</textarea>
+                                </div>
+                            @endforeach
+                        @endif
 
-{{--                        <!-- Center Mechanism -->--}}
-{{--                        <h3>Center Mechanism</h3>--}}
-{{--                        @if (isset($settings['center-mechanism']['points']) && is_array($settings['center-mechanism']['points']))--}}
-{{--                            @foreach ($settings['center-mechanism']['points'] as $index => $point)--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label for="center-mechanism-{{ $index }}" class="form-label">Mechanism {{ $index + 1 }}</label>--}}
-{{--                                    <textarea class="form-control" id="center-mechanism-{{ $index }}" name="center-mechanism[points][{{ $index }}][title]" rows="3">--}}
-{{--                    {{ $point['title'] }}--}}
-{{--                </textarea>--}}
-{{--                                </div>--}}
-{{--                            @endforeach--}}
-{{--                        @else--}}
-{{--                            <p>No mechanisms found. Please add some mechanisms in the settings.</p>--}}
-{{--                        @endif--}}
+                        <!-- Center Mechanism -->
+                        @php
+                            $points = is_string($settings['center-mechanism']['points'])
+                                ? json_decode($settings['center-mechanism']['points'], true)
+                                : $settings['center-mechanism']['points'];
+                        @endphp
 
+                        @if (is_array($points))
+                            @foreach ($points as $index => $point)
+                                <div class="col-6 mb-3">
+                                    <label for="title-{{ $index }}" class="form-label">{{ trans('dashboard.settings.point') }} {{ $index + 1 }}</label>
+                                    <input type="text" class="form-control" id="point-{{ $index }}" name="center-mechanism[points][{{ $index }}][title]" value="{{ $point['title'] }}">
+                                </div>
+                            @endforeach
+                        @endif
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary">{{ trans('dashboard.save') }} </button>
+                        <button type="submit" class="btn btn-primary">{{ trans('dashboard.save') }} </button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+    {{--    ckeditor    --}}
+    <script src="{{ asset('assets/admin/vendor/libs/texteditor/ckeditor/ckeditor.js') }}"></script>
     <script>
-        $(function() {
-
-            //select2 with search
-            function matchStart(params, data) {
-                // If there are no search terms, return all of the data
-                if ($.trim(params.term) === '') {
-                    return data;
-                }
-
-                // Skip if there is no 'children' property
-                if (typeof data.children === 'undefined') {
-                    return null;
-                }
-
-                // `data.children` contains the actual options that we are matching against
-                var filteredChildren = [];
-                $.each(data.children, function(idx, child) {
-                    if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
-                        filteredChildren.push(child);
-                    }
-                });
-
-                // If we matched any of the timezone group's children, then set the matched children on the group
-                // and return the group object
-                if (filteredChildren.length) {
-                    var modifiedData = $.extend({}, data, true);
-                    modifiedData.children = filteredChildren;
-
-                    // You can return modified objects from here
-                    // This includes matching the `children` how you want in nested data sets
-                    return modifiedData;
-                }
-
-                // Return `null` if the term should not be displayed
-                return null;
-            }
-
-            $(".select2").select2({
-                tags: true,
-                closeOnSelect: false,
-                minimumResultsForSearch: Infinity,
-                matcher: matchStart
-            });
+        CKEDITOR.config.language = 'ar';
+        CKEDITOR.replace('ckeditor', {
+            filebrowserImageBrowseUrl: '/file-manager/ckeditor',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Cairo&family=Amiri&family=Almarai&family=Aref+Ruqaa&family=El+Messiri&family=Reem+Kufi&display=swap',
+                'path/to/your/custom/styles.css' // If you have any custom styles
+            ],
+            font_names: 'Traditional Arabic/Traditional Arabic;' +
+                'Cairo/Cairo;Amiri/Amiri;Almarai/Almarai;El Messiri/El Messiri;Reem Kufi/Reem Kufi;Aref Ruqaa/Aref Ruqaa;' +
+                CKEDITOR.config.font_names
         });
     </script>
-@endsection
+    @endsection

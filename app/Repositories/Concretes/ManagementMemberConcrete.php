@@ -16,8 +16,17 @@ class ManagementMemberConcrete extends BaseConcrete implements ManagementMemberC
     {
         parent::__construct($model);
     }
+    public function getLivewireMembers()
+    {
+        return ManagementMember::get();
+    }
     public function create(array $attributes = []): mixed
     {
+        $lastOrderPosition = ManagementMember::max('order_position');
+        $nextOrderPosition = $lastOrderPosition + 1;
+
+        // Include the next order position in the attributes
+        $attributes['order_position'] = $nextOrderPosition;
         $record = parent::create($attributes);
 
         if (isset($attributes['avatar'])) {

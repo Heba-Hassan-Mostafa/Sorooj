@@ -9,8 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Setting extends Model implements HasMedia
 {
-    use ModelTrait;
-    use InteractsWithMedia;
+    use ModelTrait, InteractsWithMedia;
 
     protected $casts = [
         'value' => 'array',

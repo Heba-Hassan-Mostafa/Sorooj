@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
+use App\Http\Controllers\Api\V1\Client\ManagementMemberController;
 use App\Http\Controllers\Api\V1\Client\SocialAuthController;
 use App\Http\Controllers\Api\V1\Client\SocialiteController;
 use App\Http\Controllers\Api\V1\Client\StaticPageController;
@@ -202,9 +203,21 @@ Route::prefix("auth")->group(function () {
                 Route::get('tracks-center-areas', [StaticPageController::class, 'getTracksCenterAreas']);
                 Route::get('center-mechanism', [StaticPageController::class, 'getCenterMechanism']);
                 Route::get('social-contacts', [StaticPageController::class, 'getContactsInfo']);
+                Route::get('privacy-policy', [StaticPageController::class, 'getPrivacyPolicy']);
+                Route::get('terms-conditions', [StaticPageController::class, 'getTermsAndConditions']);
+                Route::get('delete-account', [StaticPageController::class, 'getDeleteAccount']);
+                Route::get('keywords', [StaticPageController::class, 'getKeywords']);
+                Route::get('description', [StaticPageController::class, 'getDescription']);
+                Route::get('management-members', [ManagementMemberController::class, 'index']);
 
             });
-Route::middleware(["auth:api"])->group(function () {
+
+            Route::group(['prefix' => 'live'], function () {
+                Route::get('youtube-live', [StaticPageController::class, 'getYoutubeLive']);
+                Route::get('telegram-live', [StaticPageController::class, 'getTelegramLive']);
+                Route::get('mixlr-live', [StaticPageController::class, 'getMixlrLive']);
+            });
+    Route::middleware(["auth:api"])->group(function () {
 
 //
 });

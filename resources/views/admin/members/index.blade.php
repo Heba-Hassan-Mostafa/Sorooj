@@ -13,6 +13,9 @@
     <a href="{{ route('admin.management-members.create') }}" class="btn btn-primary mb-2">
         {{ trans('dashboard.members.add-new-member') }}
     </a>
+    <a href="{{ route('admin.management-members.sort-members') }}" class="btn btn-warning font-weight-bold p-2"
+       role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
+        {{ trans('dashboard.change_order') }}</a>
     <div class="card">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">

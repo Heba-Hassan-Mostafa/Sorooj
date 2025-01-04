@@ -24,6 +24,12 @@ class ManagementMemberController extends Controller
         $members = $this->repository->all();
         return view('admin.members.index', compact('members'));
     }
+    public function livewire_index()
+    {
+        $members = $this->repository->getLivewireMembers();
+        return view('admin.members.livewire_index',compact('members'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

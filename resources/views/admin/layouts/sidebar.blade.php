@@ -218,7 +218,13 @@
                 <div>{{ trans('dashboard.sidebar.management-members') }}</div>
             </a>
         </li>
-        <!-- users & roles-->
+        <li class="menu-item {{ url()->current() == route('admin.settings.live') ? 'active' : '' }}">
+            <a href="{{ route('admin.settings.live') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <div>{{ trans('dashboard.sidebar.live') }}</div>
+            </a>
+        </li>
+        <!-- settings-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
@@ -233,6 +239,12 @@
                 <li class="menu-item {{ url()->current() == route('admin.settings.aboutCenter') ? 'active' : '' }}">
                     <a href="{{ route('admin.settings.aboutCenter') }}" class="menu-link">
                         <div>{{ trans('dashboard.sidebar.settings-about') }}</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ url()->current() == route('admin.settings.websiteSettings') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.websiteSettings') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.website-settings') }}</div>
                     </a>
                 </li>
             </ul>

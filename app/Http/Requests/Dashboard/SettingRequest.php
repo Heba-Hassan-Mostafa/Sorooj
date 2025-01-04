@@ -22,8 +22,11 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => 'required',
-            'value' => ['required','array'],
+            'key' => 'nullable|string',
+            'value' => ['nullable'],
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
         ];
     }
 }
