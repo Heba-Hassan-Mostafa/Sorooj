@@ -49,7 +49,7 @@ class SettingController extends Controller
 
     public function update(SettingRequest $request)
     {
-//        cache()->clear();
+       cache()->clear();
 //        $setting = $this->repository->defaultUpdateOrCreate(
 //            [
 //                'key' => $request->key,

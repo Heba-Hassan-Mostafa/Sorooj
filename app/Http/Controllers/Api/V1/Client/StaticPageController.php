@@ -103,7 +103,9 @@ class StaticPageController extends Controller
 
     public function getYoutubeLive(): JsonResponse
     {
-        $data['data'] = collect(setting('youtube-live'))->toArray() ?? '';
+
+        $url = Setting::where('key', 'youtube-live')->first()->value ?? '';
+        $data['data'] = getYoutubeId($url);
         $data['status'] = 200;
         return $this->setStatusCode(200)->respondWithArray($data);
     }

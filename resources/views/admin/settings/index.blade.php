@@ -74,6 +74,13 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="col-12 mb-3">
+                            <label for="about-center-home" class="form-label">{{ trans('dashboard.settings.about-center-home') }}</label>
+                            <textarea type="text" name="app-contacts[about-center-home]" class="form-control" cols="5" rows="5">{{ $settings['app-contacts']['about-center-home'] ?? '' }}</textarea>
+                            @error('about-center-home')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">{{ trans('dashboard.save') }} </button>

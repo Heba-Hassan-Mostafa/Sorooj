@@ -228,6 +228,7 @@ return [
         'youtube-live'                  => 'يوتيوب مباشر',
         'telegram-live'                 => 'تليجرام مباشر',
         'mixlr-live'                    => 'ماكسلر مباشر',
+        'about-center-home'             => 'عن المركز في الرئيسية',
         ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',
