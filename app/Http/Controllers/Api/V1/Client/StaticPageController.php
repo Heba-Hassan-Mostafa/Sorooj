@@ -159,4 +159,11 @@ class StaticPageController extends Controller
         return $this->setStatusCode(200)->respondWithArray($data);
     }
 
+    public function getHideSectionMembers(): JsonResponse
+    {
+        $data['data'] = Setting::where('key', 'hide-section-members')->first()->value ? 'true' : 'false';
+        $data['status'] = 200;
+        return $this->setStatusCode(200)->respondWithArray($data);
+    }
+
 }

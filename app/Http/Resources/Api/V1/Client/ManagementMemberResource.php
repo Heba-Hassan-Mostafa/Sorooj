@@ -12,6 +12,7 @@ class ManagementMemberResource extends JsonResource
             'id'                => $this->id,
             'name'              => $this->name,
             'position'          => $this->position,
+            'image'             => $this->avatar,
             'is_active'         => $this->is_active,
             'order_position'    => $this->order_position,
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),

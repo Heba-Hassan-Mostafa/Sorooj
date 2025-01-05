@@ -224,6 +224,7 @@ Route::prefix("auth")->group(function () {
                 Route::get('keywords', [StaticPageController::class, 'getKeywords']);
                 Route::get('description', [StaticPageController::class, 'getDescription']);
                 Route::get('management-members', [ManagementMemberController::class, 'index']);
+                Route::get('hide-section-members', [StaticPageController::class, 'getHideSectionMembers']);
 
             });
 
