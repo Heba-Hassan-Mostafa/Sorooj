@@ -25,7 +25,7 @@ class SettingRequest extends FormRequest
             'key' => 'nullable|string',
             'value' => ['nullable'],
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,ico|max:2048',
 
         ];
     }
