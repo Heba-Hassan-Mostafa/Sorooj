@@ -18,13 +18,13 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-6 mb-3">
-                            <label for="copyright" class="form-label">{{ trans('dashboard.settings.copyright') }}</label>
-                            <input type="text" name="copyright" value="{{ $settings['copyright'] ?? '' }}" class="form-control" />
-                            @error('copyright')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+{{--                        <div class="col-6 mb-3">--}}
+{{--                            <label for="copyright" class="form-label">{{ trans('dashboard.settings.copyright') }}</label>--}}
+{{--                            <input type="text" name="copyright" value="{{ $settings['copyright'] ?? '' }}" class="form-control" />--}}
+{{--                            @error('copyright')--}}
+{{--                            <span class="text-danger">{{ $message }}</span>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
                         <div class="col-6 mb-3">
                             <label for="hide-section-members" class="form-label">{{ trans('dashboard.settings.hide-section-members') }}</label>
                             <select name="hide-section-members" id="hide-section-members" class="form-select">
@@ -85,21 +85,21 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label for="privacy-policy" class="form-label">{{ trans('dashboard.settings.privacy-policy') }}</label>
-                        <textarea name="privacy-policy" class="form-control" cols="30" rows="10">{!! $settings['privacy-policy'] ?? '' !!}</textarea>
+                        <textarea name="privacy-policy" class="form-control" cols="30" rows="10" id='ckeditor'>{!! $settings['privacy-policy'] ?? '' !!}</textarea>
                         @error('privacy-policy')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label for="terms-and-conditions" class="form-label">{{ trans('dashboard.settings.terms-and-conditions') }}</label>
-                        <textarea name="terms-and-conditions" class="form-control" cols="30" rows="10">{!! $settings['terms-and-conditions'] ?? '' !!}</textarea>
+                        <textarea name="terms-and-conditions" class="form-control" cols="30" rows="10" id='ckeditor2'>{!! $settings['terms-and-conditions'] ?? '' !!}</textarea>
                         @error('terms-and-conditions')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label for="delete-account" class="form-label">{{ trans('dashboard.settings.delete-account') }}</label>
-                        <textarea name="delete-account" class="form-control" cols="30" rows="10">{!! $settings['delete-account'] ?? '' !!}</textarea>
+                        <textarea name="delete-account" class="form-control" cols="30" rows="10" id='ckeditor3'>{!! $settings['delete-account'] ?? '' !!}</textarea>
                         @error('delete-account')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -109,4 +109,47 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    {{--    ckeditor    --}}
+    <script src="{{ asset('assets/admin/vendor/libs/texteditor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.config.language = 'ar';
+        CKEDITOR.replace('ckeditor', {
+            filebrowserImageBrowseUrl: '/file-manager/ckeditor',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Cairo&family=Amiri&family=Almarai&family=Aref+Ruqaa&family=El+Messiri&family=Reem+Kufi&display=swap',
+                'path/to/your/custom/styles.css' // If you have any custom styles
+            ],
+            font_names: 'Traditional Arabic/Traditional Arabic;' +
+                'Cairo/Cairo;Amiri/Amiri;Almarai/Almarai;El Messiri/El Messiri;Reem Kufi/Reem Kufi;Aref Ruqaa/Aref Ruqaa;' +
+                CKEDITOR.config.font_names
+        });
+    </script>
+    <script>
+        CKEDITOR.config.language = 'ar';
+        CKEDITOR.replace('ckeditor2', {
+            filebrowserImageBrowseUrl: '/file-manager/ckeditor',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Cairo&family=Amiri&family=Almarai&family=Aref+Ruqaa&family=El+Messiri&family=Reem+Kufi&display=swap',
+                'path/to/your/custom/styles.css' // If you have any custom styles
+            ],
+            font_names: 'Traditional Arabic/Traditional Arabic;' +
+                'Cairo/Cairo;Amiri/Amiri;Almarai/Almarai;El Messiri/El Messiri;Reem Kufi/Reem Kufi;Aref Ruqaa/Aref Ruqaa;' +
+                CKEDITOR.config.font_names
+        });
+    </script>
+    <script>
+        CKEDITOR.config.language = 'ar';
+        CKEDITOR.replace('ckeditor3', {
+            filebrowserImageBrowseUrl: '/file-manager/ckeditor',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Cairo&family=Amiri&family=Almarai&family=Aref+Ruqaa&family=El+Messiri&family=Reem+Kufi&display=swap',
+                'path/to/your/custom/styles.css' // If you have any custom styles
+            ],
+            font_names: 'Traditional Arabic/Traditional Arabic;' +
+                'Cairo/Cairo;Amiri/Amiri;Almarai/Almarai;El Messiri/El Messiri;Reem Kufi/Reem Kufi;Aref Ruqaa/Aref Ruqaa;' +
+                CKEDITOR.config.font_names
+        });
+    </script>
 @endsection
