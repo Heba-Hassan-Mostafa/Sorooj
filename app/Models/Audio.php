@@ -29,6 +29,17 @@ class Audio extends Model implements HasMedia
             ]
         ];
     }
+
+    #Relations
+
+    public function audioable()
+    {
+        return $this->morphTo();
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     public function scopeOfName($query, $keyword)
     {
         return $query->where('name', 'like', '%' . $keyword . '%');
@@ -62,16 +73,6 @@ class Audio extends Model implements HasMedia
         return  $query->where('publish_date','<=',Carbon::now()->toDateString());
     }
 
-    #Relations
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function audioable()
-    {
-        return $this->morphTo();
-    }
 
 }

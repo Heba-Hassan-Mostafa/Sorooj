@@ -6,11 +6,14 @@ use App\Http\Controllers\DashboardWeb\V1\Audios\AudioCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Audios\AudioController;
 use App\Http\Controllers\DashboardWeb\V1\AuthController;
 use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Blogs\BlogController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Books\BookCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\ClientController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
+use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaAnswerController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
@@ -113,6 +116,10 @@ Route::group(
             Route::delete('/courses/{course}/image', [CourseController::class, 'deleteCourseImage'])
                 ->name('courses.deleteCourseImage');
 
+            //comments
+            Route::get('/comments/change-status',      [CourseCommentController::class,'changeStatus'])->name('comments.change-status');
+            Route::resource('/comments', CourseCommentController::class);
+
         });
 
         // Books
@@ -135,6 +142,10 @@ Route::group(
             //delete image
             Route::delete('/books/{book}/image', [BookController::class, 'deleteBookImage'])
                 ->name('books.deleteBookImage');
+            //comments
+            Route::get('/comments/change-status',      [BookCommentController::class,'changeStatus'])->name('comments.change-status');
+            Route::resource('/comments', BookCommentController::class);
+
 
         });
 
@@ -161,6 +172,11 @@ Route::group(
             //delete video
             Route::delete('/blogs/{blog}/video', [BlogController::class, 'deleteBlogVideo'])
                 ->name('blogs.deleteBlogVideo');
+
+            //comments
+            Route::get('/comments/change-status',      [BlogCommentController::class,'changeStatus'])->name('comments.change-status');
+            Route::resource('/comments', BlogCommentController::class);
+
         });
 
         // videos

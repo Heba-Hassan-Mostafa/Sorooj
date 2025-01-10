@@ -56,15 +56,13 @@
                         <div>{{ trans('dashboard.sidebar.courses') }}</div>
                     </a>
                 </li>
+                <li class="menu-item {{ url()->current() == route('admin.courses.comments.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.courses.comments.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.courses-comments') }}</div>
+                    </a>
+                </li>
             </ul>
 
-{{--            <ul class="menu-sub">--}}
-{{--                <li class="menu-item {{ url()->current() == route('admin.users.index') ? 'active' : '' }}">--}}
-{{--                    <a href="{{ route('admin.users.index') }}" class="menu-link">--}}
-{{--                        <div>{{ trans('dashboard.users') }}</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
         </li>
 
         <!-- books & categories-->
@@ -84,15 +82,13 @@
                         <div>{{ trans('dashboard.sidebar.books') }}</div>
                     </a>
                 </li>
+                <li class="menu-item {{ url()->current() == route('admin.books.comments.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.books.comments.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.books-comments') }}</div>
+                    </a>
+                </li>
             </ul>
 
-            {{--            <ul class="menu-sub">--}}
-            {{--                <li class="menu-item {{ url()->current() == route('admin.users.index') ? 'active' : '' }}">--}}
-            {{--                    <a href="{{ route('admin.users.index') }}" class="menu-link">--}}
-            {{--                        <div>{{ trans('dashboard.users') }}</div>--}}
-            {{--                    </a>--}}
-            {{--                </li>--}}
-            {{--            </ul>--}}
         </li>
 
 
@@ -114,15 +110,12 @@
                         <div>{{ trans('dashboard.sidebar.blogs') }}</div>
                     </a>
                 </li>
+                <li class="menu-item {{ url()->current() == route('admin.blogs.comments.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.blogs.comments.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.blogs-comments') }}</div>
+                    </a>
+                </li>
             </ul>
-
-            {{--            <ul class="menu-sub">--}}
-            {{--                <li class="menu-item {{ url()->current() == route('admin.users.index') ? 'active' : '' }}">--}}
-            {{--                    <a href="{{ route('admin.users.index') }}" class="menu-link">--}}
-            {{--                        <div>{{ trans('dashboard.users') }}</div>--}}
-            {{--                    </a>--}}
-            {{--                </li>--}}
-            {{--            </ul>--}}
         </li>
 
         <!-- videos & categories-->

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Dashboard\Web\Books;
 
+use App\Enum\CategoryTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 
 class CategoryRequest extends FormRequest
@@ -17,7 +19,16 @@ class CategoryRequest extends FormRequest
     {
         $categoryId = $this->route('category')->id ?? null;
         $rules = [
-            'name'       => ['required', 'string', 'min:3' ,'max:255','unique:categories,name,'.$categoryId],
+            //'name'       => ['required', 'string', 'min:3' ,'max:255','unique:categories,name,'.$categoryId],
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                Rule::unique('categories', 'name')
+                    ->where('type', CategoryTypeEnum::BOOK)
+                    ->ignore($categoryId)
+            ],
             'parent_id'  => ['nullable', 'exists:categories,id']
             ];
 

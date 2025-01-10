@@ -19,11 +19,20 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
+//        DB::table('roles')->truncate();
+//        DB::table('permissions')->truncate();
+//        DB::table('role_has_permissions')->truncate();
+//        DB::table('model_has_roles')->truncate();
+//        DB::table('model_has_permissions')->truncate();
+
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('roles')->truncate();
         DB::table('permissions')->truncate();
         DB::table('role_has_permissions')->truncate();
         DB::table('model_has_roles')->truncate();
         DB::table('model_has_permissions')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $this->defaultPermissions();
         $this->syncAdminRole();
@@ -42,13 +51,21 @@ class PermissionSeeder extends Seeder
     {
         # Models
         $adminModels = [
-            'users', 'roles', 'permissions', 'notifications', 'admins','settings','categories','subcategories',
-            'courses', 'subscribers','books','blogs','videos','comments','audios','upcoming_events'
+            'roles', 'admins','course_categories','courses','book_categories','books',
+            'blog_categories', 'blogs','video_categories','videos', 'audio_categories','audios',
+           'sliders','upcoming_events','management_members',
         ];
         # Default Methods
-        $methods = ['index', 'create', 'edit', 'delete', 'show', 'activate'];
+        $methods = ['index', 'create', 'edit', 'delete'];
         # Additional Permissions
-        $additionalAdminPermissions = [];
+        $additionalAdminPermissions = [
+            'clients index', 'clients delete','course_comments index','course_comments delete','book_comments index','book_comments delete',
+            'blog_comments index','blog_comments delete','subscribers index','subscribers delete',
+            'fatwa_questions index', 'fatwa_questions delete', 'fatwa_questions reply','fatwa_answers index',
+            'fatwa_answers edit', 'fatwa_answers delete','live index','live edit',
+            'contacts index', 'contacts reply','setting_contacts edit','setting_aboutCenter edit',
+            'settings_websiteSettings edit'
+        ];
         # Generate
         $adminRole = Role::firstOrCreate([
             'name' => [

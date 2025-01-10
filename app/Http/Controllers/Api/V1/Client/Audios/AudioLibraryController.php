@@ -36,4 +36,13 @@ class AudioLibraryController extends BaseApiController
             'Audio' => (new AudioResource($audio)),
         ]);
     }
+
+    public function suggestedAudios(): JsonResponse
+    {
+        $audio = $this->repository->suggestedAudios();
+        return $this->respondWithSuccess(__('Suggested Audios'), [
+            'suggested_audios' => AudioResource::collection($audio),
+        ]);
+
+    }
 }

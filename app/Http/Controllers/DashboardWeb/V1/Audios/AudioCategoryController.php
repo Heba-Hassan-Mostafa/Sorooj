@@ -4,10 +4,9 @@ namespace App\Http\Controllers\DashboardWeb\V1\Audios;
 
 use App\Enum\CategoryTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Web\Courses\CategoryRequest;
+use App\Http\Requests\Dashboard\Web\Audios\CategoryRequest;
 use App\Models\Category;
 use App\Repositories\Contracts\AudioCategoryContract;
-use App\Repositories\Contracts\VideoCategoryContract;
 use Illuminate\Http\Request;
 
 

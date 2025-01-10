@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('comment');
             $table->integer('stars');
-            $table->enum('status',CommentStatusEnum::values())->default(CommentStatusEnum::NEW);
+            $table->enum('status',CommentStatusEnum::values())->default(CommentStatusEnum::UNPUBLISHED);
             $table->unsignedBigInteger('commentable_id');
             $table->string('commentable_type');
             $table->timestamps();

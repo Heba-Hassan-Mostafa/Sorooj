@@ -30,9 +30,9 @@ class CourseResource extends JsonResource
             'publish_date'      => $this->publish_date,
             'status'            => $this->status,
             'view_count'        => $this->view_count,
-            'is_favorite'        => (bool)$favorite,
-            'is_subscribed'      => (bool)$subscribed,
-
+            'is_favorite'       => (bool)$favorite,
+            'is_subscribed'     => (bool)$subscribed,
+            'exam_link'         => $this->exam_link,
             'order_position'    => $this->order_position,
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),
 

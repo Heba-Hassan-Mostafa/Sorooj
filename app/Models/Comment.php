@@ -10,7 +10,16 @@ class Comment extends Model
 {
     use HasFactory ,ModelTrait;
 
-    protected $fillable = ['user_id', 'name', 'comment', 'stars','status', 'commentable_id', 'commentable_type'];
+    protected $fillable = ['user_id', 'name', 'comment', 'stars','status', 'is_active','commentable_id', 'commentable_type'];
 
 
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

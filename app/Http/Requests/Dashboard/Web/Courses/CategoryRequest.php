@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Dashboard\Web\Courses;
 
+use App\Enum\CategoryTypeEnum;
 use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 
 class CategoryRequest extends FormRequest
@@ -17,8 +19,18 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $categoryId = $this->route('category')->id ?? null;
+        
         $rules = [
-            'name'       => ['required', 'string', 'min:3' ,'max:255','unique:categories,name,'.$categoryId],
+          //  'name'       => ['required', 'string', 'min:3' ,'max:255','unique:categories,name,'.$categoryId],
+                'name' => [
+                    'required',
+                    'string',
+                    'min:3',
+                    'max:255',
+                    Rule::unique('categories', 'name')
+                        ->where('type', CategoryTypeEnum::COURSE)
+                        ->ignore($categoryId)
+                ],
             'parent_id'  => ['nullable', 'exists:categories,id']
             ];
 

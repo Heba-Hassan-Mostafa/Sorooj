@@ -138,6 +138,13 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="col-6 mb-3 mt-1">
+                            <label for="exam_link" class="form-label titles">{{ trans('dashboard.courses.exam_link') }}</label>
+                            <input type="text" name="exam_link" value="{{ old('exam_link') }}" class="form-control" />
+                            @error('exam_link')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="col-12 mb-3">
                             <label for="keywords" class="form-label">{{ trans('dashboard.keywords') }}</label>
                             <input type="text" name="keywords" value="{{ old('keywords') }}" class="form-control" />

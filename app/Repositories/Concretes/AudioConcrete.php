@@ -52,4 +52,13 @@ class AudioConcrete extends BaseConcrete implements AudioContract
 
     }
 
+    public function suggestedAudios()
+    {
+        $randomAudios = Audio::with('media')->where('audioable_type','Audio')
+            ->ActiveCategory()->Active()->Publish()->inRandomOrder()->paginate(3);
+
+        return $randomAudios;
+
+    }
+
 }

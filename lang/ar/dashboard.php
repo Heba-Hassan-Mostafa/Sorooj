@@ -29,6 +29,9 @@ return [
         'live'                  => 'البث المباشر',
         'audios'                => 'المكتبة الصوتية',
         'audios-categories'     => 'أقسام المكتبة الصوتية',
+        'courses-comments'     => 'تعليقات الدورات',
+        'books-comments'       => 'تعليقات الكتب',
+        'blogs-comments'       => 'تعليقات المدونة',
 
 
     ],
@@ -82,7 +85,15 @@ return [
         'enter_youtube_link'            => 'أدخل رابط الفيديو اليوتيوب',
         'brief_description'             => 'وصف مختصر',
         'course-videos-reorder'         => ' تغيير ترتيب الفيديوات ',
-        'edit-course'                   =>'تعديل الدورة'
+        'edit-course'                   =>'تعديل الدورة',
+        'exam_link'                     => 'رابط الامتحان',
+        'client_name'                   => 'اسم العميل',
+        'email'                         => 'البريد الالكترونى',
+        'comment'                       => 'التعليق',
+        'comment-belongs-to'            => 'التعليق ينتمي ل',
+        'stars'                         => 'التقييم',
+        'show_comment'                  => 'عرض التعليق',
+
     ],
     'blogs' =>[
         'add-blog-category'            => 'اضافة قسم جديد',
@@ -107,7 +118,13 @@ return [
         'video_link'                    => 'رابط الفيديو',
         'enter_youtube_link'            => 'أدخل رابط الفيديو اليوتيوب',
         'brief_description'             => 'وصف مختصر',
-        'edit-blog'                    =>'تعديل المدونة'
+        'edit-blog'                    =>'تعديل المدونة',
+        'client_name'                   => 'اسم العميل',
+        'email'                         => 'البريد الالكترونى',
+        'comment'                       => 'التعليق',
+        'comment-belongs-to'            => 'التعليق ينتمي ل',
+        'stars'                         => 'التقييم',
+        'show_comment'                  => 'عرض التعليق',
     ],
     'books' =>[
         'add-book-category'             => 'اضافة قسم جديد',
@@ -128,7 +145,13 @@ return [
         'book_image'                    => 'صورة الكتاب/البحث',
         'add-book'                     => 'اضافة كتاب جديدة',
         'brief_description'             => 'وصف مختصر',
-        'edit-book'                     =>'تعديل الكتاب'
+        'edit-book'                     =>'تعديل الكتاب',
+        'client_name'                   => 'اسم العميل',
+        'email'                         => 'البريد الالكترونى',
+        'comment'                       => 'التعليق',
+        'comment-belongs-to'            => 'التعليق ينتمي ل',
+        'stars'                         => 'التقييم',
+        'show_comment'                  => 'عرض التعليق',
     ],
     'slider' => [
         'add-slider'                    => 'اضافة صورة جديدة',

@@ -36,6 +36,7 @@ class CourseRequest extends FormRequest
             'videos.*.name'         => 'nullable|string|max:255',
             'videos.*.youtube_link' => 'nullable|url',
             'attachments.*'         => 'nullable|mimes:pdf|max:64000',
+            'exam_link'             => 'nullable|url',
 
         ];
         if($this->method() == 'PUT'){

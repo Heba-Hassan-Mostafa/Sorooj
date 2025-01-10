@@ -18,7 +18,7 @@ class Course extends Model implements HasMedia
     use HasFactory , ModelTrait,InteractsWithMedia,Sluggable;
 
     protected $fillable = ['course_name','slug', 'course_content', 'brief_description','author_name', 'category_id', 'publish_date',
-                            'status', 'view_count', 'download_count', 'order_position', 'keywords', 'description'];
+                            'status', 'exam_link','view_count', 'download_count', 'order_position', 'keywords', 'description'];
 
     public $filters = ['course_name', 'author_name', 'category_id', 'publish_date'];
 

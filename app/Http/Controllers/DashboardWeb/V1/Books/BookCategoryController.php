@@ -4,7 +4,7 @@ namespace App\Http\Controllers\DashboardWeb\V1\Books;
 
 use App\Enum\CategoryTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Web\Courses\CategoryRequest;
+use App\Http\Requests\Dashboard\Web\Books\CategoryRequest;
 use App\Models\Category;
 use App\Repositories\Contracts\BookCategoryContract;
 use Illuminate\Http\Request;

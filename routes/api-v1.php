@@ -147,6 +147,8 @@ Route::prefix("auth")->group(function () {
                 Route::get('/categories', [AudioCategoryController::class, 'index'])->name('category.index');
                 //index
                 Route::get('/', [AudioLibraryController::class, 'index'])->name('index');
+                //suggested
+                Route::get('/suggested-audios', [AudioLibraryController::class, 'suggestedAudios'])->name('suggested-audios');
 
                 //show
                 Route::get('/{slug}', [AudioLibraryController::class, 'show'])->name('audios.show');

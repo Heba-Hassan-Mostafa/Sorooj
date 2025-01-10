@@ -60,7 +60,7 @@ class RolesPermissionGenerator
                     'guard_name' => 'web',
                 ], [
                     'name' => [
-                        'ar' => trans('permissions.responses.' . $method, [], 'ar') . ' ' . trans('permissions.responses.' . $model, [], 'en'),
+                        'ar' => trans('permissions.responses.' . $method, [], 'ar') . ' ' . trans('permissions.responses.' . $model, [], 'ar'),
                         'en' => ucfirst(trans('permissions.responses.' . $model, [], 'en')) . ' ' . trans('permissions.responses.' . $method, [], 'en'),
                     ],
                     'slug' => strtolower(Str::slug($additionalAdminPermission)),
