@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Course;
 use App\Repositories\Contracts\CourseContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CourseController extends BaseApiController
 {
@@ -41,7 +42,7 @@ class CourseController extends BaseApiController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $course->increment('view_count');
+//        $course->increment('view_count');
         return $this->respondWithSuccess(__('Courses details'), [
             'Courses' => (new CourseResource($course)),
         ]);
@@ -97,5 +98,16 @@ class CourseController extends BaseApiController
         $subscriptions = $this->repository->getMySubscriptions();
         return $this->respondWithCollection($subscriptions);
 
+    }
+
+
+    public function setCourseViewCount(Request $request,$id): JsonResponse
+    {
+        $validated = $request->validate([
+            'view_count' => 'required|integer',
+        ]);
+        $course = $this->repository->findOrFail($id);
+        $course->update(['view_count' => $validated['view_count']]);
+        return $this->respondWithSuccess(__('View count updated successfully'));
     }
 }

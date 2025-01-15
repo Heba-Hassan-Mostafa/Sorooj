@@ -14,10 +14,11 @@ use App\Http\Controllers\Api\V1\Client\FavoriteController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaAnswerController;
 use App\Http\Controllers\Api\V1\Client\HomePage\FatwaQuestionController;
 use App\Http\Controllers\Api\V1\Client\HomePage\MostViewedController;
+use App\Http\Controllers\Api\V1\Client\HomePage\SearchController;
+use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\StatisticsController;
 use App\Http\Controllers\Api\V1\Client\HomePage\SubscriberController;
 use App\Http\Controllers\Api\V1\Client\HomePage\UpcomingEventController;
-use App\Http\Controllers\Api\V1\Client\HomePage\SliderController;
 use App\Http\Controllers\Api\V1\Client\HomePage\VideoController;
 use App\Http\Controllers\Api\V1\Client\ManagementMemberController;
 use App\Http\Controllers\Api\V1\Client\SocialiteController;
@@ -85,6 +86,9 @@ Route::prefix("auth")->group(function () {
             //subscription
             Route::post('/add-subscription/{courseId}', [CourseController::class, 'addSubscription'])
                 ->name('add-subscription')->middleware('auth:sanctum');
+
+            //set view count
+            Route::post('/set-view-count/{id}', [CourseController::class, 'setCourseViewCount'])->name('set-view-count');
 
         });
 
@@ -184,6 +188,11 @@ Route::prefix("auth")->group(function () {
                 //statistics
                 Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
 
+                //search
+                Route::post('search', [SearchController::class, 'search'])->name('search');
+
+
+
             });
             //contact-us
             Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
@@ -235,7 +244,4 @@ Route::prefix("auth")->group(function () {
                 Route::get('telegram-live', [StaticPageController::class, 'getTelegramLive']);
                 Route::get('mixlr-live', [StaticPageController::class, 'getMixlrLive']);
             });
-    Route::middleware(["auth:api"])->group(function () {
 
-//
-});
