@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.courses-categories') }}
     </h4>
-    <a href="{{ route('admin.courses.category.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.courses.category.create') }}" class=" mainBtnStyle mb-2">
         {{ trans('dashboard.courses.add-course-category') }}
     </a>
     <a href="{{ route('admin.courses.category.sort-categories') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-4">
 
         <div class="table-responsive p-2">
 
@@ -26,7 +26,7 @@
                         <h2 class="accordion-header d-flex align-items-center">
                             <button
                                 type="button"
-                                class="accordion-button"
+                                class="accordion-button mainBtnStyle text-white"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordionWithIcon-1"
                                 aria-expanded="true">
@@ -101,7 +101,7 @@
                         <h2 class="accordion-header d-flex align-items-center">
                             <button
                                 type="button"
-                                class="accordion-button collapsed"
+                                class="accordion-button collapsed mainBtnStyle text-white"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordionWithIcon-2"
                                 aria-expanded="false">

@@ -32,6 +32,11 @@ return [
         'courses-comments'     => 'تعليقات الدورات',
         'books-comments'       => 'تعليقات الكتب',
         'blogs-comments'       => 'تعليقات المدونة',
+        'contacts'             => 'تواصل معنا',
+        'statistics'           => 'الاحصائيات',
+        'last_updated'         => 'اخر تحديث',
+        'view_profile'         => 'عرض الملف الشخصي',
+        'total_subscribers'    => 'اجمالي المشتركين',
 
 
     ],
@@ -60,6 +65,8 @@ return [
         'last_name'                      => 'اسم العائلة',
         'password'                       => 'كلمة المرور',
         'password_confirmation'          => 'تاكيد كلمة المرور',
+        'message'                        =>'الرسالة',
+        'message_type'                   =>'نوع الرسالة',
     ],
     'courses' =>[
         'add-course-category'            => 'اضافة قسم جديد',
@@ -274,6 +281,7 @@ return [
         'telegram-live'                 => 'تليجرام مباشر',
         'mixlr-live'                    => 'ماكسلر مباشر',
         'about-center-home'             => 'عن المركز في الرئيسية',
+        'twitter-section-id'            => 'رقم المنشور في تويتر',
         ],
     'main'                                  => 'الرئيسية',
     'options'                               => 'التحكم',
@@ -307,4 +315,5 @@ return [
     'attachments'                           => 'المرفقات',
     'change_order'                           => 'تغيير الترتيب',
     'select-all'                             => 'تحديد الكل',
+    'welcome'                                => 'مرحبا',
 ];

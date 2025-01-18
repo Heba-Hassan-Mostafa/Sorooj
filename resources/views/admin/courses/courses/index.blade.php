@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.courses') }}
     </h4>
-    <a href="{{ route('admin.courses.courses.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.courses.courses.create') }}" class="mainBtnStyle mb-2">
         {{ trans('dashboard.courses.add-course') }}
     </a>
     <a href="{{ route('admin.courses.sort-courses') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-4">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>
@@ -66,8 +66,8 @@
                             </label>
                         </td>
                         <td>
-                            <div class="m-2">
-                                    <a href="{{ route('admin.courses.courses.edit',$course->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
+                            <div class="m-2 d-flex ">
+                                    <a href="{{ route('admin.courses.courses.edit',$course->id) }}"  class="me-2 btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a onclick="fireDeleteEvent({{ $course->id }})" type="button"

@@ -8,6 +8,7 @@ use App\Models\Audio;
 use App\Models\Blog;
 use App\Models\Book;
 use App\Models\Course;
+use App\Models\FatwaQuestion;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ class SearchController extends Controller
         // Search in courses using Eloquent
         $courses = Course::where('course_name', 'LIKE', "%{$query}%")
             ->orWhere('course_content', 'LIKE', "%{$query}%")
+            ->orWhere('author_name', 'LIKE', "%{$query}%")
             ->select('id', 'course_name as name', 'course_content as description', 'view_count', 'author_name',
                 'brief_description', 'publish_date', 'slug', DB::raw('"courses" as type'))
             ->get();
@@ -39,6 +41,7 @@ class SearchController extends Controller
         // Search in books using Eloquent
         $books = Book::where('book_name', 'LIKE', "%{$query}%")
             ->orWhere('book_content', 'LIKE', "%{$query}%")
+            ->orWhere('author_name', 'LIKE', "%{$query}%")
             ->select('id', 'book_name as name', 'book_content as description', 'view_count', 'author_name',
                 'brief_description', 'publish_date', 'slug', DB::raw('"books" as type'))
             ->get();
@@ -52,6 +55,7 @@ class SearchController extends Controller
         // Search in blogs using Eloquent
         $blogs = Blog::where('blog_name', 'LIKE', "%{$query}%")
             ->orWhere('blog_content', 'LIKE', "%{$query}%")
+            ->orWhere('author_name', 'LIKE', "%{$query}%")
             ->select('id', 'blog_name as name', 'blog_content as description', 'view_count', 'author_name',
                 'brief_description', 'publish_date', 'slug', DB::raw('"blogs" as type'))
             ->get();
@@ -62,16 +66,12 @@ class SearchController extends Controller
             return $blog;
         });
 
-        // Search in videos using Eloquent
-        $videos = Video::where('name', 'LIKE', "%{$query}%")
-            ->select('id', 'name as name', 'view_count', 'brief_description', 'publish_date', DB::raw('"videos" as type'))
-            ->get();
 
-        // Attach media to videos
-        $videos = $videos->map(function ($video) {
-            $video->image = $video->getFirstMediaUrl('videos'); // 'videos' is the collection name
-            return $video;
-        });
+        // Search in fatwas using Eloquent
+        $fatwas = FatwaQuestion::where('status', 1)
+            ->where('message', 'LIKE', "%{$query}%")
+            ->select('id', 'message as name', 'slug', DB::raw('"fatwas" as type'))
+            ->get();
 
         // Search in audios using Eloquent
         $audios = Audio::where('name', 'LIKE', "%{$query}%")
@@ -88,8 +88,8 @@ class SearchController extends Controller
         $merged = $courses
             ->merge($books)
             ->merge($blogs)
-            ->merge($videos)
             ->merge($audios)
+            ->merge($fatwas)
             ->sortByDesc('created_at');
 
        return SearchResource::collection($merged)->additional([

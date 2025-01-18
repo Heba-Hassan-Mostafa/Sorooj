@@ -31,9 +31,10 @@
 
 
                         <div class="col-lg-12">
-                            <ul id="treeview1">
+                            <ul id="treeview1" class="list-unstyled">
                                 <h4 class="selectCatTo"> {{ trans('dashboard.courses.choose-category') }}</h4>
-                                <li><a href="#">{{ trans('dashboard.sidebar.courses-categories') }}</a>
+                                <li class="allCateSelect grayBgColorStyle branch">
+                                    <a href="#">{{ trans('dashboard.sidebar.courses-categories') }}</a>
                                     <ul class="row fristParent">
                                 </li>
                                 @foreach ($categories as $category)
@@ -53,7 +54,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">{{ trans('dashboard.save') }} </button>
+                    <button type="submit" class="mainBtnStyle">{{ trans('dashboard.save') }} </button>
                 </form>
             </div>
         </div>

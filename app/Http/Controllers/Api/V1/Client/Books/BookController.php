@@ -7,8 +7,10 @@ use App\Http\Resources\Api\V1\Client\Books\BookCommentResource;
 use App\Http\Resources\Api\V1\Client\Books\BookResource;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Book;
+use App\Models\Course;
 use App\Repositories\Contracts\BookContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BookController extends BaseApiController
 {
@@ -36,13 +38,13 @@ class BookController extends BaseApiController
      */
     public function show($slug): JsonResponse
     {
-        $course = Book::with(['category', 'media', 'favorites'])
+        $book = Book::with(['category', 'media', 'favorites'])
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $course->increment('view_count');
+        $book->increment('view_count');
         return $this->respondWithSuccess(__('Books details'), [
-            'Books' => (new BookResource($course)),
+            'Books' => (new BookResource($book)),
         ]);
     }
 
@@ -86,6 +88,26 @@ class BookController extends BaseApiController
         $favorites = $this->repository->getFavorites();
         return $this->respondWithCollection($favorites);
 
+    }
+
+    public function setBookViewCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'view_count' => 'required|integer',
+        ]);
+        $book = Book::where('slug', $slug)->firstOrFail();
+        $book->update(['view_count' => $validated['view_count']]);
+        return $this->respondWithSuccess(__('View count updated successfully'));
+    }
+
+    public function setBookDownloadCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'download_count' => 'required|integer',
+        ]);
+        $book = Book::where('slug', $slug)->firstOrFail();
+        $book->update(['download_count' => $validated['download_count']]);
+        return $this->respondWithSuccess(__('Download count updated successfully'));
     }
 
 }

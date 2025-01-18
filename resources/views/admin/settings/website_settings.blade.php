@@ -40,6 +40,13 @@
                             @enderror
                         </div>
                         <div class="col-6 mb-3">
+                            <label for="twitter-section-id" class="form-label">{{ trans('dashboard.settings.twitter-section-id') }}</label>
+                            <input type="text" name="twitter-section-id" value="{{ $settings['twitter-section-id'] ?? '' }}" class="form-control" />
+                            @error('twitter-section-id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-6 mb-3">
                             <label for="logo" class="form-label">{{ trans('dashboard.settings.logo') }}</label>
                             <input type="file" name="logo" id="logo" class="form-control" />
                             @if ($logoUrl)

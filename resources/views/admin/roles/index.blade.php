@@ -4,16 +4,16 @@
 @endsection
 @section('content')
     <h4 class="py-3">
-        <a href="{{ route('admin.dashboard') }}">
+        <a href="{{ route('admin.dashboard') }}" >
             <span class="text-muted fw-light">{{ trans('dashboard.main') }}/
             </span>
         </a>
         {{ trans('dashboard.sidebar.roles') }}
     </h4>
-    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.roles.create') }}" class="mainBtnStyle mb-2">
         {{ trans('dashboard.roles.add-new-role') }}
     </a>
-    <div class="card">
+    <div class="card mt-4">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>

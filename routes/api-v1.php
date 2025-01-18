@@ -88,7 +88,7 @@ Route::prefix("auth")->group(function () {
                 ->name('add-subscription')->middleware('auth:sanctum');
 
             //set view count
-            Route::post('/set-view-count/{id}', [CourseController::class, 'setCourseViewCount'])->name('set-view-count');
+            Route::post('/set-view-count/{slug}', [CourseController::class, 'setCourseViewCount'])->name('set-view-count');
 
         });
 
@@ -112,6 +112,12 @@ Route::prefix("auth")->group(function () {
             Route::post('toggle-favorite/{courseId}', [BookController::class, 'toggleFavorite'])
                 ->name('toggle-favorite')->middleware('auth:sanctum');
 
+            //set view count
+            Route::post('/set-view-count/{slug}', [BookController::class, 'setBookViewCount'])->name('set-view-count');
+
+            //set download count
+            Route::post('/set-download-count/{slug}', [BookController::class, 'setBookDownloadCount'])->name('set-download-count');
+
         });
 
             //blogs
@@ -133,6 +139,12 @@ Route::prefix("auth")->group(function () {
                 //favorite
                 Route::post('/toggle-favorite/{blogId}', [BlogController::class, 'toggleFavorite'])
                     ->name('toggle-favorite')->middleware('auth:sanctum');
+
+                //set view count
+                Route::post('/set-view-count/{slug}', [BlogController::class, 'setBlogViewCount'])->name('set-view-count');
+
+                //set download count
+                Route::post('/set-download-count/{slug}', [BlogController::class, 'setBlogDownloadCount'])->name('set-download-count');
 
             });
             //videos library
@@ -156,6 +168,12 @@ Route::prefix("auth")->group(function () {
 
                 //show
                 Route::get('/{slug}', [AudioLibraryController::class, 'show'])->name('audios.show');
+
+                //set view count
+                Route::post('/set-view-count/{slug}', [AudioLibraryController::class, 'setAudioViewCount'])->name('set-view-count');
+
+                //set download count
+                Route::post('/set-download-count/{slug}', [AudioLibraryController::class, 'setAudioDownloadCount'])->name('set-download-count');
 
 
             });

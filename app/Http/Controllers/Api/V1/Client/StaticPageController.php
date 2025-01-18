@@ -115,6 +115,7 @@ class StaticPageController extends Controller
         $data['icon'] = $icon ? $icon->getFirstMediaUrl('icon') : null;
         $data['keywords'] = Setting::where('key', 'keywords')->first()->value ?? '';
         $data['description'] = Setting::where('key', 'description')->first()->value ?? '';
+        $data['twitter-section-id'] = Setting::where('key', 'twitter-section-id')->first()->value ?? '';
 
         $data['status'] = 200;
         return $this->setStatusCode(200)->respondWithArray($data);

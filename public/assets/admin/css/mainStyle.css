@@ -97,3 +97,15 @@
 .bold {
     font-weight: bold;
 }
+.mainBkColor {
+    background: #424C61!important;
+}
+.mainBtnStyle {
+    background: #424C61 !important;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+.mainBtnStyle:hover {
+    color: #fff;
+}

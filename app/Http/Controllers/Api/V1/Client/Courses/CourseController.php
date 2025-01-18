@@ -101,12 +101,12 @@ class CourseController extends BaseApiController
     }
 
 
-    public function setCourseViewCount(Request $request,$id): JsonResponse
+    public function setCourseViewCount(Request $request,$slug): JsonResponse
     {
         $validated = $request->validate([
             'view_count' => 'required|integer',
         ]);
-        $course = $this->repository->findOrFail($id);
+        $course = Course::where('slug', $slug)->firstOrFail();
         $course->update(['view_count' => $validated['view_count']]);
         return $this->respondWithSuccess(__('View count updated successfully'));
     }

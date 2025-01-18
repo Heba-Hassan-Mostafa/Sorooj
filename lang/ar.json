@@ -1367,6 +1367,8 @@
     "Inactive": "معطل",
     "books": "كتب وابحاث",
     "courses": "دورة تعليمية",
+    "blogs": "مدونات",
+    "audios": "صوتيات",
     "E-mail": "البريد الالكتروني",
     "Book added to favorites": "تم اضافة الكتاب الى المفضلة.",
     "Book removed from favorites": "تم ازالة الكتاب من المفضلة.",
@@ -1381,5 +1383,15 @@
     "Blog removed from favorites": "تم ازالة المدونة من المفضلة.",
     "Answer": "الجواب",
     "Audio File": "ملف صوتي",
-    "Audio Name": "اسم الصوتى"
+    "Audio Name": "اسم الصوتى",
+    "fatwas": "سؤال وجواب",
+    "request": "طلب",
+    "inquiry": "استفسار",
+    "suggestion": "اقتراح",
+    "complaint":"شكوى",
+    "other": "اخرى",
+    "Most Favorite": "الاكثر مفضلة",
+    "Book": "كتب وابحاث",
+    "Course": "دورة تعليمية",
+    "Blog": "مدونات"
 }

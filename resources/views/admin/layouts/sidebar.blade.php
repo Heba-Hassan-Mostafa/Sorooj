@@ -12,7 +12,7 @@
 
         <li class="menu-item {{ url()->current() == route('admin.dashboard') ? 'active' : '' }}">
             <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-home"></i>
+                <i class="menu-icon fa-solid fa-house"></i>
                 <div>{{ trans('dashboard.main') }} </div>
             </a>
         </li>
@@ -20,7 +20,7 @@
         <!-- users & roles-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-user-group"></i>
                 <div>{{ trans('dashboard.sidebar.roles') }}</div>
             </a>
             <ul class="menu-sub">
@@ -42,7 +42,7 @@
         <!-- courses & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-film"></i>
                 <div>{{ trans('dashboard.sidebar.courses') }}</div>
             </a>
             <ul class="menu-sub">
@@ -68,7 +68,7 @@
         <!-- books & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-book"></i>
                 <div>{{ trans('dashboard.sidebar.books') }}</div>
             </a>
             <ul class="menu-sub">
@@ -96,7 +96,7 @@
         <!-- blogs & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-square-pen"></i>
                 <div>{{ trans('dashboard.sidebar.blogs') }}</div>
             </a>
             <ul class="menu-sub">
@@ -121,7 +121,7 @@
         <!-- videos & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-file-video"></i>
                 <div>{{ trans('dashboard.sidebar.videos') }}</div>
             </a>
             <ul class="menu-sub">
@@ -142,7 +142,7 @@
         <!-- audios & categories-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-file-audio"></i>
                 <div>{{ trans('dashboard.sidebar.audios') }}</div>
             </a>
             <ul class="menu-sub">
@@ -165,7 +165,7 @@
         <!-- questions & answers-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-clipboard-question"></i>
                 <div>{{ trans('dashboard.sidebar.questions_answers') }}</div>
             </a>
             <ul class="menu-sub">
@@ -182,13 +182,13 @@
             </ul>
 
         </li>
-        <!-- home & sections -->
+        <!-- home & sections slider-->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">{{ trans('dashboard.sidebar.home-sections') }}</span>
         </li>
         <li class="menu-item {{ url()->current() == route('admin.slider.slider.index') ? 'active' : '' }}">
             <a href="{{ route('admin.slider.slider.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <i class="menu-icon fa-solid fa-file-image"></i>
                 <div>{{ trans('dashboard.sidebar.slider') }}</div>
             </a>
         </li>
@@ -196,7 +196,7 @@
         <!-- events -->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-calendar"></i>
                 <div>{{ trans('dashboard.sidebar.upcoming-events') }}</div>
             </a>
             <ul class="menu-sub">
@@ -215,33 +215,39 @@
         </li>
         <li class="menu-item {{ url()->current() == route('admin.clients.index') ? 'active' : '' }}">
             <a href="{{ route('admin.clients.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <i class="menu-icon fa-solid fa-image-portrait"></i>
                 <div>{{ trans('dashboard.sidebar.clients') }}</div>
             </a>
         </li>
         <li class="menu-item {{ url()->current() == route('admin.subscribers.index') ? 'active' : '' }}">
             <a href="{{ route('admin.subscribers.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <i class="menu-icon fa-solid fa-square-envelope"></i>
                 <div>{{ trans('dashboard.sidebar.subscribers') }}</div>
+            </a>
+        </li>
+        <li class="menu-item {{ url()->current() == route('admin.contacts.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.contacts.index') }}" class="menu-link">
+                <i class="menu-icon fa-solid fa-square-envelope"></i>
+                <div>{{ trans('dashboard.sidebar.contacts') }}</div>
             </a>
         </li>
 
         <li class="menu-item {{ url()->current() == route('admin.management-members.index') ? 'active' : '' }}">
             <a href="{{ route('admin.management-members.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <i class="menu-icon fa-solid fa-user-tie"></i>
                 <div>{{ trans('dashboard.sidebar.management-members') }}</div>
             </a>
         </li>
         <li class="menu-item {{ url()->current() == route('admin.settings.live') ? 'active' : '' }}">
             <a href="{{ route('admin.settings.live') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <i class="menu-icon fa-brands fa-youtube"></i>
                 <div>{{ trans('dashboard.sidebar.live') }}</div>
             </a>
         </li>
         <!-- settings-->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon fa-solid fa-gear"></i>
                 <div>{{ trans('dashboard.sidebar.settings') }}</div>
             </a>
             <ul class="menu-sub">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Blog;
 use App\Repositories\Contracts\BlogContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BlogController extends BaseApiController
 {
@@ -77,6 +78,26 @@ class BlogController extends BaseApiController
     public function toggleFavorite($blogId)
     {
        return $this->repository->toggleFavorite($blogId);
+    }
+
+    public function setBlogViewCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'view_count' => 'required|integer',
+        ]);
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+        $blog->update(['view_count' => $validated['view_count']]);
+        return $this->respondWithSuccess(__('View count updated successfully'));
+    }
+
+    public function setBlogDownloadCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'download_count' => 'required|integer',
+        ]);
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+        $blog->update(['download_count' => $validated['download_count']]);
+        return $this->respondWithSuccess(__('Download count updated successfully'));
     }
 
 }

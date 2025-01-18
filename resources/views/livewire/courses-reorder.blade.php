@@ -15,7 +15,7 @@
         </thead>
         <tbody wire:sortable="updateCourseOrder">
         @foreach ($courses as $course)
-            <tr class="reOrder" wire:sortable.item="{{ $course->id }}" wire:key="course-{{ $course->id }}"
+            <tr class="reOrder" style="cursor: pointer" wire:sortable.item="{{ $course->id }}" wire:key="course-{{ $course->id }}"
                 wire:sortable.handle>
                 <td>{{ $loop->iteration }}</td>
                 <td>

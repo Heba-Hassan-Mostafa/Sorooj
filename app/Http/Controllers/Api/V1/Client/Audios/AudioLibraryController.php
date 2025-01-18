@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Audio;
 use App\Repositories\Contracts\AudioContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AudioLibraryController extends BaseApiController
 {
@@ -44,5 +45,25 @@ class AudioLibraryController extends BaseApiController
             'suggested_audios' => AudioResource::collection($audio),
         ]);
 
+    }
+
+    public function setAudioViewCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'view_count' => 'required|integer',
+        ]);
+        $audio = Audio::where('slug', $slug)->firstOrFail();
+        $audio->update(['view_count' => $validated['view_count']]);
+        return $this->respondWithSuccess(__('View count updated successfully'));
+    }
+
+    public function setAudioDownloadCount(Request $request,$slug): JsonResponse
+    {
+        $validated = $request->validate([
+            'download_count' => 'required|integer',
+        ]);
+        $audio = Audio::where('slug', $slug)->firstOrFail();
+        $audio->update(['download_count' => $validated['download_count']]);
+        return $this->respondWithSuccess(__('Download count updated successfully'));
     }
 }

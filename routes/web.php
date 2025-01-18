@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardWeb\V1\Books\BookCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Books\BookController;
 use App\Http\Controllers\DashboardWeb\V1\ClientController;
+use App\Http\Controllers\DashboardWeb\V1\ContactsController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
@@ -247,6 +248,8 @@ Route::group(
 
         //subscribers
         Route::resource('/subscribers', SubscriberController::class);
+        //contacts
+        Route::resource('/contacts', ContactsController::class);
 
         //clients
         Route::get('clients/change-status',      [ClientController::class,'changeStatus'])->name('clients.change-status');

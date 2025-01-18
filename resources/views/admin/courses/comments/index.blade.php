@@ -61,8 +61,8 @@
 
                         <td>{{ $comment->created_at->format('Y-m-d') }}</td>
                         <td>
-                            <div class="m-2">
-                                <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal"
+                            <div class="m-2 d-flex">
+                                <button class="btn btn-warning btn-sm text-white me-2" data-bs-toggle="modal"
                                         data-bs-target="#modalCenter-{{ $comment->id }}">
                                     <i class="fa fa-eye"></i>
                                     <span class="text"></span>
