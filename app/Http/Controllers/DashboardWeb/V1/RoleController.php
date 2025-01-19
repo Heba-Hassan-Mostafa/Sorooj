@@ -56,14 +56,14 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $names = [];
-        foreach (app_languages() as $key => $one) {
-            $names[$key] = $request->input("name_{$key}");
-        }
+//        $names = [];
+//        foreach (app_languages() as $key => $one) {
+//            $names[$key] = $request->input("name_{$key}");
+//        }
 
         $role = $this->repository->create([
-            'name' => $names,
-            'slug' => $request->input("name_en"),
+            'name' => $request->name,
+            'slug' => $request->input("name"),
         ]);
 
         // Handle permissions
@@ -137,14 +137,14 @@ class RoleController extends Controller
             return redirect()->back()->withErrors(['role' => __('dashboard.roles.role-not-found')]);
         }
 
-        $names = [];
-        foreach (app_languages() as $key => $one) {
-            $names[$key] = $request->input("name_{$key}");
-        }
+//        $names = [];
+//        foreach (app_languages() as $key => $one) {
+//            $names[$key] = $request->input("name_{$key}");
+//        }
 
         $role->update([
-            'name' => $names,
-            'slug' => $request->input("name_en"),
+            'name' => $request->name,
+            'slug' => $request->input("name"),
         ]);
 
         // Handle permissions

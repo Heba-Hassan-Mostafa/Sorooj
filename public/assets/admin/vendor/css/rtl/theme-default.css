@@ -127,8 +127,8 @@ a.bg-primary:hover, a.bg-primary:focus {
 
 .page-item.active .page-link,
 .pagination li.active > a:not(.page-link) {
-  border-color: #7367f0;
-  background-color: #7367f0;
+  border-color: #424c61;
+  background-color: #424c61;
   color: #fff;
 }
 
@@ -289,8 +289,8 @@ button.list-group-item-primary.active {
 
 .btn-primary {
   color: #fff;
-  background-color: #7367f0;
-  border-color: #7367f0;
+  background-color: #424c61;
+  border-color: #424c61;
 }
 .btn-primary:hover {
   color: #fff !important;
@@ -788,10 +788,10 @@ html[dir=rtl] .border-primary {
 }
 
 a {
-  color: #7367f0;
+  color: #9F854E;
 }
 a:hover {
-  color: #8176f2;
+  color: #9F854E;
 }
 
 .fill-primary {

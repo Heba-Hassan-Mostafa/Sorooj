@@ -21,9 +21,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>
                     @if (!empty($book->image))
-                        <img src="{{ asset($book->image) }}" style="width:50px;height:50px;"  alt=""/>
+                        <img src="{{ asset($book->image) }}" style="width:75px;height:75px;"  alt=""/>
                     @else
-                        <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                        <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:75px;height:75px;"  alt=""/>
                     @endif
 
                 </td>

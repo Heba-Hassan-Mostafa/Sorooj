@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.blogs') }}
     </h4>
-    <a href="{{ route('admin.blogs.blogs.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.blogs.blogs.create') }}" class=" mainBtnStyle me-2 mb-2">
         {{ trans('dashboard.blogs.add-blog') }}
     </a>
     <a href="{{ route('admin.blogs.sort-blogs') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-3">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>
@@ -40,9 +40,9 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             @if (!empty($blog->image))
-                                <img src="{{ asset($blog->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                <img src="{{ asset($blog->image) }}" style="width:75px;height:75px;"  alt=""/>
                             @else
-                                <img src="{{ asset('assets/admin/images/blogs.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                <img src="{{ asset('assets/admin/images/blogs.webp') }}" style="width:75px;height:75px;"  alt=""/>
                             @endif
 
                         </td>

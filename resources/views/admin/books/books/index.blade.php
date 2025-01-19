@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.books') }}
     </h4>
-    <a href="{{ route('admin.books.books.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.books.books.create') }}" class=" mainBtnStyle me-2 mb-2">
         {{ trans('dashboard.books.add-book') }}
     </a>
     <a href="{{ route('admin.books.sort-books') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-4">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>
@@ -40,9 +40,9 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             @if (!empty($book->image))
-                                <img src="{{ asset($book->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                <img src="{{ asset($book->image) }}" style="width:75px;height:75px;"  alt=""/>
                             @else
-                                <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:75px;height:75px;"  alt=""/>
                             @endif
 
                         </td>
@@ -67,8 +67,8 @@
                             </label>
                         </td>
                         <td>
-                            <div class="m-2">
-                                    <a href="{{ route('admin.books.books.edit',$book->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
+                            <div class="m-2 d-flex">
+                                    <a href="{{ route('admin.books.books.edit',$book->id) }}"  class="btn btn-info btn-sm text-white me-2"  title="{{ trans('dashboard.edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a onclick="fireDeleteEvent({{ $book->id }})" type="button"

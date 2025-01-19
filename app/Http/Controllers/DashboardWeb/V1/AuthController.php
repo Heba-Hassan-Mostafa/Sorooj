@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Auth\ForgetPasswordDashboardRequest;
 use App\Http\Requests\Api\Auth\LoginDashboardRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
+use App\Http\Requests\Api\Auth\UpdateProfileRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\AdminResource;
 use App\Models\User;
@@ -179,6 +180,38 @@ class AuthController extends Controller
 
         session()->flash('success', __("Logged out Successfully"));
         return redirect()->route('admin.login');
+    }
+
+    public function profile()
+    {
+        return view('admin.admins.profile');
+
+    }
+
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $user = auth()->user();
+      $record=  $user->update($request->validated());
+        if (isset($request->avatar)) {
+            uploadImage('avatar', $request->avatar, $user);
+        }
+        session()->flash('success', __("Profile Updated Successfully"));
+        return redirect()->route('admin.profile');
+    }
+
+    public function changePasswordForm()
+    {
+        return view('admin.admins.change_password');
+    }
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = auth()->user();
+        $user->update([
+            'password' => $request->password
+        ]);
+        session()->flash('success', __("Password Updated Successfully"));
+        return redirect()->route('admin.dashboard');
     }
 
 }

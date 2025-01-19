@@ -37,6 +37,8 @@ return [
         'last_updated'         => 'اخر تحديث',
         'view_profile'         => 'عرض الملف الشخصي',
         'total_subscribers'    => 'اجمالي المشتركين',
+        'courses-subscriptions' => 'مشتركين الدورات',
+        'latest-upcoming-events' => ' اخر الاحداث ',
 
 
     ],
@@ -100,6 +102,8 @@ return [
         'comment-belongs-to'            => 'التعليق ينتمي ل',
         'stars'                         => 'التقييم',
         'show_comment'                  => 'عرض التعليق',
+        'subscriptions'                 => 'المشتركين',
+        'subscriptions-count'           => 'عدد المشتركين',
 
     ],
     'blogs' =>[
@@ -316,4 +320,11 @@ return [
     'change_order'                           => 'تغيير الترتيب',
     'select-all'                             => 'تحديد الكل',
     'welcome'                                => 'مرحبا',
+    'subscription_at'                        => 'تاريخ الاشتراك',
+    'logout'                                 => 'تسجيل الخروج',
+    'change-password'                        => 'تغيير كلمة المرور',
+    'profile'                                => 'الملف الشخصي',
+    'old-password'                           => 'كلمة المرور القديمة',
+    'new-password'                           => 'كلمة المرور الجديدة',
+    'new-password-confirmation'              => 'تاكيد كلمة المرور الجديدة',
 ];

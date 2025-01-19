@@ -34,7 +34,7 @@
                         <td>{{ $question->user?->email ?? '-----' }}</td>
                         <td>{{\Illuminate\Support\Str::limit( $question->message , 100) }}</td>
                         <td>{{ $question->created_at->format('Y-m-d') }}</td>
-                        <td>
+                        <td class="text-center">
                                 <?php
                                 $answer = $question
                                     ->fatwaAnswer()
@@ -42,7 +42,7 @@
                                     ->first();
                                 ?>
                             @if ($answer)
-                                <div class="btn btn-success-gradient">{{ trans('dashboard.fatwa.reply-done') }}
+                                <div class="btn btn-success btn-sm disabled">{{ trans('dashboard.fatwa.reply-done') }}
                                 </div>
                             @else
                                 <a href="{{ route('admin.fatwa.questions.edit', $question->id) }}"

@@ -12,8 +12,7 @@
         <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper mb-0">
                 <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
-                    <i class="ti ti-search ti-md me-2"></i>
-                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
+                    <span class="d-none d-md-inline-block text-muted">{{trans('dashboard.main')}}</span>
                 </a>
             </div>
         </div>
@@ -25,12 +24,12 @@
                 @if (App::getLocale() == 'ar')
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         {{ LaravelLocalization::getCurrentLocaleName() }}
-                        <img src="{{ URL::asset('Files/image/flags/KW.png') }}" alt="">
+                        <img src="{{ asset('assets/admin/images/KW.png') }}" alt="">
                     </a>
                 @else
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         {{ LaravelLocalization::getCurrentLocaleName() }}
-                        <img src="{{ URL::asset('Files/image/flags/US.png') }}" alt="">
+                        <img src="{{ asset('assets/admin/images/US.png') }}" alt="">
                     </a>
                 @endif
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -45,69 +44,40 @@
             </li>
             <!--/ Language -->
 
-            <!-- Style Switcher -->
-            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="ti ti-md"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                            <span class="align-middle"><i class="ti ti-sun me-2"></i>Light</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                            <span class="align-middle"><i class="ti ti-moon me-2"></i>Dark</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                            <span class="align-middle"><i class="ti ti-device-desktop me-2"></i>System</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- / Style Switcher-->
-
-
-
-
-
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-{{--                        @if (!empty(auth()->user()->image->file_name))--}}
-{{--                            <img src="{{ asset('Files/image/Users/'.auth()->user()->image->file_name) }}" alt class="h-auto rounded-circle" />--}}
-{{--                        @else--}}
-{{--                            <img src="{{ asset('Files/image/avatar.jpg') }}" alt class="h-auto rounded-circle" />--}}
-{{--                        @endif--}}
+                        @if (!empty(auth()->user()->avatar))
+                            <img src="{{ auth()->user()->avatar }}" alt class="rounded-circle" />
+                        @else
+                            <img src="{{ asset('assets/admin/avatar.jpg') }}" alt class="rounded-circle" />
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <a class="dropdown-item" href="javascript:void(0);">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-{{--                                        @if (!empty(auth()->user()->image->file_name))--}}
-{{--                                            <img src="{{ asset('Files/image/Users/'.auth()->user()->image->file_name) }}" alt class="h-auto rounded-circle" />--}}
-{{--                                        @else--}}
-{{--                                            <img src="{{ asset('Files/image/avatar.jpg') }}" alt class="h-auto rounded-circle" />--}}
-{{--                                        @endif--}}
+                                        @if (!empty(auth()->user()->avatar))
+                                            <img src="{{ auth()->user()->avatar }}" alt class="rounded-circle" />
+                                        @else
+                                            <img src="{{ asset('assets/admin/avatar.jpg') }}" alt class="rounded-circle" />
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">
-{{--                                        {{ auth()->user()->fullname }}--}}
+                                        {{ auth()->user()->fullName() }}
                                     </span>
                                     <small class="text-muted">
-{{--                                        @if (!empty(auth()->user()->getRoleNames()))--}}
-{{--                                            @foreach (auth()->user()->getRoleNames() as $v)--}}
-{{--                                                {{ $v }}--}}
-{{--                                            @endforeach--}}
-{{--                                        @endif--}}
+                                        @if (!empty(auth()->user()->getRoleNames()))
+                                            @foreach (auth()->user()->getRoleNames() as $v)
+                                                {{ $v }}
+                                            @endforeach
+                                        @endif
                                     </small>
                                 </div>
                             </div>
@@ -117,19 +87,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
                             <i class="ti ti-user-check me-2 ti-sm"></i>
                             <span class="align-middle">{{ trans('dashboard.profile') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="">
-                            <i class="ti ti-settings me-2 ti-sm"></i>
-                            <span class="align-middle">{{ trans('dashboard.sidebar.settings') }}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{ route('admin.show-change-password') }}">
                             <i class="ti ti-key me-2 ti-sm"></i>
                             <span class="align-middle">{{ trans('dashboard.change-password') }}</span>
                         </a>
@@ -145,7 +109,7 @@
                             @csrf
                             <a class="dropdown-item" href="#"  onclick="event.preventDefault();this.closest('form').submit();">
                                 <i class="ti ti-logout me-2 ti-sm"></i>
-                                <span class="align-middle">{{ trans('dashboard.log-out') }}</span>
+                                <span class="align-middle">{{ trans('dashboard.logout') }}</span>
                             </a>
                         </form>
 

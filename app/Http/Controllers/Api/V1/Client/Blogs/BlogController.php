@@ -41,7 +41,7 @@ class BlogController extends BaseApiController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $blog->increment('view_count');
+       // $blog->increment('view_count');
         return $this->respondWithSuccess(__('Blogs details'), [
             'Blogs' => (new BlogResource($blog)),
         ]);

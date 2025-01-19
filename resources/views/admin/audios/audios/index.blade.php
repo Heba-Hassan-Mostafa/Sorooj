@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.audios') }}
     </h4>
-    <a href="{{ route('admin.audios.audios.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.audios.audios.create') }}" class=" mainBtnStyle me-2 mb-2">
         {{ trans('dashboard.audios.add-audio') }}
     </a>
     <a href="{{ route('admin.audios.sort-audios') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-3">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>

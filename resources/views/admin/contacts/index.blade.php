@@ -58,7 +58,7 @@
 
                     </tr>
                     <!-- Modal -->
-                   @include('admins.contacts.showContactUsModal')
+                   @include('admin.contacts.showContactUsModal')
                     <!-- modal -->
                 @endforeach
                 </tbody>

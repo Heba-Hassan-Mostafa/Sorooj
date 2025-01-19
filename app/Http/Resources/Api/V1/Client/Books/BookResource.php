@@ -23,6 +23,7 @@ class BookResource extends JsonResource
             'publish_date'      => $this->publish_date,
             'status'            => $this->status,
             'view_count'        => $this->view_count,
+            'download_count'    => $this->download_count,
             'is_favorite'       => (bool)$favorite,
             'order_position'    => $this->order_position,
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),

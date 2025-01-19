@@ -28,7 +28,7 @@
 
                                 </p>
                                 <a href="{{ route('admin.profile') }}"
-                                   class="btn btn-primary waves-effect waves-light">{{ trans('dashboard.sidebar.view_profile') }}</a>
+                                   class="  mainBtnStyle waves-effect waves-light">{{ trans('dashboard.sidebar.view_profile') }}</a>
                             </div>
                         </div>
                         <div class="col-5 text-center text-sm-left">
@@ -50,7 +50,7 @@
                      id="swiper-with-pagination-cards">
                     <div class="swiper-wrapper">
                         @foreach ($members as $member)
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" style="background: #39455c">
                                 <div class="row">
                                     <div class="col-12">
                                         <h5 class="text-white mb-0 mt-2 mb-2">{{ trans('dashboard.sidebar.management-members') }}</h5>
@@ -106,10 +106,10 @@
                     </div>
                     <div class="card-body">
                         <div class="row gy-3">
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-danger me-3 p-2">
-                                        <i class="ti ti-file-dollar ti-sm"></i>
+                                        <i class="ti ti-users ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">{{ App\Models\User::whereType(\App\Enum\UserTypeEnum::ADMIN)->count() }}</h5>
@@ -117,10 +117,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-danger me-3 p-2">
-                                        <i class="ti ti-file-dollar ti-sm"></i>
+                                        <i class="ti ti-users ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">{{ App\Models\User::whereType(\App\Enum\UserTypeEnum::CLIENT)->count() }}</h5>
@@ -128,10 +128,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-danger me-3 p-2">
-                                        <i class="ti ti-file-dollar ti-sm"></i>
+                                        <i class="ti ti-users ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">{{ App\Models\Subscriber::count() }}</h5>
@@ -139,11 +139,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
 
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-primary me-3 p-2">
-                                        <i class="ti ti-medical-cross ti-sm"></i>
+                                        <i class="ti ti-book ti-sm"></i>
                                     </div>
 
                                     <div class="card-info">
@@ -152,10 +152,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-info me-3 p-2">
-                                        <i class="ti ti-brand-youtube ti-sm"></i>
+                                        <i class="ti ti-file ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">{{ App\Models\Course::count() }}</h5>
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-danger me-3 p-2">
                                         <i class="ti ti-highlight ti-sm"></i>
@@ -174,10 +174,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-success me-3 p-2">
-                                        <i class="ti ti-photo ti-sm"></i>
+                                        <i class="ti ti-video ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">
@@ -187,10 +187,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-success me-3 p-2">
-                                        <i class="ti ti-photo ti-sm"></i>
+                                        <i class="ti ti-microphone ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">
@@ -200,10 +200,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="badge rounded-pill bg-label-success me-3 p-2">
-                                        <i class="ti ti-photo ti-sm"></i>
+                                        <i class="ti ti-question-mark ti-sm"></i>
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">
@@ -266,9 +266,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             @if (!empty($course->image))
-                                                <img src="{{ asset($course->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset($course->image) }}" style="width:75px;height:70px;"  alt=""/>
                                             @else
-                                                <img src="{{ asset('assets/admin/images/courses.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset('assets/admin/images/courses.webp') }}" style="width:75px;height:70px;"  alt=""/>
                                             @endif
                                         </td>
                                         <td>{{ $course->course_name }}</td>
@@ -300,9 +300,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             @if (!empty($book->image))
-                                                <img src="{{ asset($book->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset($book->image) }}" style="width:75px;height:70px;"  alt=""/>
                                             @else
-                                                <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset('assets/admin/images/books.webp') }}" style="width:75px;height:70px;"  alt=""/>
                                             @endif
 
                                         </td>
@@ -336,9 +336,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             @if (!empty($blog->image))
-                                                <img src="{{ asset($blog->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset($blog->image) }}" style="width:75px;height:70px;"  alt=""/>
                                             @else
-                                                <img src="{{ asset('assets/admin/images/blogs.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                                <img src="{{ asset('assets/admin/images/blogs.webp') }}" style="width:75px;height:70px;"  alt=""/>
                                             @endif
 
                                         </td>
@@ -357,133 +357,127 @@
                 </div>
             </div>
 
-            {{-- mostViewed--}}
-            <div class="col-md-6  mb-4">
+
+            <div class="d-flex justify-content-around">
+                {{-- mostViewed--}}
+                <div class="col-md-5  mb-4">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="card-title m-0 me-2">
+                                <h5 class="m-0 me-2">{{__('Most Viewed')}}</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                @foreach($mostViewed as $view)
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="me-3">
+                                            @if($view->image)
+                                                <img src="{{$view->image}}" alt="img" class="rounded" width="90">
+                                            @else
+                                                <img src="{{asset('assets/admin/images/audios.webp')}}" alt="img" width="90">
+                                            @endif
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <h6 class="mb-0">{{\Illuminate\Support\Str::limit($view->name, 30)}}</h6>
+                                                <small class="text-muted d-block">{{__($view->type)}}</small>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <p class="mb-0 fw-medium">{{$view->view_count}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {{-- mostFavorite--}}
+            <div class="col-md-5  mb-4">
                 <div class="card h-100">
                     <div class="card-header d-flex justify-content-between">
                         <div class="card-title m-0 me-2">
-                            <h5 class="m-0 me-2">{{__('Most Viewed')}}</h5>
+                            <h5 class="m-0 me-2">{{__('Most Favorite')}}</h5>
                         </div>
                     </div>
                     <div class="card-body">
                         <ul class="p-0 m-0">
-                            @foreach($mostViewed as $view)
-                            <li class="d-flex mb-4 pb-1">
-                                <div class="me-3">
-                                    @if($view->image)
-                                    <img src="{{$view->image}}" alt="img" class="rounded" width="46">
-                                    @else
-                                    <img src="{{asset('assets/admin/images/audios.webp')}}" alt="img" width="46">
-                                    @endif
-                                </div>
-                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">{{\Illuminate\Support\Str::limit($view->name, 30)}}</h6>
-                                        <small class="text-muted d-block">{{__($view->type)}}</small>
+                            @foreach ($result as $item)
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="me-3">
+                                        <img src="{{$item['image']}}" alt="img" class="rounded" width="46">
                                     </div>
-                                    <div class="user-progress d-flex align-items-center gap-1">
-                                        <p class="mb-0 fw-medium">{{$view->view_count}}</p>
+                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">{{$item['name']}}</h6>
+                                            <small class="text-muted d-block">{{__($item['type'])}}</small>
+                                        </div>
+                                        <div class="user-progress d-flex align-items-center gap-1">
+                                            <p class="mb-0 fw-medium">{{$item['total'] }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
-             </div>
-        {{-- mostFavorite--}}
-        <div class="col-md-6  mb-4">
-            <div class="card h-100">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="card-title m-0 me-2">
-                        <h5 class="m-0 me-2">{{__('Most Favorite')}}</h5>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <ul class="p-0 m-0">
-                        @foreach ($result as $item)
-                            <li class="d-flex mb-4 pb-1">
-                                <div class="me-3">
-                                        <img src="{{$item['image']}}" alt="img" class="rounded" width="46">
-                                </div>
-                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">{{$item['name']}}</h6>
-                                        <small class="text-muted d-block">{{__($item['type'])}}</small>
-                                    </div>
-                                    <div class="user-progress d-flex align-items-center gap-1">
-                                        <p class="mb-0 fw-medium">{{$item['total'] }}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
         </div>
-    </div>
+
+
 
             <?php
-            $contacts = App\Models\Contact::latest()
+            $events = App\Models\UpcomingEvent::latest()
                 ->limit(5)
                 ->get();
             ?>
-            {{-- contact-us --}}
-            <div class="col-lg-8 mb-4 mb-lg-0">
+            {{-- events --}}
+            <div class="col-lg-12 mb-4 mb-lg-0">
                 <div class="card h-100">
                     <div class="card-header d-flex justify-content-between">
-                        <h5 class="card-title m-0 me-2">{{ trans('dashboard.sidebar.contacts') }}</h5>
+                        <h5 class="card-title m-0 me-2">{{ trans('dashboard.sidebar.latest-upcoming-events') }}</h5>
 
                     </div>
                     <div class="table-responsive">
                         <table class="table table-borderless border-top">
                             <thead class="border-bottom">
                             <tr>
-                                <th>{{ trans('dashboard.admins.name') }}</th>
-                                <th>{{ trans('dashboard.admins.email') }}</th>
-                                <th>{{ trans('dashboard.admins.mobile') }}</th>
-                                <th>{{ trans('dashboard.admins.message') }}</th>
-                                <th>{{ trans('dashboard.admins.message_type') }}</th>
-                                <th>{{ trans('dashboard.options') }}</th>
-
+                                <th>#</th>
+                                <th>{{ trans('dashboard.events.image') }}</th>
+                                <th>{{ trans('dashboard.events.main-title') }}</th>
+                                <th>{{ trans('dashboard.events.event-title') }}</th>
+                                <th>{{ trans('dashboard.events.instructor') }}</th>
+                                <th>{{ trans('dashboard.events.day') }}</th>
+                                <th>{{ trans('dashboard.events.event-date') }}</th>
+                                <th>{{ trans('dashboard.events.event-time') }}</th>
+                                <th>{{ trans('dashboard.events.country-time') }}</th>
+                                <th>{{ trans('dashboard.events.location') }}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($contacts as $contact)
+                            @foreach ($events as $event)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <div class="d-flex justify-content-start align-items-center">
-                                            {{ $contact->name }}
-                                        </div>
+                                        @if (!empty($event->image))
+                                            <img src="{{ asset($event->image) }}" style="width:50px;height:50px;"  alt=""/>
+                                        @else
+                                            <img src="{{ asset('assets/admin/images/events.webp') }}" style="width:50px;height:50px;"  alt=""/>
+                                        @endif
+
                                     </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <p class="mb-0 fw-medium">{{ $contact->email }}</p>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-label-success">{{ $contact->mobile }}</span></td>
-                                    <td>
-                                        <p class="mb-0 fw-medium">
-                                            {{ \Illuminate\Support\Str::limit($contact->message, 40) }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0 fw-medium">
-                                            {{ __($contact->type) }}</p>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal"
-                                                data-bs-target="#modalCenter-{{ $contact->id }}">
-                                            <i class="fa fa-eye"></i>
-                                            <span class="text"></span>
-                                        </button>
-                                    </td>
+                                    <td>{{ $event->main_title ?? '-----' }}</td>
+                                    <td>{{ $event->event_title ?? '-----' }}</td>
+                                    <td>{{ $event->instructor ?? '-----' }}</td>
+                                    <td>{{ $event->event_date?->translatedFormat('l') }}</td>
+                                    <td>{{ $event->event_date?->format('Y-m-d') }}</td>
+                                    <td>{{ $event->event_date?->format('H:i a') }}</td>
+                                    <td>{{ $event->country_time }}</td>
+                                    <td>{{ $event->location }}</td>
+
                                 </tr>
-                                <!-- Modal -->
-                                @include('admin.contacts.showContactUsModal')
-                                <!-- modal -->
-                            @empty
-                            @endforelse
+                            @endforeach
 
                             </tbody>
                         </table>
@@ -491,5 +485,5 @@
                 </div>
             </div>
             {{-- end contact-us --}}
-        </div>
+
 @endsection

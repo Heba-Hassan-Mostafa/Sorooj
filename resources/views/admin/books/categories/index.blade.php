@@ -10,13 +10,13 @@
         </a>
         {{ trans('dashboard.sidebar.books-categories') }}
     </h4>
-    <a href="{{ route('admin.books.category.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.books.category.create') }}" class="mainBtnStyle mb-2">
         {{ trans('dashboard.books.add-book-category') }}
     </a>
     <a href="{{ route('admin.books.category.sort-categories') }}" class="btn btn-warning font-weight-bold p-2"
        role="button" aria-pressed="true"> <i style="font-size: 16px" class="fas fa-sort"></i>
         {{ trans('dashboard.change_order') }}</a>
-    <div class="card">
+    <div class="card mt-4">
 
         <div class="table-responsive p-2">
 

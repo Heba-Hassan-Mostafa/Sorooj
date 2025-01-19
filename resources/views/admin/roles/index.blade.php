@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <div class="m-2">
-{{--                                @if ($role->getTranslation('name', 'en') !== 'admin' && $role->getTranslation('name', 'ar') !== 'أدمن')--}}
+                                @if ($role->name !== 'admin' && $role->name !== 'أدمن')
                                 <a href="{{ route('admin.roles.edit',$role->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
@@ -60,10 +60,10 @@
                                     @csrf
                                     @method('Delete')
                                 </form>
-{{--                                @else--}}
-{{--                                    <i class="fas fa-lock text-secondary" title="{{ trans('dashboard.locked') }}"></i>--}}
+                                @else
+                                    <i class="fas fa-lock text-secondary" title="{{ trans('dashboard.locked') }}"></i>
 
-{{--                                @endif--}}
+                                @endif
                             </div>
                         </td>
 

@@ -47,11 +47,7 @@
                         <td>
                             @if (!empty($admin->getRoleNames()))
                                 @foreach ($admin->getRoleNames() as $role)
-                                    @php
-                                        $roleName = json_decode($role, true);
-                                        $localizedRoleName = $roleName[app()->getLocale()] ?? $roleName['en'] ?? $role;
-                                    @endphp
-                                    <label class="btn btn-success" style="pointer-events: none">{{ $localizedRoleName }}</label>
+                                    <label class="btn btn-success" style="pointer-events: none">{{ $role }}</label>
                                 @endforeach
                             @endif
                         </td>
@@ -75,8 +71,7 @@
                                 @php
                                     // Decode the JSON role
                                     $hasAdminRole = $admin->getRoleNames()->contains(function ($role) {
-                                        $roleArray = json_decode($role, true);
-                                        return isset($roleArray['en']) && $roleArray['en'] === 'admin';
+                                        return $role === 'admin';
                                     });
                                 @endphp
 

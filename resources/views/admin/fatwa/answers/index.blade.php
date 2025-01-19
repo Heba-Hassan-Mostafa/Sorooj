@@ -32,7 +32,9 @@
                         <td>{{ $answer->created_at->format('Y-m-d') }}</td>
                         <td>
                             <div class="m-2">
-                                <a href="{{ route('admin.fatwa.answers.edit',$answer->id) }}"  class="btn btn-info btn-sm text-white"  title="{{ trans('dashboard.edit') }}">
+                                <a href="{{ route('admin.fatwa.answers.edit',$answer->id) }}"
+                                   class="btn btn-info btn-sm text-white"
+                                   title="{{ trans('dashboard.edit') }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                     <a onclick="fireDeleteEvent({{ $answer->id }})" type="button"

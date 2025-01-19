@@ -42,7 +42,7 @@ class BookController extends BaseApiController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $book->increment('view_count');
+       // $book->increment('view_count');
         return $this->respondWithSuccess(__('Books details'), [
             'Books' => (new BookResource($book)),
         ]);

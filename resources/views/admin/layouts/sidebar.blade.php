@@ -56,6 +56,11 @@
                         <div>{{ trans('dashboard.sidebar.courses') }}</div>
                     </a>
                 </li>
+                <li class="menu-item {{ url()->current() == route('admin.courses.subscriptions.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.courses.subscriptions.index') }}" class="menu-link">
+                        <div>{{ trans('dashboard.sidebar.courses-subscriptions') }}</div>
+                    </a>
+                </li>
                 <li class="menu-item {{ url()->current() == route('admin.courses.comments.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.courses.comments.index') }}" class="menu-link">
                         <div>{{ trans('dashboard.sidebar.courses-comments') }}</div>

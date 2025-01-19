@@ -32,9 +32,10 @@
 
 
                         <div class="col-lg-12">
-                            <ul id="treeview1">
+                            <ul id="treeview1" class="list-unstyled">
                                 <h4 class="selectCatTo"> {{ trans('dashboard.books.choose-category') }}</h4>
-                                <li><a href="#">{{ trans('dashboard.sidebar.books-categories') }}</a>
+                                <li class="allCateSelect grayBgColorStyle branch">
+                                    <a href="#">{{ trans('dashboard.sidebar.books-categories') }}</a>
                                     <ul class="row fristParent">
                                 </li>
                                 @foreach ($parentCategories  as $parentCategory)

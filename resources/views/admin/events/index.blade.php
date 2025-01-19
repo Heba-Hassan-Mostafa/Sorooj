@@ -10,10 +10,10 @@
         </a>
         {{ trans('dashboard.sidebar.upcoming-events') }}
     </h4>
-    <a href="{{ route('admin.events.upcoming-events.create') }}" class="btn btn-primary mb-2">
+    <a href="{{ route('admin.events.upcoming-events.create') }}" class=" mainBtnStyle me-2  mb-2">
         {{ trans('dashboard.events.add-event') }}
     </a>
-    <div class="card">
+    <div class="card mt-3">
         <div class="table-responsive p-2">
             <table class="myDatatable table table-bordered">
                 <thead>

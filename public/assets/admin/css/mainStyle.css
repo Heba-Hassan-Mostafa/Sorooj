@@ -109,3 +109,35 @@
 .mainBtnStyle:hover {
     color: #fff;
 }
+.accordion-button {
+    background: #424C61 !important;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff!important;
+}
+.accordion-button:hover {
+    color: #fff!important;
+    background: #424C61 !important;
+}
+.accordion-header {
+    color: #fff!important;
+}
+.reOrder {
+    cursor : pointer;
+    background: #f5f3ed;
+    border-bottom: 1px solid #39455c;
+}
+.reOrder td {
+    padding: 12px!important;
+}
+.list-group .active {
+    background: #F5F3ED!important;
+    border: 1px solid #9F854E!important;
+    color: #424C61!important;
+    font-weight: bold!important;
+}
+.list-group-item-action {
+    background: #fff!important;
+    color: #9F854E!important;
+    font-weight: bold!important;
+}

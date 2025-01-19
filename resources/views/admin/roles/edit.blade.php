@@ -24,33 +24,13 @@
                     <div class="row">
                         <div class="card-header">
                             <h5 class="card-title bold brownColor">{{ trans('dashboard.roles.role-name') }}</h5>
-                            <ul class="nav nav-tabs" role="tablist">
-                                @foreach (app_languages() as $key => $one)
-                                    <li class="nav-item">
-                                        <a class="mainColor nav-link {{ $key == app()->getLocale() ? 'active' : '' }}" id="tab-{{ $key }}-tab" data-bs-toggle="tab"
-                                           href="#tab-{{ $key }}" role="tab">
-                                            {{ $one['native'] }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </div>
-                        <div class="card-body table-responsive">
-                            <fieldset>
-                                <div class="tab-content">
-                                    @foreach (app_languages() as $key => $one)
-                                        <div class="tab-pane fade {{ $key == app()->getLocale() ? 'show active' : '' }}" id="tab-{{ $key }}" role="tabpanel">
-                                            <div class="form-body">
-                                                <div class="form-group row">
-                                                    <input type="text" name="name_{{ $key }}" class="form-control" placeholder="{{ trans('dashboard.roles.role-name') }}" value="{{ old('name_' . $key, $role->getTranslation('name', $key)) }}">
-                                                    @error('name_' . $key)
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+
+                        <input type="text" name="name" class="form-control" placeholder="{{ trans('dashboard.roles.role-name') }}" value="{{ old('name', $role->name) }}">
+                        @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                                 <hr />
                                 <div class="form-group">
@@ -89,9 +69,7 @@
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary mt-5">{{ trans('dashboard.save') }}</button>
                                 </div>
-                            </fieldset>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>

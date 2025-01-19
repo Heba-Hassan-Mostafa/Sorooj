@@ -18,6 +18,7 @@ class AudioResource extends JsonResource
             'category'          => new AudioCategoryResource($this->category),
             'publish_date'      => $this->publish_date,
             'brief_description' => $this->brief_description,
+            'view_count'        => $this->view_count,
             'keywords'          => $this->keywords,
             'description'       => $this->description,
             'status'            => $this->status,

@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardWeb\V1\ContactsController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCategoryController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseCommentController;
 use App\Http\Controllers\DashboardWeb\V1\Courses\CourseController;
+use App\Http\Controllers\DashboardWeb\V1\Courses\CourseSubscriptionController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaAnswerController;
 use App\Http\Controllers\DashboardWeb\V1\Fatwa\FatwaQuestionController;
 use App\Http\Controllers\DashboardWeb\V1\HomeSections\SubscriberController;
@@ -63,18 +64,13 @@ Route::group(['middleware'=>['guest'],'prefix' => 'admin', 'as' => 'admin.'], fu
 });
 Route::group(['middleware'=>['auth'] ,'prefix' => 'admin', 'as' => 'admin.'], function () {
 
-
-    Route::post('/password/change', [AuthController::class, 'changePassword'])->name('password.change');
-
     // OTP Routes
     Route::post('/otp/send', [AuthController::class, 'sendOTP'])->name('otp.send');
 
-    // Profile (Protected with Middleware)
-    Route::get('/profile', [AuthController::class, 'profile'])->name('profile')->middleware('auth');
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     // Account Deletion
-    Route::post('/delete-account', [AuthController::class, 'deleteAccount'])->name('account.delete')->middleware('auth');
+    Route::post('/delete-account', [AuthController::class, 'deleteAccount'])->name('account.delete');
 
   });
 Route::group(
@@ -87,6 +83,14 @@ Route::group(
     Route::group(['middleware'=>['auth'] ,'prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+        // Change Password
+        Route::get('/change/password', [AuthController::class, 'changePasswordForm'])->name('show-change-password');
+        Route::put('/change/password', [AuthController::class, 'changePassword'])->name('change-password');
+
+        // Profile
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+        Route::put('/update-profile', [AuthController::class, 'updateProfile'])->name('update-profile');
 
         # Roles
         Route::get('/roles/change-status',      [RoleController::class,'changeStatus'])->name('roles.change-status');
@@ -120,6 +124,8 @@ Route::group(
             //comments
             Route::get('/comments/change-status',      [CourseCommentController::class,'changeStatus'])->name('comments.change-status');
             Route::resource('/comments', CourseCommentController::class);
+
+            Route::resource('/subscriptions', CourseSubscriptionController::class);
 
         });
 
