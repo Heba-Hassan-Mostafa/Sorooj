@@ -102,6 +102,8 @@ return [
         'show_comment'                  => 'Show Comment',
         'subscriptions'                 => 'Subscribers',
         'subscriptions-count'           => 'Subscribers Count',
+        'cannot-delete-course'          => 'Cannot Delete Course That Has Subscriptions',
+
     ],
     'blogs' =>[
         'add-blog-category'            => 'Add New Category',

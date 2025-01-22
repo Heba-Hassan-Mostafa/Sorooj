@@ -101,31 +101,6 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-
-{{--                            <div id="videoInputs">--}}
-{{--                                @foreach ($course->videos as $index => $video)--}}
-{{--                                    <div class="row mb-2 videosBox">--}}
-{{--                                        <input type="hidden" name="videos[{{ $index }}][id]" value="{{ $video->id }}">--}}
-{{--                                        <div class="col-5">--}}
-{{--                                            <input type="text" name="videos[{{ $index }}][name]" class="form-control"--}}
-{{--                                                   value="{{ $video->name }}"--}}
-{{--                                                   placeholder="{{ trans('dashboard.courses.video_name') }}">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-5">--}}
-{{--                                            <input type="text" name="videos[{{ $index }}][youtube_link]" class="form-control"--}}
-{{--                                                   value="{{ $video->youtube_link }}"--}}
-{{--                                                   placeholder="{{ trans('dashboard.courses.enter_youtube_link') }}">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-2">--}}
-{{--                                            <button type="button" class="btn btn-danger removeVideo">{{ trans('dashboard.remove') }}</button>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
-{{--                            <button type="button" class="btn btn-success addVideo">{{ trans('dashboard.add') }}</button>--}}
-{{--                        </div>--}}
-
                             <!-- Videos Repeater -->
                         <div id="videos-repeater"  class="mb-4">
                             <label for="videos" class="form-label titles">
@@ -144,13 +119,15 @@
                                             </div>
                                             <div class="col-2">
                                                 <button type="button" class="btn btn-danger remove-video-row" {{ $loop->first ? 'disabled' : '' }}>{{trans('dashboard.remove')}}</button>
-                                                <button type="button" id="add-video-row" class="btn btn-success addVideo">{{trans('dashboard.add')}}</button>
 
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <button type="button" id="add-video-row" class="btn btn-success addVideo">{{trans('dashboard.add')}}</button>
+                        </div>
 
                             <div class="col-6 mb-3">
                             <label for="attachments" class="form-label titles">
