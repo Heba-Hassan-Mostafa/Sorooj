@@ -104,6 +104,7 @@ return [
         'show_comment'                  => 'عرض التعليق',
         'subscriptions'                 => 'المشتركين',
         'subscriptions-count'           => 'عدد المشتركين',
+        'cannot-delete-course'          => 'لا يمكن حذف الدورة بسبب وجود مشتركين',
 
     ],
     'blogs' =>[

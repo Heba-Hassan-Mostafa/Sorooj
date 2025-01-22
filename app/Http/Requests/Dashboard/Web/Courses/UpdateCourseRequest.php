@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 
-class CourseRequest extends FormRequest
+class UpdateCourseRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -33,10 +33,18 @@ class CourseRequest extends FormRequest
             'description'           => ['required','string'],
             'image'                 =>['nullable','image','mimes:png,jpg,jpeg,gif,webp,svg','max:2048'],
             'status'                =>['boolean','in:0,1'],
-            'videos.*.name'         => 'nullable|string|max:255',
-            'videos.*.youtube_link' => 'nullable|url',
             'attachments.*'         => 'nullable|mimes:pdf|max:64000',
             'exam_link'             => 'nullable|url',
+            // Videos validation
+            'videos'                    => 'nullable|array',
+            'videos.*.id'               => 'nullable|exists:videos,id',
+            'videos.*.name'             => 'nullable|string|max:255',
+            'videos.*.youtube_link'     => 'nullable|url|max:255',
+
+            // New video entries
+            'videos.new'                => 'nullable|array',
+            'videos.new.*.name'         => 'sometimes|string|max:255',
+            'videos.new.*.youtube_link' => 'sometimes|url|max:255',
 
         ];
 

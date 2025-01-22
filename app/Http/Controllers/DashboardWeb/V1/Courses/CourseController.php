@@ -82,13 +82,72 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
+//    public function update(CourseRequest $request, Course $course)
+//    {
+//
+//        $this->repository->update($course,$request->validated());
+//        return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.updated-successfully'));
+//
+//
+//    }
+
     public function update(CourseRequest $request, Course $course)
     {
+        DB::beginTransaction();
 
-        $this->repository->update($course,$request->validated());
-        return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.updated-successfully'));
+        try {
+            // Update course details
+            $course->update($request->validated());
 
+            // Update or Delete Existing Videos
+            $existingVideoIds = collect($request->input('videos', []))->pluck('id')->filter();
+            $course->videos()->whereNotIn('id', $existingVideoIds)->delete();
 
+            foreach ($request->input('videos', []) as $videoData) {
+                if (isset($videoData['id'])) {
+                    $course->videos()->where('id', $videoData['id'])->update([
+                        'name' => $videoData['name'],
+                        'youtube_link' => $videoData['youtube_link'],
+                    ]);
+                }
+            }
+
+            // Add New Videos
+            if ($request->has('videos.new')) {
+                foreach ($request->input('videos.new') as $newVideo) {
+                    if ($newVideo) {
+                        $lastVideoOrder = $course->videos()->max('order_position') ?? 0; // Get last order position
+                        $course->videos()->create([
+                            'name' => $newVideo['name'],
+                            'youtube_link' => $newVideo['youtube_link'],
+                            'publish_date' => $course->publish_date,
+                            'videoable_type' => Course::class,
+                            'videoable_id' => $course->id,
+                            'order_position' => $lastVideoOrder + 1,
+                        ]);
+                    }
+                }
+            }
+            // update attachments
+            $this->handleMedia($course, $request);
+
+            DB::commit();
+            return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.updated-successfully'));
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    private function handleMedia($course, $request): void
+    {
+        if (isset($request->attachments)) {
+            foreach ($request->attachments as $media) {
+                if (in_array($media->extension(), ['pdf'])) {
+                    uploadMedia('attachments', $media, $course, false);
+                }
+            }
+        }
     }
 
     /**
@@ -97,10 +156,10 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         //TODO: check if this course can be deleted
-//        $res = $this->repository->canRemove($course);
-//        if (!$res) {
-//            return redirect()->route('admin.courses.courses.index')->with('error', __('dashboard.cannot-delete'));
-//        }
+        $res = $course->subscriptions()->count();
+        if (!$res) {
+            return redirect()->route('admin.courses.courses.index')->with('error', __('dashboard.courses.cannot-delete'));
+        }
         $this->repository->remove($course);
         return redirect()->route('admin.courses.courses.index')->with('success', __('dashboard.deleted-successfully'));
     }

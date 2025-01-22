@@ -97,60 +97,58 @@ class CourseConcrete extends BaseConcrete implements CourseContract
     }
 
 
-    public function update(Model $model, array $attributes = []): mixed
-    {
-        DB::beginTransaction();
-
-        try {
-            // Update main course attributes
-
-            $record = parent::update($model, $attributes);
-
-           // Update course image
-            if (isset($attributes['image']) && $attributes['image']->isValid()) {
-                uploadImage('image', $attributes['image'], $record);
-            }
-
-        // Update videos
-        if (isset($attributes['videos'])) {
-            $existingVideos = $record->videos->keyBy('id');
-            foreach ($attributes['videos'] as $video) {
-                if (isset($video['id']) && $existingVideos->has($video['id'])) {
-                    // Update existing video
-                    $existingVideos->get($video['id'])->update([
-                        'name' => $video['name'],
-                        'youtube_link' => $video['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                    ]);
-                    $existingVideos->forget($video['id']);
-                } else {
-                    // Create new video
-                    $record->videos()->create([
-                        'name' => $video['name'],
-                        'youtube_link' => $video['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                    ]);
-                }
-            }
-
-            // Delete removed videos
-            foreach ($existingVideos as $remainingVideo) {
-                $remainingVideo->delete();
-            }
-        }
-            // update attachments
-            $this->handleMedia($record, $attributes);
-
-            DB::commit();
-
-            return $record;
-       } catch (\Exception $e) {
-            DB::rollback();
-           return redirect()->back()->with(['error' => $e->getMessage()]);
-        }
-    }
-
-
+//    public function update(Model $model, array $attributes = []): mixed
+//    {
+//        DB::beginTransaction();
+//
+//        try {
+//            // Update main course attributes
+//
+//            $record = parent::update($model, $attributes);
+//
+//           // Update course image
+//            if (isset($attributes['image']) && $attributes['image']->isValid()) {
+//                uploadImage('image', $attributes['image'], $record);
+//            }
+//
+//        // Update videos
+//        if (isset($attributes['videos'])) {
+//            $existingVideos = $record->videos->keyBy('id');
+//            foreach ($attributes['videos'] as $video) {
+//                if (isset($video['id']) && $existingVideos->has($video['id'])) {
+//                    // Update existing video
+//                    $existingVideos->get($video['id'])->update([
+//                        'name' => $video['name'],
+//                        'youtube_link' => $video['youtube_link'],
+//                        'publish_date' => $record->publish_date,
+//                    ]);
+//                    $existingVideos->forget($video['id']);
+//                } else {
+//                    // Create new video
+//                    $record->videos()->create([
+//                        'name' => $video['name'],
+//                        'youtube_link' => $video['youtube_link'],
+//                        'publish_date' => $record->publish_date,
+//                    ]);
+//                }
+//            }
+//
+//            // Delete removed videos
+//            foreach ($existingVideos as $remainingVideo) {
+//                $remainingVideo->delete();
+//            }
+//        }
+//            // update attachments
+//            $this->handleMedia($record, $attributes);
+//
+//            DB::commit();
+//
+//            return $record;
+//       } catch (\Exception $e) {
+//            DB::rollback();
+//           return redirect()->back()->with(['error' => $e->getMessage()]);
+//        }
+//    }
 
     // add comment to course
     public function addComment($courseId, array $attributes = [])
