@@ -55,7 +55,7 @@ class AuthClientService extends AuthAbstract
         }
 
         $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken;
-        return $this->handelMobileOTP($user);
+        return $this->handelMailOTP($user);
     }
 
     public function updateProfile(array $attributes = [])

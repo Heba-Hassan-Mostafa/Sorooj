@@ -99,6 +99,11 @@ class CourseController extends Controller
             // Update course details
             $course->update($request->validated());
 
+            // Update course image
+           if (isset($request->image) && $request->image->isValid()) {
+                uploadImage('image', $request->image, $course);
+            }
+
             // Update or Delete Existing Videos
             $existingVideoIds = collect($request->input('videos', []))->pluck('id')->filter();
             $course->videos()->whereNotIn('id', $existingVideoIds)->delete();

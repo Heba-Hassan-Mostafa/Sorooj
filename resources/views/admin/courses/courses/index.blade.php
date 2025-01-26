@@ -82,9 +82,9 @@
                                         @method('Delete')
                                     </form>
 
-{{--                                <a href="{{ route('admin.courses.videos.sort',$course->id) }}"  class="btn btn-warning btn-sm text-white"  title="{{ trans('dashboard.courses.course-videos-reorder') }}">--}}
-{{--                                    <i class="fas fa-sort"></i>--}}
-{{--                                </a>--}}
+                                <a href="{{ route('admin.courses.videos.sort',$course->id) }}"  class="btn btn-warning btn-sm text-white"  title="{{ trans('dashboard.courses.course-videos-reorder') }}">
+                                    <i class="fas fa-sort"></i>
+                                </a>
                             </div>
                         </td>
 

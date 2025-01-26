@@ -17,6 +17,8 @@ class BlogCategoryController extends BaseApiController
     protected int $limit = 0;
     protected int $page = 0;
 
+    protected string $orderBy = 'order_position';
+
     protected array $conditions = [
         'where' => [
             'type' => CategoryTypeEnum::BLOG,
