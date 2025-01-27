@@ -4,7 +4,9 @@
           <img src="{{ asset('assets/admin/images/logo.png') }}" alt="" class="w-60" style="">
         </a>
     </div>
-
+    @php
+    $permissions = auth()->user()->getAllPermissions();
+       @endphp
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1 mt-5 ">
@@ -46,11 +48,19 @@
                 <div>{{ trans('dashboard.sidebar.courses') }}</div>
             </a>
             <ul class="menu-sub">
+
+{{--                @if($permissions->pluck('name')->contains(function ($name) {--}}
+{{--                    return in_array($name, [--}}
+{{--                      trans('permissions.responses.index') . ' ' . trans('permissions.responses.course_categories'),--}}
+{{--                        'Course categories index', // Fallback to English--}}
+{{--                    ]);--}}
+{{--                }))--}}
                 <li class="menu-item {{ url()->current() == route('admin.courses.category.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.courses.category.index') }}" class="menu-link">
                         <div>{{ trans('dashboard.sidebar.courses-categories') }}</div>
                     </a>
                 </li>
+{{--                @endif--}}
                 <li class="menu-item {{ url()->current() == route('admin.courses.courses.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.courses.courses.index') }}" class="menu-link">
                         <div>{{ trans('dashboard.sidebar.courses') }}</div>

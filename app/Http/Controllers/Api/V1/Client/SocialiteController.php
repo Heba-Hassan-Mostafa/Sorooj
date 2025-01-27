@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Client;
 
+use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -36,6 +37,8 @@ class SocialiteController extends Controller
                 'email_verified_at' => now(),
                 'first_name' => $response->getName(),
                 'last_name' => $response->getNickname(),
+                'type' => UserTypeEnum::CLIENT,
+                'is_active' => 1
             ]
         );
 
