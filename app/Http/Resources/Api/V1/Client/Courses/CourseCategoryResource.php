@@ -15,6 +15,7 @@ class CourseCategoryResource extends JsonResource
             'subcategories' => CourseCategoryResource::collection($this->subcategory),
             'status' => $this->status,
             'order_position' => $this->order_position,
+            'courses_count' => $this->courses->count(),
             'created_at' => $this->created_at->format('Y-m-d'),
 
         ];

@@ -153,6 +153,12 @@ class StaticPageController extends Controller
         $data['status'] = 200;
         return $this->setStatusCode(200)->respondWithArray($data);
     }
+    public function getFacebookLive(): JsonResponse
+    {
+        $data['data'] = collect(setting('facebook-live'))->toArray() ?? '';
+        $data['status'] = 200;
+        return $this->setStatusCode(200)->respondWithArray($data);
+    }
     public function getMixlrLive(): JsonResponse
     {
         $data['data'] = collect(setting('mixlr-live'))->toArray() ?? '';

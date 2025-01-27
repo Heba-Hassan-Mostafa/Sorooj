@@ -31,7 +31,7 @@ class VideosReorder extends Component
 
         foreach($items as $item)
         {
-            Video::find($item['value'])->update(['order_position'=>$item['order']]);
+            Video::where('videoable_type','Course')->find($item['value'])->update(['order_position'=>$item['order']]);
         }
     }
 }

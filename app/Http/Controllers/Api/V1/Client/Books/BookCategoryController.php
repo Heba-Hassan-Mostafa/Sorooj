@@ -19,6 +19,8 @@ class BookCategoryController extends BaseApiController
 
     protected string $orderBy = 'order_position';
 
+    protected string $orderDir = 'ASC';
+
     protected array $conditions = [
         'where' => [
             'type' => CategoryTypeEnum::BOOK,

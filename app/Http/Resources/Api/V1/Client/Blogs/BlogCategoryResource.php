@@ -9,12 +9,13 @@ class BlogCategoryResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'type' => $this->type,
-            'status' => $this->status,
+            'id'             => $this->id,
+            'name'           => $this->name,
+            'type'           => $this->type,
+            'status'         => $this->status,
             'order_position' => $this->order_position,
-            'created_at' => $this->created_at->format('Y-m-d'),
+            'blogs_count'    => $this->blogs->count(),
+            'created_at'     => $this->created_at->format('Y-m-d'),
 
         ];
     }

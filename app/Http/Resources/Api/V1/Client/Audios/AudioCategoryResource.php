@@ -14,6 +14,7 @@ class AudioCategoryResource extends JsonResource
             'type'           => $this->type,
             'status'         => $this->status,
             'order_position' => $this->order_position,
+            'audios_count'   => $this->audios->count(),
             'created_at'     => $this->created_at->format('Y-m-d'),
 
         ];

@@ -100,23 +100,27 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div id="videoRepeater" class="mb-4 ">
+                        <!-- Videos Repeater -->
+                        <div id="videos-repeater"  class="mb-4">
                             <label for="videos" class="form-label titles">
-                                <i class="fa-brands fa-youtube"></i>
                                 {{ trans('dashboard.blogs.videos_youtube_links') }}
                             </label>
-                            <div id="videoInputs">
-                                <div class="row mb-2 videosBox">
+                            <div class="video-row mb-3">
+                                <div class="row mb-2">
                                     <div class="col-5">
-                                        <input type="text" name="video_name" class="form-control" placeholder="{{ trans('dashboard.blogs.video_name') }}" />
+                                        <input type="text" name="videos[0][name]" class="form-control" placeholder="{{ trans('dashboard.blogs.video_name') }}">
                                     </div>
                                     <div class="col-5">
-                                        <input type="text" name="youtube_link" class="form-control" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}" />
+                                        <input type="text" name="videos[0][youtube_link]" class="form-control" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}" >
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-danger remove-video-row" disabled>{{trans('dashboard.remove')}}</button>
+                                        <button type="button" id="add-video-row" class="btn btn-success addVideo">{{ trans('dashboard.add') }}</button>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col-6 mb-3 mt-1">
                             <label for="attachments" class="form-label titles">
@@ -132,6 +136,13 @@
                             <label for="image" class="form-label titles">{{ trans('dashboard.image') }}</label>
                             <input type="file" name="image" value="{{ old('image') }}" class="form-control" />
                             @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="audio_file" class="form-label">{{ trans('dashboard.audios.audio_file') }}</label>
+                            <input type="file" name="audio_file" class="form-control" />
+                            @error('audio_file')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -161,6 +172,53 @@
 @section('scripts')
     <script src="{{ asset('assets/admin/vendor/libs/treeview/treeview.js') }}"></script>
 
+    {{--    Add new input for video--}}
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let videoIndex = 1; // Keeps track of video rows
+
+            // Add new video row
+            document.getElementById('add-video-row').addEventListener('click', () => {
+                const videosRepeater = document.getElementById('videos-repeater');
+                const newVideoRow = document.createElement('div');
+                newVideoRow.classList.add('video-row', 'mb-3');
+
+                newVideoRow.innerHTML = `
+                <div class="row">
+                    <div class="col-5">
+                        <input type="text" name="videos[${videoIndex}][name]" class="form-control" placeholder="{{ trans('dashboard.blogs.video_name') }}" required>
+                    </div>
+                    <div class="col-5">
+                        <input type="text" name="videos[${videoIndex}][youtube_link]" class="form-control" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger remove-video-row">{{trans('dashboard.remove')}}</button>
+                    </div
+                </div>
+            `;
+
+                videosRepeater.appendChild(newVideoRow);
+                videoIndex++;
+            });
+
+            // Remove video row
+            document.getElementById('videos-repeater').addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('remove-video-row')) {
+                    const videoRow = e.target.closest('.video-row');
+
+                    // Ensure the first row cannot be removed
+                    const allRows = document.querySelectorAll('.video-row');
+                    if (allRows[0] === videoRow) {
+                        return; // Do nothing if trying to remove the first row
+                    }
+
+                    videoRow.remove();
+                }
+            });
+        });
+    </script>
 
 
 {{--    ckeditor    --}}

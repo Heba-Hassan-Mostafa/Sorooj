@@ -5,10 +5,12 @@ namespace App\Http\Controllers\DashboardWeb\V1\Blogs;
 use App\Enum\CategoryTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Web\Blogs\BlogRequest;
+use App\Http\Requests\Dashboard\Web\Blogs\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Repositories\Contracts\BlogContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class BlogController extends Controller
@@ -81,13 +83,75 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BlogRequest $request, Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
+        DB::beginTransaction();
 
-        $this->repository->update($blog,$request->validated());
-        return redirect()->route('admin.blogs.blogs.index')->with('success', __('dashboard.updated-successfully'));
+        try {
+            // Update main blog attributes
+
+            $blog->update($request->validated());
+
+            // Update course image
+            if (isset($request->image) && $request->image->isValid()) {
+                uploadImage('image', $request->image, $blog);
+            }
+            if (isset($request->audio_file) && $request->audio_file->isValid()) {
+                uploadImage('audio_file', $request->audio_file, $blog);
+            }
+
+            // Update or Delete Existing Videos
+            $existingVideoIds = collect($request->input('videos', []))->pluck('id')->filter();
+            $blog->videos()->whereNotIn('id', $existingVideoIds)->delete();
+
+            foreach ($request->input('videos', []) as $videoData) {
+                if (isset($videoData['id'])) {
+                    $blog->videos()->where('id', $videoData['id'])->update([
+                        'name' => $videoData['name'],
+                        'youtube_link' => $videoData['youtube_link'],
+                    ]);
+                }
+            }
+
+            // Add New Videos
+            if ($request->has('videos.new')) {
+                foreach ($request->input('videos.new') as $newVideo) {
+                    if ($newVideo) {
+                        $lastVideoOrder = $blog->videos()->max('order_position') ?? 0; // Get last order position
+                        $blog->videos()->create([
+                            'name' => $newVideo['name'],
+                            'youtube_link' => $newVideo['youtube_link'],
+                            'publish_date' => $blog->publish_date,
+                            'videoable_type' => Blog::class,
+                            'videoable_id' => $blog->id,
+                            'order_position' => $lastVideoOrder + 1,
+                        ]);
+                    }
+                }
+            }
+
+            // update attachments
+            $this->handleMedia($blog, $request);
+
+            DB::commit();
+            return redirect()->route('admin.blogs.blogs.index')->with('success', __('dashboard.updated-successfully'));
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
 
 
+    }
+    private function handleMedia($blog, $request): void
+    {
+        if (isset($request->attachments)) {
+            foreach ($request->attachments as $media) {
+                if (in_array($media->extension(), ['pdf'])) {
+                    uploadMedia('attachments', $media, $blog, false);
+                }
+            }
+        }
     }
 
     /**
@@ -152,5 +216,20 @@ class BlogController extends Controller
         return response()->json(['success' => false, 'message' => 'video not found.'], 404);
     }
 
+    public function videosSort(Blog $blog)
+    {
+        $this->repository->getLivewireBlogVideos($blog);
+        return view('admin.blogs.blogs.videos-sort',compact('blog'));
+    }
 
+    public function deleteAudioFile(Blog $audio)
+    {
+
+        if ($audio->hasMedia('audio_file')) {
+            $audio->getFirstMedia('audio_file')->delete();
+            return response()->json(['success' => true, 'message' => 'audio deleted successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'audio file not found.'], 404);
+    }
 }

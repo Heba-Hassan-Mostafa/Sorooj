@@ -102,38 +102,33 @@
                             @enderror
                         </div>
 
-                        <div id="videoRepeater" class="mb-4">
+                        <!-- Videos Repeater -->
+                        <div id="videos-repeater"  class="mb-4">
                             <label for="videos" class="form-label titles">
-                                <i class="fa-brands fa-youtube"></i>
                                 {{ trans('dashboard.blogs.videos_youtube_links') }}
                             </label>
-                            <div id="videoInputs">
-                                @foreach ($blog->videos as  $video)
-                                    <div class="row mb-2 videosBox">
-                                        <input type="hidden" name="id" value="{{ $video->id }}">
+                            <!-- Existing Videos -->
+                            @foreach($blog->videos as $index => $video)
+                                <div class="video-row mb-3">
+                                    <div class="row mb-2">
                                         <div class="col-5">
-                                            <input type="text" name="video_name" class="form-control"
-                                                   value="{{ $video->name }}"
-                                                   placeholder="{{ trans('dashboard.blogs.video_name') }}">
+                                            <input type="hidden" name="videos[{{ $video->id }}][id]" value="{{ $video->id }}">
+                                            <input type="text" name="videos[{{ $video->id }}][name]" class="form-control" value="{{ $video->name }}" placeholder="{{ trans('dashboard.blogs.video_name') }}">
                                         </div>
                                         <div class="col-5">
-                                            <input type="text" name="youtube_link" class="form-control"
-                                                   value="{{ $video->youtube_link }}"
-                                                   placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}">
+                                            <input type="text" name="videos[{{ $video->id }}][youtube_link]" class="form-control" value="{{ $video->youtube_link }}" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}">
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-danger remove-video-row" {{ $loop->first ? 'disabled' : '' }}>{{trans('dashboard.remove')}}</button>
+
                                         </div>
                                     </div>
-                                    @php
-                                        $url = getYoutubeId($video->youtube_link);
-                                    @endphp
-                                    @if ($url)
-                                        <iframe width="320" height="200"
-                                                src="https://www.youtube.com/embed/{{ $url }}" allowfullscreen>
-                                        </iframe>
-                                    @endif
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-
+                        <div class="mb-4">
+                            <button type="button" id="add-video-row" class="btn btn-success addVideo">{{trans('dashboard.add')}}</button>
+                        </div>
                         <div class="col-6 mb-3">
                             <label for="attachments" class="form-label titles">
                                 <i class="fa-solid fa-file-pdf"></i>
@@ -174,6 +169,19 @@
                             @enderror
                         </div>
 
+                        <div class="col-6 mb-3">
+                            <label for="audio_file" class="form-label">{{ trans('dashboard.fatwa.audio_file') }}</label>
+                            <input type="file" name="audio_file"  class="form-control" />
+                            @if($blog->getFirstMediaUrl('audio_file'))
+                                <audio src="{{ $blog->getFirstMediaUrl('audio_file') }}" controls></audio>
+                                <button type="button" class="btn btn-danger btn-sm delete-audio" data-id="{{ $blog->id }}">
+                                    {{ trans('dashboard.delete') }} {{ trans('dashboard.fatwa.audio_file') }}
+                                </button>
+                            @endif
+                            @error('audio_file')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="col-12 mb-3">
                             <label for="keywords" class="form-label">{{ trans('dashboard.keywords') }}</label>
                             <input type="text" name="keywords" value="{{ old('keywords', $blog->keywords) }}" class="form-control" />
@@ -201,40 +209,50 @@
     <script src="{{ asset('assets/admin/vendor/libs/treeview/treeview.js') }}"></script>
 
     {{--    Add new input for video--}}
+
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let videoIndex = {{ $blog->videos->count() }}; // Start index for new videos
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const videoInputs = document.getElementById('videoInputs');
-            let videoIndex = {{ $blog->videos->count() }}; // Start from the count of existing videos
+            // Add new video row
+            document.getElementById('add-video-row').addEventListener('click', () => {
+                const videosRepeater = document.getElementById('videos-repeater');
+                const newVideoRow = document.createElement('div');
+                newVideoRow.classList.add('video-row', 'mb-3');
 
-            // Add new video input
-            document.querySelector('.addVideo').addEventListener('click', function () {
-                const newInput = `
-            <div class="row mb-3">
-                <div class="col-5">
-                    <input type="text" name="videos[${videoIndex}][name]" class="form-control"
-                           placeholder="{{ trans('dashboard.blogs.video_name') }}">
+                newVideoRow.innerHTML = `
+                <div class="row">
+                    <div class="col-5">
+                        <input type="text" name="videos[new][${videoIndex}][name]" class="form-control" placeholder="{{ trans('dashboard.blogs.video_name') }}">
+                    </div>
+                    <div class="col-5">
+                        <input type="text" name="videos[new][${videoIndex}][youtube_link]" class="form-control" placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger remove-video-row">{{trans('dashboard.remove')}}</button>
+                    </div>
                 </div>
-                <div class="col-5">
-                    <input type="text" name="videos[${videoIndex}][youtube_link]" class="form-control"
-                           placeholder="{{ trans('dashboard.blogs.enter_youtube_link') }}">
-                </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-danger removeVideo">{{ trans('dashboard.remove') }}</button>
-                </div>
-            </div>`;
-                videoInputs.insertAdjacentHTML('beforeend', newInput);
+            `;
+
+                videosRepeater.appendChild(newVideoRow);
                 videoIndex++;
             });
 
-            // Remove video input
-            videoInputs.addEventListener('click', function (e) {
-                if (e.target.classList.contains('removeVideo')) {
-                    e.target.closest('.row').remove();
+            // Remove video row
+            document.getElementById('videos-repeater').addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('remove-video-row')) {
+                    const videoRow = e.target.closest('.video-row');
+
+                    // Ensure the first row of existing videos cannot be removed
+                    const allRows = document.querySelectorAll('.video-row');
+                    if (allRows[0] === videoRow && !videoRow.querySelector('input[name^="videos[new]"]')) {
+                        return; // Do nothing if trying to remove the first row of existing videos
+                    }
+
+                    videoRow.remove();
                 }
             });
         });
-
     </script>
 
     {{--    ckeditor    --}}
@@ -333,5 +351,31 @@
         });
     </script>
 
+    <script>
+        // AJAX for deleting  audio
+        $(document).on('click', '.delete-audio', function() {
+            var audioId = $(this).data('id');
+            var audioButton = $(this);
+
+            //if (confirm('Are you sure you want to delete this audio?')) {
+            $.ajax({
+                url: '{{ url("admin/blogs/delete") }}/' + audioId + '/audio', // Define the route URL
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // Remove the audio and button from the UI
+                    audioButton.prev('audio').remove(); // Remove the audio
+                    audioButton.remove(); // Remove the delete button
+                    // alert('Image deleted successfully.');
+                },
+                error: function(xhr) {
+                    alert('Error deleting audio: ' + xhr.responseText);
+                }
+            });
+            //}
+        });
+    </script>
 @endsection
 

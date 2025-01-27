@@ -137,6 +137,9 @@ return [
         'comment-belongs-to'            => 'التعليق ينتمي ل',
         'stars'                         => 'التقييم',
         'show_comment'                  => 'عرض التعليق',
+        'blog-videos-reorder'          => ' تغيير ترتيب الفيديوات ',
+
+
     ],
     'books' =>[
         'add-book-category'             => 'اضافة قسم جديد',
@@ -185,7 +188,6 @@ return [
         'youtube_link'                 => 'رابط الفيديو اليوتيوب',
         'audio_file'                   => 'ملف الصوت',
         'edit-answer'                   => 'تعديل الجواب',
-
         'created_at'                    => 'تاريخ الانشاء',
 
     ],
@@ -284,6 +286,7 @@ return [
         'hide-section-members'          => 'اخفاء قسم اعضاء مجلس الادارة',
         'youtube-live'                  => 'يوتيوب مباشر',
         'telegram-live'                 => 'تليجرام مباشر',
+        'facebook-live'                 => 'فيسبوك مباشر',
         'mixlr-live'                    => 'ماكسلر مباشر',
         'about-center-home'             => 'عن المركز في الرئيسية',
         'twitter-section-id'            => 'رقم المنشور في تويتر',

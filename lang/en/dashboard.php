@@ -135,6 +135,8 @@ return [
         'comment-belongs-to'           => 'Comment Belongs To',
         'stars'                        => 'Rating',
         'show_comment'                 => 'Show Comment',
+        'blog-videos-reorder'          => 'Reorder Blog Videos',
+
     ],
 
     'books' =>[
@@ -282,6 +284,7 @@ return [
         'hide-section-members'         => 'Hide Management Members Section',
         'youtube-live'                 => 'YouTube Live',
         'telegram-live'                => 'Telegram Live',
+        'facebook-live'                 => 'Facebook Live',
         'mixlr-live'                   => 'Mixlr Live',
         'about-center-home'            => 'About the Center on Homepage',
         'twitter-section-id'           => 'Twitter Post ID',

@@ -15,7 +15,7 @@ class BlogResource extends JsonResource
         $user = auth(activeGuard())?->user();
         $favorite = $user ? $this->favorites()->where('user_id', $user->id)->exists() : false;
 
-        $sortedVideos = $this->videos->sortByDesc('order_position');
+        $sortedVideos = $this->videos->sortBy('order_position');
 
         return [
             'id'                => $this->id,
@@ -36,7 +36,7 @@ class BlogResource extends JsonResource
             'created_at'        => $this->created_at->format('Y-m-d H:i:s'),
 
            $this->mergeWhen($request->route()->getName() == 'blogs.blogs.show', [
-              'videos'                  => BlogVideoResource::collection($this->videos),
+               'videos'                  => BlogVideoResource::collection($sortedVideos),
                'attachments'            => BlogAttachmentResource::collection($this->getAttachments()),
                'comments'               => BlogCommentResource::collection($this->comments->where('status', CommentStatusEnum::PUBLISHED)),
                 'seo'               => [

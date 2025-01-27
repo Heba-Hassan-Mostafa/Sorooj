@@ -20,6 +20,7 @@ class CategoryController extends BaseApiController
     protected int $page = 0;
 
     protected string $orderBy = 'order_position';
+    protected string $orderDir = 'ASC';
 
     protected array $conditions = [
         'where' => [
@@ -30,7 +31,7 @@ class CategoryController extends BaseApiController
 
     public function __construct(CourseCategoryContract $repository)
     {
-        request()->merge(['loadRelations' => 'subcategory','parent']);
+        request()->merge(['loadRelations' => 'subcategory','parent','courses']);
         parent::__construct($repository, CourseCategoryResource::class);
     }
 

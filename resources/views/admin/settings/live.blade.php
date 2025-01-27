@@ -33,6 +33,13 @@
                             @enderror
                         </div>
                         <div class="col-6 mb-3">
+                            <label for="facebook-live" class="form-label">{{ trans('dashboard.settings.facebook-live') }}</label>
+                            <input type="text" name="facebook-live" value="{{ $settings['facebook-live'] ?? '' }}" class="form-control" />
+                            @error('facebook-live')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-6 mb-3">
                             <label for="mixlr-live" class="form-label">{{ trans('dashboard.settings.mixlr-live') }}</label>
                             <input type="text" name="mixlr-live" value="{{ $settings['mixlr-live'] ?? '' }}" class="form-control" />
                             @error('mixlr-live')

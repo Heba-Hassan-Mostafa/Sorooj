@@ -179,7 +179,9 @@ Route::group(
             //delete video
             Route::delete('/blogs/{blog}/video', [BlogController::class, 'deleteBlogVideo'])
                 ->name('blogs.deleteBlogVideo');
-
+            //delete audio
+            Route::delete('/delete/{audio}/audio', [BlogController::class, 'deleteAudioFile'])
+                ->name('blogs.deleteAudioFile');
             //comments
             Route::get('/comments/change-status',      [BlogCommentController::class,'changeStatus'])->name('comments.change-status');
             Route::resource('/comments', BlogCommentController::class);

@@ -15,6 +15,8 @@ class BaseApiController extends Controller
     protected bool $order = true;
     protected int $page = 1;
     protected string $orderBy = 'id';
+    protected string $orderDir = 'desc';
+
     protected BaseContract $repository;
     protected mixed $modelResource;
     protected array $relations = [];
@@ -60,6 +62,8 @@ class BaseApiController extends Controller
         $limit = 10;
         $order = $this->order;
         $orderBy = $this->orderBy;
+        $orderDir = $this->orderDir;
+
         $filters = request()->all();
         if (request()->has('page')) {
             $page = request('page');
@@ -73,6 +77,9 @@ class BaseApiController extends Controller
         if (request()->has('orderBy')) {
             $orderBy = request('orderBy');
         }
+        if (request()->has('orderDir')) {
+            $orderDir = request('orderDir');
+        }
 
         $models = $this->repository->search(
             filters: $filters,
@@ -81,6 +88,7 @@ class BaseApiController extends Controller
             page: $page,
             limit: $limit,
             orderBy: $orderBy,
+            orderDir: $orderDir ?? 'ASC',
             conditions: $this->conditions
         );
         return $this->respondWithCollection($models);

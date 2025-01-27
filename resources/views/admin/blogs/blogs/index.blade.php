@@ -81,7 +81,9 @@
                                         @csrf
                                         @method('Delete')
                                     </form>
-
+                                <a href="{{ route('admin.blogs.videos.sort',$blog->id) }}"  class="btn btn-warning btn-sm text-white"  title="{{ trans('dashboard.blogs.blog-videos-reorder') }}">
+                                    <i class="fas fa-sort"></i>
+                                </a>
                             </div>
                         </td>
 

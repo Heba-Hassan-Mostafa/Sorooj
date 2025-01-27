@@ -260,6 +260,8 @@ Route::prefix("auth")->group(function () {
             Route::group(['prefix' => 'live'], function () {
                 Route::get('youtube-live', [StaticPageController::class, 'getYoutubeLive']);
                 Route::get('telegram-live', [StaticPageController::class, 'getTelegramLive']);
+                Route::get('facebook-live', [StaticPageController::class, 'getFacebookLive']);
+
                 Route::get('mixlr-live', [StaticPageController::class, 'getMixlrLive']);
             });
 

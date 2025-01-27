@@ -27,6 +27,11 @@ class BlogConcrete extends BaseConcrete implements BlogContract
         return Blog::with(['category'])->get();
     }
 
+    public function getLivewireBlogVideos(Blog $model)
+    {
+        return $model->videos()->get();
+
+    }
 
     public function create(array $attributes = []): mixed
     {
@@ -43,22 +48,34 @@ class BlogConcrete extends BaseConcrete implements BlogContract
          // create course
         $record = parent::create($attributes);
 
-        // store course image
+        // store blog image
         if (isset($attributes['image']) && $attributes['image']->isValid()) {
             uploadImage('image', $attributes['image'], $record);
         }
 
-        // Store videos if isset
+            // store blog audio file
 
-                    $record->videos()->create([
-                        'name' => $attributes['video_name'],
-                        'youtube_link' => $attributes['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                        'videoable_type' => Blog::class,
-                        'videoable_id' => $record->id,
-                    ]);
+            if (isset($attributes['audio_file']) && $attributes['audio_file']->isValid()) {
+                uploadImage('audio_file', $attributes['audio_file'], $record);
+            }
 
+            // Store videos if isset
+            if (isset($attributes['videos'])) {
+                foreach ($attributes['videos'] as $video) {
+                    if ($video) {
+                        $lastVideoOrder = $record->videos()->max('order_position') ?? 0; // Get the last video's order
 
+                        $record->videos()->create([
+                            'name' => $video['name'],
+                            'youtube_link' => $video['youtube_link'],
+                            'publish_date' => $record->publish_date,
+                            'videoable_type' => Blog::class,
+                            'videoable_id' => $record->id,
+                            'order_position' => $lastVideoOrder + 1,
+                        ]);
+                    }
+                }
+            }
 
             // Store attachments if isset
 
@@ -86,41 +103,41 @@ class BlogConcrete extends BaseConcrete implements BlogContract
     }
 
 
-    public function update(Model $model, array $attributes = []): mixed
-    {
-        DB::beginTransaction();
-
-        try {
-            // Update main blog attributes
-
-            $record = parent::update($model, $attributes);
-
-           // Update course image
-            if (isset($attributes['image']) && $attributes['image']->isValid()) {
-                uploadImage('image', $attributes['image'], $record);
-            }
-
-        // Update videos
-
-                    // Create new video
-                    $record->videos()->update([
-                        'name' => $attributes['video_name'],
-                        'youtube_link' => $attributes['youtube_link'],
-                        'publish_date' => $record->publish_date,
-                    ]);
-
-
-            // update attachments
-            $this->handleMedia($record, $attributes);
-
-            DB::commit();
-
-            return $record;
-       } catch (\Exception $e) {
-            DB::rollback();
-           return redirect()->back()->with(['error' => $e->getMessage()]);
-        }
-    }
+//    public function update(Model $model, array $attributes = []): mixed
+//    {
+//        DB::beginTransaction();
+//
+//        try {
+//            // Update main blog attributes
+//
+//            $record = parent::update($model, $attributes);
+//
+//           // Update course image
+//            if (isset($attributes['image']) && $attributes['image']->isValid()) {
+//                uploadImage('image', $attributes['image'], $record);
+//            }
+//
+//        // Update videos
+//
+//                    // Create new video
+//                    $record->videos()->update([
+//                        'name' => $attributes['video_name'],
+//                        'youtube_link' => $attributes['youtube_link'],
+//                        'publish_date' => $record->publish_date,
+//                    ]);
+//
+//
+//            // update attachments
+//            $this->handleMedia($record, $attributes);
+//
+//            DB::commit();
+//
+//            return $record;
+//       } catch (\Exception $e) {
+//            DB::rollback();
+//           return redirect()->back()->with(['error' => $e->getMessage()]);
+//        }
+//    }
 
 
 
