@@ -46,6 +46,9 @@ class BlogResource extends JsonResource
 
             ]),
 
+            'audio_file'        => $this->getFirstMediaUrl('audio_file'),
+
+
 
         ];
     }
